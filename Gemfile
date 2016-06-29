@@ -21,7 +21,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dpn_cops', git: 'git@github.com:dpn-admin/dpn_cops.git'
+  gem 'dpn_cops', git: 'https://github.com/dpn-admin/dpn_cops.git'
   gem 'pry'
   gem 'pry-doc'
   gem 'yard'

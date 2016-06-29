@@ -1,17 +1,17 @@
 GIT
-  remote: git@github.com:dpn-admin/dpn_cops.git
-  revision: 14e2f1f75b9ad05cb9ce7d8f6f3b6c5615206da9
-  specs:
-    dpn_cops (0.0.3)
-      rubocop (~> 0.37.0)
-      rubocop-rspec (~> 1.4.0)
-
-GIT
   remote: https://github.com/dpn-admin/dpn-client.git
   revision: c055de238edfacbff1fc3978db2075f76ab7512e
   specs:
     dpn-client (1.3.1)
       httpclient (~> 2.6.0.1)
+
+GIT
+  remote: https://github.com/dpn-admin/dpn_cops.git
+  revision: 14e2f1f75b9ad05cb9ce7d8f6f3b6c5615206da9
+  specs:
+    dpn_cops (0.0.3)
+      rubocop (~> 0.37.0)
+      rubocop-rspec (~> 1.4.0)
 
 GEM
   remote: https://rubygems.org/

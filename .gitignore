@@ -1,0 +1,17 @@
+.DS_Store
+.binstubs/
+.bundle/
+.capistrano/
+.env
+.idea/
+.rspec-local
+.rvmrc
+.ruby-version
+.yardoc/
+*.sublime-*
+config/database.yml
+coverage
+doc/
+vendor/
+log/*.log
+
