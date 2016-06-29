@@ -6,22 +6,20 @@ class DpnSync < Sinatra::Base
 
   set public_folder: 'public', static: true
 
-  # get '/' do
-  #   erb :welcome
-  # end
   get '/' do
+    erb :welcome
+  end
+
+  get '/test' do
     stats = Sidekiq::Stats.new
     @failed = stats.failed
     @processed = stats.processed
     @messages = REDIS.lrange('dpn-messages', 0, -1)
-    erb :index
+    erb :test
   end
 
   post '/msg' do
-
-    require 'pry'; binding.pry
-
     DPN::Workers::Base.perform_async params[:msg]
-    redirect to('/')
+    redirect to('/test')
   end
 end

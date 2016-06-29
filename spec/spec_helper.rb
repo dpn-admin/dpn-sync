@@ -7,17 +7,33 @@ require 'simplecov'
 require 'coveralls'
 Coveralls.wear!
 
+SimpleCov.profiles.define 'dpn-sync' do
+  add_filter '.gems'
+  add_filter '/config/environments/'
+  add_filter 'pkg'
+  add_filter 'spec'
+  add_filter 'vendor'
+
+  # Simplecov can detect changes using data from the
+  # last rspec run.  Travis will never have a previous
+  # dataset for comparison, so it can't fail a travis build.
+  maximum_coverage_drop 0.1
+end
+SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start 'dpn-sync'
+
 require 'bundler'
 Bundler.setup
 Bundler.require
+require 'fakeredis'
 
 ENV['RACK_ENV'] = 'test'
 
 require 'rack/test'
 require 'rspec'
-
-require 'fakeredis'
-REDIS = Redis.new
 
 require 'find'
 %w(./config/initializers ./lib).each do |load_path|
