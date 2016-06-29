@@ -42,8 +42,7 @@ module DPN
       end
 
       def logger(name)
-        log_level = Settings.log_level || 'none'
-        return nil if log_level =~ /none/i
+        log_level = Settings.log_level || 'info'
         logger = Logger.new(File.join('log', "#{name}.log"))
         logger.level = Logger.const_get log_level.upcase
         logger
