@@ -1,11 +1,13 @@
 ---
-:concurrency: 6
+:concurrency: 3
 :pidfile: ./tmp/pids/sidekiq.pid
-
-development:
-  :concurrency: 3
-production:
-  :concurrency: 20
-  :logfile: ./log/sidekiq.log
 :queues:
   - default
+
+test:
+  :logfile: ./log/sidekiq_test.log
+development:
+  :logfile: ./log/sidekiq_dev.log
+production:
+  :concurrency: 12
+  :logfile: ./log/sidekiq.log
