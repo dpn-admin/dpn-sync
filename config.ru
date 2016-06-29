@@ -2,7 +2,7 @@
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
 if $DEBUG
-  log = File.new('log/rack_debug.log', 'w')
+  log = File.new('log/rack_debug.log', 'w+')
   $stderr.reopen(log)
 end
 
