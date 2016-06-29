@@ -1,6 +1,11 @@
 # Load path and gems/bundler
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 
+if $DEBUG
+  log = File.new('log/rack_debug.log', 'w')
+  $stderr.reopen(log)
+end
+
 require 'bundler'
 Bundler.require
 require 'redis'
@@ -23,4 +28,13 @@ end
 
 # Load app
 require 'dpn_sync'
+
+if $DEBUG
+  # Use $DEBUG to drop into a console
+  require 'pry'
+  binding.pry
+  exit!
+end
+
+# Run app
 run Rack::URLMap.new('/' => DpnSync, '/sidekiq' => Sidekiq::Web)
