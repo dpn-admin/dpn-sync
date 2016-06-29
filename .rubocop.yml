@@ -1,0 +1,5 @@
+inherit_gem:
+  dpn_cops: "config/dpn_baseline.yml"
+
+AllCops:
+  TargetRubyVersion: 2.2
