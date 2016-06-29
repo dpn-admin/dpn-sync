@@ -2,7 +2,7 @@ source 'https://rubygems.org/'
 
 # App Stack
 gem 'sinatra', '~> 1.4'
-gem 'sinatra-contrib'
+gem 'config'
 
 gem 'sidekiq'
 gem 'sidekiq-cron', '~> 0.4.0'

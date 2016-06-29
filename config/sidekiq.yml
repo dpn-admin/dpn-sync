@@ -7,7 +7,6 @@
 test:
   :logfile: ./log/sidekiq_test.log
 development:
-  :logfile: ./log/sidekiq_dev.log
 production:
   :concurrency: 12
   :logfile: ./log/sidekiq.log
