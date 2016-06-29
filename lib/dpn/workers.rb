@@ -20,9 +20,13 @@ module DPN
     ]
     Config.load_and_set_settings(config_files)
 
+    ##
     # Initialize nodes
-    REDIS.set 'nodes', Settings.nodes.to_json
+    nodes = DPN::Workers::Nodes.new
+    nodes.redis_nodes_set Settings.nodes.map(&:to_hash)
 
+    ##
+    # Convenience class methods for accessing node data
     class << self
       extend Forwardable
       def_delegator :nodes, :local_node

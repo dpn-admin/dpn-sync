@@ -6,7 +6,7 @@ module DPN
 
       attr_reader :local_namespace
 
-      def initialize(local_namespace)
+      def initialize(local_namespace = 'local')
         @local_namespace = local_namespace
       end
 
@@ -26,8 +26,8 @@ module DPN
 
       # @return nodes [Array<DPN::Workers::Node>]
       def nodes
-        db_nodes.map do |node|
-          DPN::Workers::Node.new(node.symbolize_keys)
+        redis_nodes_get.map do |node|
+          DPN::Workers::Node.new(node)
         end
       end
 
@@ -42,16 +42,19 @@ module DPN
       end
 
       # @return nodes [Array<Hash>]
-      def db_nodes
-        redis_nodes
+      def redis_nodes_get
+        REDIS.scan_each(match: 'dpn_nodes:*').collect do |node_key|
+          JSON.parse(REDIS.get(node_key)).symbolize_keys
+        end
       end
 
-      private
-
-        # @return nodes [Array<Hash>]
-        def redis_nodes
-          JSON.parse(REDIS.get('nodes'))
+      # @param nodes [Array<Hash>]
+      def redis_nodes_set(nodes)
+        nodes.each do |node_hash|
+          node = DPN::Workers::Node.new(node_hash)
+          node.redis_set
         end
+      end
     end
   end
 end

@@ -2,9 +2,6 @@ module DPN
   module Workers
     # A wrapper for redis node data
     class Node
-      extend Forwardable
-      def_delegator :to_json, :to_hash
-
       attr_reader :name
       attr_reader :namespace
       attr_reader :api_root
@@ -30,11 +27,6 @@ module DPN
         @auth_credential = opts[:auth_credential]
       end
 
-      def alive?
-        response = client.node(namespace)
-        response.success?
-      end
-
       def client
         @client ||= begin
           client = DPN::Client.client
@@ -46,8 +38,16 @@ module DPN
         end
       end
 
-      def update_from_remote_node
-        update_attributes(remote_node_data)
+      def redis_key
+        "dpn_nodes:#{namespace}"
+      end
+
+      def redis_get
+        REDIS.get redis_key
+      end
+
+      def redis_set
+        REDIS.set redis_key, to_json
       end
 
       def to_hash
@@ -61,13 +61,22 @@ module DPN
         hash.symbolize_keys
       end
 
-      # def to_json
-      #   to_hash.to_json
-      # end
+      def to_json
+        to_hash.to_json
+      end
+
+      def server_alive?
+        response = client.node(namespace)
+        response.success?
+      end
+
+      def server_get
+        update_attributes(server_node_data)
+      end
 
       private
 
-        def remote_node_data
+        def server_node_data
           response = client.node(namespace)
           raise response.body unless response.success?
           response.body
