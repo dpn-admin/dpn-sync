@@ -31,9 +31,11 @@ require 'dpn_sync'
 
 if $DEBUG
   # Use $DEBUG to drop into a console
+  # rubocop:disable Lint/Debugger
   require 'pry'
   binding.pry
   exit!
+  # rubocop:enable Lint/Debugger
 end
 
 # Run app

@@ -2,6 +2,9 @@ module DPN
   module Workers
     # A wrapper for redis node data
     class Node
+      extend Forwardable
+      def_delegator :to_json, :to_hash
+
       attr_reader :name
       attr_reader :namespace
       attr_reader :api_root
@@ -50,7 +53,7 @@ module DPN
       def to_hash
         hash = {}
         instance_variables.each do |var|
-          key = var.to_s.gsub('@','')
+          key = var.to_s.delete('@')
           next if key == 'client'
           value = instance_variable_get(var)
           hash[key] = value
@@ -58,27 +61,27 @@ module DPN
         hash.symbolize_keys
       end
 
-      def to_json
-        to_hash.to_json
-      end
+      # def to_json
+      #   to_hash.to_json
+      # end
 
       private
 
-      def remote_node_data
-        response = client.node(namespace)
-        raise response.body unless response.success?
-        response.body
-      end
-
-      def update_attributes(node_data)
-        node_data.each_pair do |key, value|
-          # Skip attributes that are explicitly initialized
-          next if key == :api_root
-          next if key == :namespace
-          next if key == :auth_credential
-          instance_variable_set("@#{key}", value)
+        def remote_node_data
+          response = client.node(namespace)
+          raise response.body unless response.success?
+          response.body
         end
-      end
+
+        def update_attributes(node_data)
+          node_data.each_pair do |key, value|
+            # Skip attributes that are explicitly initialized
+            next if key == :api_root
+            next if key == :namespace
+            next if key == :auth_credential
+            instance_variable_set("@#{key}", value)
+          end
+        end
     end
   end
 end
