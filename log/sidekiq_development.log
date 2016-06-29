@@ -1,0 +1,11 @@
+# Logfile created on 2016-06-28 14:05:00 -0700 by logger.rb/54362
+2016-06-28T21:05:00.085Z 13224 TID-gqonddwwg INFO: Running in ruby 2.3.1p112 (2016-04-26 revision 54768) [x86_64-linux]
+2016-06-28T21:05:00.085Z 13224 TID-gqonddwwg INFO: See LICENSE and the LGPL-3.0 for licensing details.
+2016-06-28T21:05:00.086Z 13224 TID-gqonddwwg INFO: Upgrade to Sidekiq Pro for more features and support: http://sidekiq.org
+2016-06-28T21:05:00.086Z 13224 TID-gqonddwwg INFO: Booting Sidekiq 4.1.2 with redis options {:url=>nil}
+2016-06-28T21:05:00.087Z 13224 TID-gqonddwwg INFO: Starting processing, hit Ctrl-C to stop
+2016-06-28T21:05:22.447Z 13224 TID-gqonddwwg INFO: Shutting down
+2016-06-28T21:05:22.447Z 13224 TID-gqonddwwg INFO: Terminating quiet workers
+2016-06-28T21:05:22.447Z 13224 TID-gqongxuys INFO: Scheduler exiting...
+2016-06-28T21:05:22.547Z 13224 TID-gqonddwwg INFO: Pausing to allow workers to finish...
+2016-06-28T21:05:24.077Z 13224 TID-gqonddwwg INFO: Bye!

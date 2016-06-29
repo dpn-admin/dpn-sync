@@ -1,0 +1,20 @@
+development:
+  namespace: dpn-dev
+  host: localhost
+  port: 6379
+  db: 0
+  password:
+
+test:
+  namespace: dpn-test
+  host: localhost
+  port: 6379
+  db: 1
+  password:
+
+production:
+  namespace: dpn-prod
+  host: localhost
+  port: 6379
+  db: 2
+  password:

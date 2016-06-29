@@ -1,0 +1,16 @@
+rare_job:
+  cron: "* * * * */5"
+  class: "DPN::Workers::Base"
+  queue: default
+
+# my_first_job:
+#   cron: "*/5 * * * *"
+#   class: "DPN::Workers::Base"
+#   queue: default
+
+# second_job:
+#   cron: "*/30 * * * *"
+#   class: "HardWorker"
+#   queue: hard_worker_long
+#   args:
+#     hard: "stuff"

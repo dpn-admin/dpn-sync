@@ -1,0 +1,27 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/data/src/dlss/dpn/dpn-sync/config/initializers/redis.rb": [
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null
+      ],
+      "/data/src/dlss/dpn/dpn-sync/dpn_sync.rb": [
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1467137857
+  }
+}
