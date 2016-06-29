@@ -4,9 +4,13 @@ module DPN
     class Nodes
       include Enumerable
 
+      attr_reader :nodes
       attr_reader :local_namespace
 
-      def initialize(local_namespace = 'local')
+      # @param nodes [Array<Hash>]
+      # @param local_namespace [String]
+      def initialize(nodes, local_namespace)
+        @nodes = nodes.map { |node| DPN::Workers::Node.new(node) }
         @local_namespace = local_namespace
       end
 
@@ -24,13 +28,6 @@ module DPN
         nodes.find { |node| node.namespace == namespace }
       end
 
-      # @return nodes [Array<DPN::Workers::Node>]
-      def nodes
-        redis_nodes_get.map do |node|
-          DPN::Workers::Node.new(node)
-        end
-      end
-
       # @return node [DPN::Workers::Node|nil]
       def remote_node(namespace)
         remote_nodes.find { |node| node.namespace == namespace }
@@ -41,20 +38,26 @@ module DPN
         nodes.select { |node| node.namespace != local_namespace }
       end
 
-      # @return nodes [Array<Hash>]
-      def redis_nodes_get
-        REDIS.scan_each(match: 'dpn_nodes:*').collect do |node_key|
-          JSON.parse(REDIS.get(node_key)).symbolize_keys
+      # Fetch registry_object data from remote nodes to update local node
+      # @param registry_object [String|Symbol]
+      def sync(obj)
+        case obj.to_sym
+        when :bags
+          sync_bags
+        when :nodes
+          sync_nodes
         end
       end
 
-      # @param nodes [Array<Hash>]
-      def redis_nodes_set(nodes)
-        nodes.each do |node_hash|
-          node = DPN::Workers::Node.new(node_hash)
-          node.redis_set
+      private
+
+        def sync_bags
+          remote_nodes.each { |node| SyncBags.new(local_node, node).sync }
         end
-      end
+
+        def sync_nodes
+          remote_nodes.each { |node| SyncNodes.new(local_node, node).sync }
+        end
     end
   end
 end

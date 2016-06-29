@@ -18,7 +18,7 @@ Sidekiq.configure_server do |config|
   config.redis = { url: REDIS_URL, namespace: REDIS_CONFIG[:namespace] }
 end
 
-schedule_file = 'config/schedule.yml'
+schedule_file = 'config/sidekiq_schedule.yml'
 if File.exist?(schedule_file) && Sidekiq.server?
   schedule = YAML.load_file(schedule_file)
   Sidekiq::Cron::Job.load_from_hash schedule

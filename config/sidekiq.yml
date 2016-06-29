@@ -3,6 +3,8 @@
 :pidfile: ./tmp/pids/sidekiq.pid
 :queues:
   - default
+  - sync_bags
+  - sync_nodes
 
 test:
   :logfile: ./log/sidekiq_test.log

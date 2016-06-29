@@ -19,7 +19,7 @@ class DpnSync < Sinatra::Base
   end
 
   post '/msg' do
-    DPN::Workers::Base.perform_async params[:msg]
+    DPN::Workers::SyncWorker.perform_async params[:msg]
     redirect to('/test')
   end
 end

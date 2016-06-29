@@ -27,27 +27,20 @@ module DPN
         @auth_credential = opts[:auth_credential]
       end
 
+      def alive?
+        response = client.node(namespace)
+        response.success?
+      end
+
       def client
         @client ||= begin
           client = DPN::Client.client
           client.api_root = api_root
           client.auth_token = auth_credential
           client.user_agent = ['dpn-client', namespace].join('-')
-          client.logger = DPN::Workers.logger(client.user_agent)
+          client.logger = DPN::Workers.create_logger(client.user_agent)
           client
         end
-      end
-
-      def redis_key
-        "dpn_nodes:#{namespace}"
-      end
-
-      def redis_get
-        REDIS.get redis_key
-      end
-
-      def redis_set
-        REDIS.set redis_key, to_json
       end
 
       def to_hash
@@ -55,23 +48,13 @@ module DPN
         instance_variables.each do |var|
           key = var.to_s.delete('@')
           next if key == 'client'
-          value = instance_variable_get(var)
-          hash[key] = value
+          hash[key] = instance_variable_get(var)
         end
         hash.symbolize_keys
       end
 
-      def to_json
-        to_hash.to_json
-      end
-
-      def server_alive?
-        response = client.node(namespace)
-        response.success?
-      end
-
-      def server_get
-        update_attributes(server_node_data)
+      def update
+        update_attributes
       end
 
       private
@@ -82,8 +65,8 @@ module DPN
           response.body
         end
 
-        def update_attributes(node_data)
-          node_data.each_pair do |key, value|
+        def update_attributes
+          server_node_data.each_pair do |key, value|
             # Skip attributes that are explicitly initialized
             next if key == :api_root
             next if key == :namespace

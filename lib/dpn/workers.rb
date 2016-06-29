@@ -1,10 +1,14 @@
 require 'config'
-require 'forwardable'
 require 'json'
 require 'logger'
+require_relative 'workers/sync'
+require_relative 'workers/sync_bags'
+require_relative 'workers/sync_nodes'
 require_relative 'workers/node'
 require_relative 'workers/nodes'
-require_relative 'workers/dpn_worker'
+require_relative 'workers/sync_worker'
+require_relative 'workers/sync_bags_worker'
+require_relative 'workers/sync_nodes_worker'
 
 module DPN
   ##
@@ -21,27 +25,18 @@ module DPN
     Config.load_and_set_settings(config_files)
 
     ##
-    # Initialize nodes
-    nodes = DPN::Workers::Nodes.new
-    nodes.redis_nodes_set Settings.nodes.map(&:to_hash)
-
-    ##
-    # Convenience class methods for accessing node data
+    # Convenience class methods (must be thread safe)
     class << self
-      extend Forwardable
-      def_delegator :nodes, :local_node
-      def_delegator :nodes, :remote_node
-      def_delegator :nodes, :remote_nodes
-
-      def local_namespace
-        @local_namespace ||= Settings.local_namespace
-      end
-
+      ##
+      # @return nodes [DPN::Workers::Nodes]
       def nodes
-        @nodes ||= DPN::Workers::Nodes.new local_namespace
+        DPN::Workers::Nodes.new Settings.nodes.map(&:to_hash),
+                                Settings.local_namespace
       end
 
-      def logger(name)
+      # @param name [String]
+      # @return logger [Logger] logs to "log/#{name}.log"
+      def create_logger(name)
         log_level = Settings.log_level || 'info'
         logger = Logger.new(File.join('log', "#{name}.log"))
         logger.level = Logger.const_get log_level.upcase
