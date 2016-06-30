@@ -1,23 +1,26 @@
-log_level: "info"
-local_namespace: "sdr"
+log_level: info
+
+# Create test cluster nodes and use those node parameters here, see
+# https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
+local_namespace: aptrust
 nodes:
   -
-    namespace: "sdr"
-    api_root: "http://localhost:3000"
-    auth_credential: "sdr_token"
+    namespace: aptrust
+    api_root: http://localhost:3001
+    auth_credential: aptrust_token
   -
-    namespace: "hathi"
-    api_root: "http://192.168.33.11"
-    auth_credential: "hathi_token"
+    namespace: chron
+    api_root: http://localhost:3002
+    auth_credential: chron_token
   -
-    namespace: "tdr"
-    api_root: "http://192.168.33.12"
-    auth_credential: "tdr_token"
+    namespace: hathi
+    api_root: http://localhost:3003
+    auth_credential: hathi_token
   -
-    namespace: "chron"
-    api_root: "http://192.168.33.13"
-    auth_credential: "chron_token"
+    namespace: sdr
+    api_root: http://localhost:3004
+    auth_credential: sdr_token
   -
-    namespace: "aptrust"
-    api_root: "http://192.168.33.14"
-    auth_credential: "aptrust_token"
+    namespace: tdr
+    api_root: http://localhost:3005
+    auth_credential: tdr_token
