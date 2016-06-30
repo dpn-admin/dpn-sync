@@ -2,9 +2,9 @@ source 'https://rubygems.org/'
 
 # App Stack
 gem 'sinatra', '~> 1.4'
-gem 'config'
+gem 'config', '~> 1.2'
 
-gem 'sidekiq'
+gem 'sidekiq', '~> 4.1'
 gem 'sidekiq-cron', '~> 0.4.0'
 
 # Redis
