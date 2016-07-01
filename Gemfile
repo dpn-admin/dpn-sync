@@ -1,6 +1,7 @@
 source 'https://rubygems.org/'
 
 # App Stack
+gem 'activesupport', '~> 5.0'
 gem 'sinatra', '~> 1.4'
 gem 'config', '~> 1.2'
 

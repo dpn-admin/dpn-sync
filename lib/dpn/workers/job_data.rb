@@ -1,16 +1,4 @@
-##
-# Add .days.ago to Fixnum
-class Fixnum
-  SECONDS_IN_DAY = 24 * 60 * 60
-
-  def days
-    self * SECONDS_IN_DAY
-  end
-
-  def ago
-    Time.now.utc - self
-  end
-end
+require 'active_support/core_ext/numeric/time'
 
 module DPN
   module Workers
@@ -42,7 +30,7 @@ module DPN
 
         # Assume the registry data has been successfully
         # retrieved in the last 90 days
-        DEFAULT_TIME = 90.days.ago
+        DEFAULT_TIME = 90.days.ago.utc
 
         # @param key [String]
         # @return data [Hash]
