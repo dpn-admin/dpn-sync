@@ -15,14 +15,18 @@
 # SyncBags every 30 mins
 sync_bags:
   cron: "*/30 * * * *"
-  class: "DPN::Workers::SyncBagsWorker"
+  class: "DPN::Workers::SyncWorker"
   queue: sync_bags
+  args:
+    content: "bags"
 
 # SyncNodes every 15 mins
 sync_nodes:
   cron: "*/15 * * * *"
-  class: "DPN::Workers::SyncNodesWorker"
+  class: "DPN::Workers::SyncWorker"
   queue: sync_nodes
+  args:
+    content: "nodes"
 
 # example_job:
 #   cron: "*/30 * * * *"

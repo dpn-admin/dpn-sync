@@ -1,12 +1,13 @@
 module DPN
   module Workers
     ##
-    # DPN worker base class
+    # DPN worker to sync content
     class SyncWorker
       include Sidekiq::Worker
 
-      def perform(msg = 'you forgot a msg!')
-        REDIS.lpush('dpn-messages', msg)
+      def perform(content)
+        nodes = DPN::Workers.nodes
+        nodes.sync content
       end
     end
   end

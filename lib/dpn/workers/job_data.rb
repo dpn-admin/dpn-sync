@@ -21,7 +21,7 @@ module DPN
 
       # @param name [String] job name (identifier)
       def initialize(name)
-        @name = job_name
+        @name = name
       end
 
       # @param namespace [String] remote node namespace

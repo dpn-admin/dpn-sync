@@ -7,8 +7,7 @@ require_relative 'workers/sync_nodes'
 require_relative 'workers/node'
 require_relative 'workers/nodes'
 require_relative 'workers/sync_worker'
-require_relative 'workers/sync_bags_worker'
-require_relative 'workers/sync_nodes_worker'
+require_relative 'workers/test_worker'
 
 module DPN
   ##
