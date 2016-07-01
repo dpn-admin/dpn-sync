@@ -14,8 +14,6 @@ module DPN
         last_success_update
       rescue => e
         logger.error(e.message)
-      ensure
-        job_data.save
       end
     end
   end
