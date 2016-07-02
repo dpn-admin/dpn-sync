@@ -41,7 +41,7 @@ require 'find'
   Find.find(load_path) { |f| require f if f =~ /\.rb$/ }
 end
 
-require File.expand_path '../../dpn_sync.rb', __FILE__
+require File.expand_path '../../app/dpn_sync.rb', __FILE__
 
 # Configure RSpec
 module RSpecMixin

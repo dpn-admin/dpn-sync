@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe DpnSync do
   it 'responds with a welcome message' do

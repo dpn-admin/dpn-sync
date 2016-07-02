@@ -1,7 +1,7 @@
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
-  set :root, File.dirname(__FILE__)
+  set :root, File.join(File.dirname(__FILE__), '..')
   register Config
 
   set public_folder: 'public', static: true

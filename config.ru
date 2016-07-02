@@ -27,7 +27,7 @@ require 'find'
 end
 
 # Load app
-require 'dpn_sync'
+require 'app/dpn_sync'
 
 if $DEBUG
   # Use $DEBUG to drop into a console
