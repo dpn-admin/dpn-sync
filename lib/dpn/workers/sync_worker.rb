@@ -8,6 +8,9 @@ module DPN
       def perform(content)
         nodes = DPN::Workers.nodes
         nodes.sync content
+      rescue StandardError => e
+        logger.error e.inspect
+        false
       end
     end
   end
