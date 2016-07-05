@@ -35,6 +35,8 @@ group :test do
   gem 'coveralls', require: false
   gem 'simplecov', require: false
   gem 'single_cov'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :deployment do
