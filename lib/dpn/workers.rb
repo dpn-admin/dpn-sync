@@ -16,14 +16,23 @@ module DPN
                                 Settings.local_namespace
       end
 
+      # Create a log file with monthly rotation
       # @param name [String]
       # @return logger [Logger] logs to "log/#{name}.log"
       def create_logger(name)
-        log_level = Settings.log_level || 'info'
-        logger = Logger.new(File.join('log', "#{name}.log"))
-        logger.level = Logger.const_get log_level.upcase
+        logger = Logger.new(File.join('log', "#{name}.log"), 'monthly')
+        logger.level = log_level
         logger
       end
+
+      private
+
+        def log_level
+          log_level = Settings.log_level || 'info'
+          Logger.const_get log_level.upcase
+        rescue
+          Logger::INFO
+        end
     end
   end
 end
