@@ -6,7 +6,10 @@ module DPN
       include Sidekiq::Worker
 
       def perform(msg = 'you forgot a msg!')
-        REDIS.lpush('dpn-messages', msg)
+        REDIS.lpush('dpn-messages', msg) > 0
+      rescue StandardError => e
+        logger.error e.inspect
+        false
       end
     end
   end
