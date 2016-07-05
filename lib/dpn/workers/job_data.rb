@@ -1,5 +1,3 @@
-require 'active_support/core_ext/numeric/time'
-
 module DPN
   module Workers
     # Worker job data persistence
@@ -10,16 +8,19 @@ module DPN
       # @param name [String] job name (identifier)
       def initialize(name)
         @name = name
+        @logger = DPN::Workers.create_logger(name)
       end
 
       # @param namespace [String] remote node namespace
       # @return timestamp [Time]
       def last_success(namespace)
         node_data = data_get("#{name}:#{namespace}")
-        node_data['last_success'] || DEFAULT_TIME
+        time = node_data['last_success'] || DEFAULT_TIME.to_s
+        Time.parse(time).utc
       end
 
       # @param namespace [String] remote node namespace
+      # @return [Boolean]
       def last_success_update(namespace)
         node_data = data_get("#{name}:#{namespace}")
         node_data['last_success'] = Time.now.utc
@@ -28,9 +29,10 @@ module DPN
 
       private
 
-        # Assume the registry data has been successfully
-        # retrieved in the last 90 days
-        DEFAULT_TIME = 90.days.ago.utc
+        attr_reader :logger
+
+        # Assume there is no registry data before the year 2000
+        DEFAULT_TIME = Time.new(2000,01,01,0,0,0,0).utc
 
         # @param key [String]
         # @return data [Hash]
@@ -41,10 +43,13 @@ module DPN
 
         # @param key [String]
         # @param data [Hash]
-        # @raises RuntimeError
+        # @return success [True|False]
         def data_set(key, data)
-          result = REDIS.set(key, data.to_json)
-          raise 'Failed to save job data' unless result == 'OK'
+          REDIS.set(key, data.to_json) == 'OK'
+        rescue Redis::BaseError => e
+          logger.error e.inspect
+          logger.error "FAILED to save #{key} => #{data.to_json}"
+          false
         end
     end
   end

@@ -179,7 +179,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport (~> 5.0)
   capistrano (~> 3.0)
   capistrano-bundle_audit (~> 0.1.0)
   capistrano-bundler
