@@ -5,7 +5,6 @@ SingleCov.setup :rspec
 
 require 'simplecov'
 require 'coveralls'
-Coveralls.wear!
 
 SimpleCov.profiles.define 'dpn-sync' do
   add_filter '.gems'
