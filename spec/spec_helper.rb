@@ -28,7 +28,6 @@ SimpleCov.start 'dpn-sync'
 require 'bundler'
 Bundler.setup
 Bundler.require
-require 'fakeredis'
 
 ENV['RACK_ENV'] = 'test'
 
