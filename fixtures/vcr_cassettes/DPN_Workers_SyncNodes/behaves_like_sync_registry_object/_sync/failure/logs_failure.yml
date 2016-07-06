@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/node/example/
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"example","api_root":"http://node.example.org","auth_credential":"example_token"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Thu, 07 Jul 2016 00:11:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 404
+      message: 'Not Found '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 79905677-9ca3-4144-b95e-ecf301f62cf1
+      X-Runtime:
+      - '0.016469'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
+      Date:
+      - Thu, 07 Jul 2016 00:11:52 GMT
+      Content-Length:
+      - '0'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Thu, 07 Jul 2016 00:11:52 GMT
+recorded_with: VCR 3.0.3

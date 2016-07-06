@@ -12,7 +12,7 @@ RSpec.shared_examples 'sync_registry_object' do
         expect(subject.sync).to be true
       end
       it 'records success timestamp' do
-        expect(subject).to receive(:last_success_update).once
+        expect(subject).to receive(:last_success_update).once.and_call_original
         expect(subject.sync).to be true
       end
     end
