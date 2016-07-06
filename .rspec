@@ -1,0 +1,10 @@
+
+# RSpec options (defaults first)
+# Settings in order of least to greatest precedence:
+# Global:   ~/.rspec
+# Project:  ./.rspec        # usually in git repo
+# Local:    ./.rspec-local  # usually in .gitignore
+# Command line options
+
+--color
+
