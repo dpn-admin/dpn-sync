@@ -60,3 +60,22 @@ VCR.configure do |c|
   }
   c.configure_rspec_metadata!
 end
+
+##
+# Common DPN::Workers::Node instances
+
+def example_node
+  DPN::Workers::Node.new(
+    namespace: 'example',
+    api_root: 'http://node.example.org',
+    auth_credential: 'example_token'
+  )
+end
+
+def local_node
+  DPN::Workers.nodes.local_node
+end
+
+def remote_node
+  DPN::Workers.nodes.remote_nodes.first
+end
