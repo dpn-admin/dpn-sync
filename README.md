@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/sul-dlss/dpn-sync.svg?branch=master)](https://travis-ci.org/sul-dlss/dpn-sync) [![Coverage Status](https://coveralls.io/repos/sul-dlss/dpn-sync/badge.png)](https://coveralls.io/r/sul-dlss/dpn-sync) [![Dependency Status](https://gemnasium.com/sul-dlss/dpn-sync.svg)](https://gemnasium.com/sul-dlss/dpn-sync) 
+[![Build Status](https://travis-ci.org/sul-dlss/dpn-sync.svg?branch=master)](https://travis-ci.org/sul-dlss/dpn-sync) [![Coverage Status](https://coveralls.io/repos/github/sul-dlss/dpn-sync/badge.svg?branch=master)](https://coveralls.io/github/sul-dlss/dpn-sync?branch=master) [![Dependency Status](https://gemnasium.com/sul-dlss/dpn-sync.svg)](https://gemnasium.com/sul-dlss/dpn-sync) 
 
 # DPN Synchronization
 

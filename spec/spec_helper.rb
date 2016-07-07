@@ -18,7 +18,7 @@ SimpleCov.profiles.define 'dpn-sync' do
   # dataset for comparison, so it can't fail a travis build.
   maximum_coverage_drop 0.1
 end
-SimpleCov::Formatter::MultiFormatter.new(
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
     Coveralls::SimpleCov::Formatter
