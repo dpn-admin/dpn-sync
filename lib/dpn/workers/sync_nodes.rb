@@ -14,14 +14,6 @@ module DPN
         logger.error e.inspect
         false
       end
-
-      private
-
-        # @private
-        # @return [String]
-        def job_name
-          'sync_nodes'
-        end
     end
   end
 end

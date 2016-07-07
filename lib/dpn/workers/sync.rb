@@ -49,7 +49,7 @@ module DPN
         # @private
         # @return [String]
         def job_name
-          'sync'
+          @job_name ||= self.class.name.gsub('::','_')
         end
 
         # @private

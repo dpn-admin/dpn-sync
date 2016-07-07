@@ -34,12 +34,6 @@ module DPN
       private
 
         # @private
-        # @return [String]
-        def job_name
-          'sync_bags'
-        end
-
-        # @private
         # @return [Boolean] result
         def create_or_update_bag(bag)
           create_bag(bag) || update_bag(bag)
