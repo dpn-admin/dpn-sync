@@ -1,7 +1,12 @@
-%w(bundler find rake/testtask).each { |lib| require lib }
+require 'bundler'
 
-task default: :spec
+require 'coveralls/rake/task'
+Coveralls::RakeTask.new
 
-Rake::TestTask.new(:spec) do |t|
-  t.test_files = FileList['spec/*_spec.rb']
+task default: [:spec]
+
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
 end
