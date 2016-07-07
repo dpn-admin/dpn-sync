@@ -2,6 +2,7 @@ require 'yaml'
 
 if ENV['RACK_ENV'] == 'test'
   require 'fakeredis'
+  require 'fakeredis/rspec'
 else
   require 'redis'
 end
