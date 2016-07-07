@@ -10,7 +10,7 @@ module DPN
       # @param [String] name job name (identifier)
       def initialize(name)
         @name = name
-        @logger = DPN::Workers.create_logger(name)
+        @logger = DPN::Workers.create_logger("#{name}_data")
       end
 
       # @param [String] namespace remote node namespace
