@@ -47,8 +47,7 @@ module DPN
         end
 
         # @private
-        # @!attribute [r] job_name
-        #   @return [String]
+        # @return [String]
         def job_name
           'sync'
         end

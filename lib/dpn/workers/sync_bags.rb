@@ -34,8 +34,7 @@ module DPN
       private
 
         # @private
-        # @!attribute [r] job_name
-        #   @return [String]
+        # @return [String]
         def job_name
           'sync_bags'
         end
