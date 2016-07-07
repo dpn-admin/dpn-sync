@@ -1,48 +1,48 @@
 module DPN
   module Workers
     # A wrapper for redis node data
+    # @!attribute [r] name
+    #   @return [String]
+    # @!attribute [r] namespace
+    #   @return [String]
+    # @!attribute [r] api_root
+    #   @return [String]
+    # @!attribute [r] auth_credential
+    #   @return [String]
+    # @!attribute [r] ssh_pubkey
+    #   @return [String|nil]
+    # @!attribute [r] created_at
+    #   @return [String]
+    # @!attribute [r] updated_at
+    #   @return [String]
+    # @!attribute [r] replicate_from
+    #   @return [Array<String>]
+    # @!attribute [r] replicate_to
+    #   @return [Array<String>]
+    # @!attribute [r] restore_from
+    #   @return [Array<String>]
+    # @!attribute [r] restore_to
+    #   @return [Array<String>]
+    # @!attribute [r] protocols
+    #   @return [Array<String>]
+    # @!attribute [r] fixity_algorithms
+    #   @return [Array<String>]
+    # @!attribute [r] storage
+    #   @return [Hash]
     class Node
-      # @!attribute [r] name
-      #   @return [String]
       attr_reader :name
-      # @!attribute [r] namespace
-      #   @return [String]
       attr_reader :namespace
-      # @!attribute [r] api_root
-      #   @return [String]
       attr_reader :api_root
-      # @!attribute [r] auth_credential
-      #   @return [String]
       attr_reader :auth_credential
-      # @!attribute [r] ssh_pubkey
-      #   @return [String|nil]
       attr_reader :ssh_pubkey
-      # @!attribute [r] created_at
-      #   @return [String]
       attr_reader :created_at
-      # @!attribute [r] updated_at
-      #   @return [String]
       attr_reader :updated_at
-      # @!attribute [r] replicate_from
-      #   @return [Array<String>]
       attr_reader :replicate_from
-      # @!attribute [r] replicate_to
-      #   @return [Array<String>]
       attr_reader :replicate_to
-      # @!attribute [r] restore_from
-      #   @return [Array<String>]
       attr_reader :restore_from
-      # @!attribute [r] restore_to
-      #   @return [Array<String>]
       attr_reader :restore_to
-      # @!attribute [r] protocols
-      #   @return [Array<String>]
       attr_reader :protocols
-      # @!attribute [r] fixity_algorithms
-      #   @return [Array<String>]
       attr_reader :fixity_algorithms
-      # @!attribute [r] storage
-      #   @return [Hash]
       attr_reader :storage
 
       # @param [Hash] opts
@@ -57,13 +57,15 @@ module DPN
       end
 
       # Test whether a node responds to a /node API request
-      # @return [True|False]
+      # @return [Boolean]
       def alive?
         response = client.node(namespace)
         response.success?
       end
 
-      # @return [DPN::Client::Agent] client
+      # A client for interactions with a DPN REST API
+      # @see https://github.com/dpn-admin/DPN-REST-Wiki
+      # @return [DPN::Client::Agent]
       def client
         @client ||= begin
           client = DPN::Client.client
@@ -87,21 +89,18 @@ module DPN
         hash.symbolize_keys
       end
 
-      # Set instance variables using node data from the HTTP API
-      # @return [True|False]
+      # Update instance variables using data from the /node API
+      # @return [Boolean]
       def update
         !update_attributes.empty?
       end
 
       private
 
-        # @private
-        # @!attribute [r] logger
-        #   @return [Logger]
         attr_reader :logger
 
-        # Retrieve node data from the HTTP API
-        # @private
+        # Retrieve data from the /node API
+        # @return [Hash]
         def server_node_data
           response = client.node(namespace)
           raise response.body unless response.success?
@@ -111,9 +110,8 @@ module DPN
           {}
         end
 
-        # Set instance variables using node data from the HTTP API
-        # @private
-        # @return [Hash] attributes
+        # Update instance variables using data from the /node API
+        # @return [Hash]
         def update_attributes
           server_node_data.each_pair do |key, value|
             # Skip attributes that are explicitly initialized, because all
