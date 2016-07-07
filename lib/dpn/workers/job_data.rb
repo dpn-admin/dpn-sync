@@ -32,7 +32,7 @@ module DPN
         attr_reader :logger
 
         # Assume there is no registry data before the year 2000
-        DEFAULT_TIME = Time.new(2000,01,01,0,0,0,0).utc
+        DEFAULT_TIME = Time.utc(2000, 01, 01, 0, 0, 0)
 
         # @param [String] key
         # @return [Hash] data

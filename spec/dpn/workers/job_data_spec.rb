@@ -30,7 +30,7 @@ describe DPN::Workers::JobData do
     end
 
     it 'defaults to the year 2000' do
-      year_2000 = Time.new(2000,01,01,0,0,0,0).utc
+      year_2000 = Time.utc(2000, 01, 01, 0, 0, 0)
       expect(subject).to receive(:data_get).and_return({})
       expect(result).to eq year_2000
     end
