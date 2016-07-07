@@ -1,6 +1,8 @@
 module DPN
   module Workers
-    # Worker job data persistence
+    # Worker data persistence
+    # @!attribute [r] name
+    #   @return [String] the name of the worker or job
     class JobData
 
       attr_reader :name
@@ -12,7 +14,7 @@ module DPN
       end
 
       # @param [String] namespace remote node namespace
-      # @return [Time] timestamp
+      # @return [Time] timestamp of last successful sync
       def last_success(namespace)
         node_data = data_get("#{name}:#{namespace}")
         time = node_data['last_success'] || DEFAULT_TIME.to_s
@@ -20,7 +22,7 @@ module DPN
       end
 
       # @param namespace [String] remote node namespace
-      # @return [Boolean] success
+      # @return [Boolean] success of the update
       def last_success_update(namespace)
         node_data = data_get("#{name}:#{namespace}")
         node_data['last_success'] = Time.now.utc
