@@ -1,14 +1,14 @@
 module DPN
   module Workers
-    # A wrapper for redis nodes
+    # A collection of DPN::Workers::Node
+    # @!attribute [r] nodes
+    #   @return [Array<DPN::Workers::Node>] all nodes in the collection
+    # @!attribute [r] local_namespace
+    #   @return [String] the namespace of the local node
     class Nodes
       include Enumerable
 
-      # @!attribute [r] nodes
-      #   @return [Array<DPN::Workers::Node>]
       attr_reader :nodes
-      # @!attribute [r] local_namespace
-      #   @return [String]
       attr_reader :local_namespace
 
       # @param [Array<Hash>] nodes
@@ -18,33 +18,40 @@ module DPN
         @local_namespace = local_namespace
       end
 
-      # @yield [DPN::Workers::Node] node
+      # @yield [DPN::Workers::Node]
       def each
         nodes.each { |node| yield node }
       end
 
-      # @return [DPN::Workers::Node] node
+      # Find the local node
+      # @return [DPN::Workers::Node]
       def local_node
         node local_namespace
       end
 
-      # @return [DPN::Workers::Node|nil] node
+      # Find a node by it's namespace
+      # @param [String] namespace
+      # @return [DPN::Workers::Node|nil]
       def node(namespace)
         nodes.find { |node| node.namespace == namespace }
       end
 
-      # @return [DPN::Workers::Node|nil] node
+      # Find a remote node by it's namespace
+      # @param [String] namespace
+      # @return [DPN::Workers::Node|nil]
       def remote_node(namespace)
         remote_nodes.find { |node| node.namespace == namespace }
       end
 
-      # @return [Array<DPN::Workers::Node>] remote_nodes
+      # Select all the remote nodes
+      # @return [Array<DPN::Workers::Node>]
       def remote_nodes
         nodes.select { |node| node.namespace != local_namespace }
       end
 
       # Fetch registry_content data from remote nodes to update local node
       # @param [String|Symbol] registry_content
+      # @return [Boolean]
       def sync(registry_content)
         case registry_content.to_sym
         when :bags
@@ -60,13 +67,11 @@ module DPN
       private
 
         # Iterates on remote_nodes to sync bag registry data into local_node
-        # @private
         def sync_bags
           remote_nodes.each { |node| SyncBags.new(local_node, node).sync }
         end
 
         # Iterates on remote_nodes to sync node registry data into local_node
-        # @private
         def sync_nodes
           remote_nodes.each { |node| SyncNodes.new(local_node, node).sync }
         end
