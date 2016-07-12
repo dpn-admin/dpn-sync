@@ -17,6 +17,7 @@ gem 'dpn-client', git: 'https://github.com/dpn-admin/dpn-client.git'
 
 group :development do
   gem 'thin' # app server
+  gem 'reek'
 end
 
 group :development, :test do
