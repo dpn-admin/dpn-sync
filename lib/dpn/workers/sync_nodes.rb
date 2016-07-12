@@ -7,7 +7,7 @@ module DPN
       def sync
         remote_node.update
         response = local_client.update_node(remote_node.to_hash)
-        raise RuntimeError, response.body unless response.success?
+        raise response.body unless response.success?
         logger.info "Updated #{remote_node.namespace} node"
         last_success_update
       rescue StandardError => e
