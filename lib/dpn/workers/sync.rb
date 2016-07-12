@@ -45,7 +45,7 @@ module DPN
 
         # @return [String]
         def job_name
-          @job_name ||= self.class.name.gsub('::','_')
+          @job_name ||= self.class.name.gsub('::', '_')
         end
 
         # @return [Logger]
