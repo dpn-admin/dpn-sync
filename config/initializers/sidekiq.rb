@@ -3,6 +3,7 @@ require_relative 'redis'
 require_relative '../../lib/dpn/workers'
 
 require 'sidekiq'
+require 'sidekiq/api'
 require 'sidekiq/cron'
 
 host = REDIS_CONFIG[:host]

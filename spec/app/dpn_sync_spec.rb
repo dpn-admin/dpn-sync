@@ -1,9 +1,47 @@
 require 'spec_helper'
 
 describe DpnSync do
-  it 'responds with a welcome message' do
-    get '/'
-    expect(last_response.body).to include 'DPN Synchronization'
+  describe 'GET /' do
+    it 'responds with a welcome message' do
+      get '/'
+      expect(last_response.body).to include 'DPN Synchronization'
+    end
+  end
+
+  describe 'GET /is_it_working' do
+    let(:queue) do
+      queue = double(Sidekiq::Queue)
+      allow(queue).to receive(:size).and_return(size)
+      allow(queue).to receive(:latency).and_return(latency)
+      queue
+    end
+    let(:size) { Settings.acceptable_queue_size - 1 }
+    let(:latency) { Settings.acceptable_queue_latency - 1 }
+
+    def check_status(status)
+      expect(Sidekiq::Queue).to receive(:new).and_return(queue)
+      get '/is_it_working'
+      expect(last_response.status).to eq status
+    end
+
+    context 'when the Sidekiq queue' do
+      it 'is acceptable - it responds with 200 status' do
+        check_status 200
+        expect(last_response.body).to match(/OK:/)
+      end
+      it 'is too large - it responds with 500 status' do
+        size = Settings.acceptable_queue_size + 1
+        allow(queue).to receive(:size).and_return(size)
+        check_status 500
+        expect(last_response.body).to match(/WARNING:/)
+      end
+      it 'is too slow - it responds with 500 status' do
+        latency = Settings.acceptable_queue_latency + 1
+        allow(queue).to receive(:latency).and_return(latency)
+        check_status 500
+        expect(last_response.body).to match(/WARNING:/)
+      end
+    end
   end
 
   describe 'GET /test' do

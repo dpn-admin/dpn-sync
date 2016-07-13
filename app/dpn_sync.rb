@@ -1,3 +1,5 @@
+require_relative 'sidekiq_monitor'
+
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
@@ -21,5 +23,16 @@ class DpnSync < Sinatra::Base
   post '/msg' do
     DPN::Workers::TestWorker.perform_async params[:msg]
     redirect to('/test')
+  end
+
+  get '/is_it_working' do
+    headers(
+      'Content-Type': 'text/plain; charset=utf8',
+      'Cache-Control': 'no-cache',
+      'Date': Time.now.utc.httpdate
+    )
+    monitor = SidekiqMonitor.new
+    status monitor.status
+    body monitor.message
   end
 end
