@@ -33,7 +33,7 @@ module DPN
       # @abstract Subclass and override {#sync} to sync node content
       # @return [Boolean]
       def sync
-        true
+        raise NotImplementedError, "This #{self.class} cannot respond to: sync"
       end
 
       private
