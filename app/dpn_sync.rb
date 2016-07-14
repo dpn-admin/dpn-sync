@@ -3,10 +3,12 @@ require_relative 'sidekiq_monitor'
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
-  set :root, File.join(File.dirname(__FILE__), '..')
-  register Config
+  set :app_file, __FILE__
+  set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
+  set :public_folder, proc { File.expand_path(File.join(root, 'app', 'public')) }, static: true
+  set :views, proc { File.expand_path(File.join(root, 'app', 'views')) }
 
-  set public_folder: 'public', static: true
+  register Config
 
   get '/' do
     erb :welcome
@@ -22,7 +24,7 @@ class DpnSync < Sinatra::Base
 
   post '/msg' do
     DPN::Workers::TestWorker.perform_async params[:msg]
-    redirect to('/test')
+    redirect to("test")
   end
 
   get '/is_it_working' do

@@ -3,8 +3,8 @@
 
 <p>
   <ul style="list-style: square;">
-    <li><a href="/sidekiq">Sidekiq Dashboard</a></li>
-    <li><a href="/test">Refresh page</a></li>
+    <li><a href="sidekiq">Sidekiq Dashboard</a></li>
+    <li><a href="test">Refresh page</a></li>
   </ul>
 </p>
 
@@ -12,16 +12,16 @@
   When the background jobs are running, the message posted from this form
   should appear below within a few seconds.  If they do not appear, do not
   keep adding messages because they are likely already in the job queue.  The
-  queue can be viewed from the <a href="/sidekiq">Sidekiq Dashboard</a>.  To
+  queue can be viewed from the <a href="sidekiq">Sidekiq Dashboard</a>.  To
   see the messages on this test page, ensure the background jobs are running:
   <pre><code>
   bundle exec sidekiq -d -C config/sidekiq.yml -r ./config/initializers/sidekiq.rb
   </code></pre>
   When the background jobs are running, the messages will be processed from
-  the queue and they will appear here after you <a href="/test">Refresh page</a>.
+  the queue and they will appear here after you <a href="test">Refresh page</a>.
 </p>
 
-<form method="post" action="/msg">
+<form method="post" action="msg">
   <input type="text" name="msg">
   <input type="submit" value="Add Message">
 </form>

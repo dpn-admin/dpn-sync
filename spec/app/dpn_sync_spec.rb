@@ -47,7 +47,7 @@ describe DpnSync do
   describe 'GET /test' do
     it 'responds with a message entry form' do
       get '/test'
-      expect(last_response.body).to match(/form method="post" action="\/msg"/)
+      expect(last_response.body).to match(/form method="post" action="\msg"/)
     end
 
     it 'displays job stats' do
