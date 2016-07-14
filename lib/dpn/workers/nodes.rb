@@ -49,11 +49,11 @@ module DPN
         nodes.select { |node| node.namespace != local_namespace }
       end
 
-      # Fetch registry_content data from remote nodes to update local node
-      # @param [String|Symbol] registry_content
+      # Fetch registry content from remote nodes to update local node
+      # @param [String|Symbol] content
       # @return [Boolean]
-      def sync(registry_content)
-        case registry_content.to_sym
+      def sync(content)
+        case content.to_sym
         when :bags
           sync_bags
         when :nodes
