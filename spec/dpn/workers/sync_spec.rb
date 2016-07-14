@@ -24,7 +24,7 @@ describe DPN::Workers::Sync do
 
   describe '#sync' do
     it 'is an abstract method that raises NotImplementedError' do
-      expect{subject.sync}.to raise_error(NotImplementedError)
+      expect { subject.sync }.to raise_error(NotImplementedError)
     end
   end
 
