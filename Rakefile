@@ -2,14 +2,18 @@ require 'bundler'
 
 Dir.glob('lib/tasks/*.rake').each { |r| load r }
 
-require 'coveralls/rake/task'
-Coveralls::RakeTask.new
-
 task default: [:spec]
 
 begin
   require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new(:spec)
 rescue LoadError
-  puts 'RSpec is not available'
+  puts 'RSpec is not available' if ENV['RACK_ENV'] == 'test'
+end
+
+begin
+  require 'coveralls/rake/task'
+  Coveralls::RakeTask.new
+rescue LoadError
+  puts 'Coveralls is not available' if ENV['RACK_ENV'] == 'test'
 end
