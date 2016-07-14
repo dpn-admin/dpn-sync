@@ -22,7 +22,7 @@ require 'sidekiq/cron/web'
 Dir.glob('config/initializers/**/*.rb').each { |r| require r }
 
 # Load app
-require 'lib/dpn/workers'
+Dir.glob('lib/dpn/**/*.rb').each { |r| require r }
 require 'app/dpn_sync'
 
 if $DEBUG

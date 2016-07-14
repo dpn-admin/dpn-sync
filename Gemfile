@@ -30,8 +30,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'fakeredis'
   gem 'rspec'
+  gem 'fakeredis', require: 'fakeredis/rspec'
   gem 'rack-test'
   gem 'coveralls', require: false
   gem 'simplecov', require: false

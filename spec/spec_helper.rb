@@ -33,13 +33,15 @@ ENV['RACK_ENV'] = 'test'
 
 require 'rack/test'
 require 'rspec'
+require 'fakeredis'
+require 'fakeredis/rspec'
 
-require 'find'
-%w(./config/initializers ./lib).each do |load_path|
-  Find.find(load_path) { |f| require f if f =~ /\.rb$/ }
-end
+# Local config
+Dir.glob('./config/initializers/**/*.rb').each { |r| require r }
 
-require File.expand_path '../../app/dpn_sync.rb', __FILE__
+# Load app
+Dir.glob('./lib/dpn/**/*.rb').each { |r| require r }
+Dir.glob('./app/**/*.rb').each { |r| require r }
 
 # Configure RSpec
 module RSpecMixin
