@@ -1,14 +1,16 @@
+# https://github.com/mperham/sidekiq/wiki/Advanced-Options
+# https://github.com/seuros/capistrano-sidekiq#usage
+# See also config/deploy.rb
 ---
-:concurrency: 3
+:concurrency: 8
 :pidfile: ./tmp/pids/sidekiq.pid
-:queues:
-  - default
-  - sync_bags
-  - sync_nodes
 
 test:
   :logfile: ./log/sidekiq_test.log
+
 development:
+  :logfile: ./log/sidekiq_dev.log
+
 production:
-  :concurrency: 12
-  :logfile: ./log/sidekiq.log
+  :concurrency: 16
+  :logfile: ./log/sidekiq_prod.log
