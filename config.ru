@@ -19,14 +19,10 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 # Local config
-require 'find'
-%w(config/initializers lib).each do |load_path|
-  Find.find(load_path) do |f|
-    require f unless f =~ /\/\..+$/ || File.directory?(f)
-  end
-end
+Dir.glob('config/initializers/**/*.rb').each { |r| require r }
 
 # Load app
+require 'lib/dpn/workers'
 require 'app/dpn_sync'
 
 if $DEBUG
