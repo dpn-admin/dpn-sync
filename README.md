@@ -35,9 +35,12 @@ Components:
   bundle install
   # Start the Sidekiq daemon to run background jobs; some
   # jobs are managed by sidekiq-cron, see config/schedule.yml
-  bundle exec sidekiq -d -C config/sidekiq.yml -r ./config/initializers/sidekiq.rb
+  bundle exec rake sidekiq:start
   # Start the Sidekiq dashboard at http://localhost:9292/
   bundle exec rackup
+  # Explore the dashboard web pages and then
+  # Cnt-C to stop and then
+  bundle exec rake sidekiq:stop
   ```
 
 ## Configuration

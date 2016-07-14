@@ -1,5 +1,7 @@
 require 'bundler'
 
+Dir.glob('lib/tasks/*.rake').each { |r| load r }
+
 require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 
