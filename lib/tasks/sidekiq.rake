@@ -7,6 +7,7 @@ namespace :sidekiq do
 
   namespace :service do
     sidekiq_config_file = File.join('config', 'sidekiq.yml')
+    sidekiq_config_file = File.expand_path(sidekiq_config_file)
     if File.exist? sidekiq_config_file
       sidekiq_config = YAML.load(File.read(sidekiq_config_file))
       sidekiq_pid_file = sidekiq_config[:pidfile]
@@ -22,8 +23,10 @@ namespace :sidekiq do
 
     sidekiq_pid_file ||= File.join('tmp', 'pids', 'sidekiq.pid')
     sidekiq_log_file ||= File.join('log', 'sidekiq.log')
+    sidekiq_pid_file = File.expand_path(sidekiq_pid_file)
+    sidekiq_log_file = File.expand_path(sidekiq_log_file)
 
-    sidekiq_init_file = File.join('config', 'initializers', 'sidekiq.rb')
+    sidekiq_init_file = File.expand_path(File.join('config', 'initializers', 'sidekiq.rb'))
 
     desc "Sidekiq - restart"
     task :restart do

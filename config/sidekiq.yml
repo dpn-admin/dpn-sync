@@ -3,7 +3,6 @@
 # See also config/deploy.rb
 ---
 :concurrency: 8
-:pidfile: ./tmp/pids/sidekiq.pid
 
 test:
   :logfile: ./log/sidekiq_test.log

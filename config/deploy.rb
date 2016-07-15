@@ -58,7 +58,7 @@ set :sidekiq_config, -> { File.join(current_path, 'config', 'sidekiq.yml') }
 # :sidekiq_queue => nil
 # :sidekiq_timeout => 10
 # :sidekiq_role => :app
-set :sidekiq_processes, 2
+# set :sidekiq_processes, 2
 # set :sidekiq_options_per_process, ["--queue sync_bags", "--queue sync_nodes"]
 # :sidekiq_concurrency => nil
 # :sidekiq_service_name => "sidekiq_#{fetch(:application)}_#{fetch(:sidekiq_env)}"
