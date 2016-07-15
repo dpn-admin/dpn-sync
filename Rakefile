@@ -1,5 +1,7 @@
 require 'bundler'
+Bundler.require
 
+# Tasks
 Dir.glob('lib/tasks/*.rake').each { |r| load r }
 
 task default: [:spec]

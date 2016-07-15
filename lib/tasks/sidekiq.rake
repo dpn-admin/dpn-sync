@@ -65,10 +65,6 @@ namespace :sidekiq do
   end
 
   namespace :clear do
-    desc "Sidekiq - clear the default queue"
-    task :default_queue do
-      Sidekiq::Queue.new('default').clear
-    end
 
     desc "Sidekiq - clear the queue[id] (id is 'default' by default)"
     task :queue, :id do |t, args|
@@ -84,6 +80,22 @@ namespace :sidekiq do
     desc "Sidekiq - clear the scheduled set"
     task :scheduled_set do
       Sidekiq::ScheduledSet.new.clear
+    end
+  end
+
+  namespace :default_queue do
+    queue = Sidekiq::Queue.new('default')
+
+    desc "Sidekiq - clear the default queue"
+    task :clear do
+      queue.clear
+    end
+
+    desc 'Sidekiq - default queue entries'
+    task :entries do
+      queue.entries.each do |entry|
+        puts JSON.pretty_generate(JSON.parse(entry.value))
+      end
     end
   end
 
