@@ -47,7 +47,7 @@ describe DpnSync do
   describe 'GET /test' do
     it 'responds with a message entry form' do
       get '/test'
-      expect(last_response.body).to match(/form method="post" action="\msg"/)
+      expect(last_response.body).to match(/form method="post" action="msg"/)
     end
 
     it 'displays job stats' do
@@ -77,6 +77,19 @@ describe DpnSync do
 
     it 'redirects to the /test page' do
       post '/msg', msg: msg
+      expect(last_response.status).to eq 302
+      expect(last_response.location).to match(/\/test$/)
+    end
+  end
+
+  describe 'POST /msg/clear' do
+    it 'clears the redis list for "dpn-messages"' do
+      expect(REDIS).to receive(:del).with('dpn-messages')
+      post '/msg/clear'
+    end
+
+    it 'redirects to the /test page' do
+      post '/msg/clear'
       expect(last_response.status).to eq 302
       expect(last_response.location).to match(/\/test$/)
     end

@@ -27,6 +27,11 @@ class DpnSync < Sinatra::Base
     redirect to("test")
   end
 
+  post '/msg/clear' do
+    REDIS.del('dpn-messages')
+    redirect to("test")
+  end
+
   get '/is_it_working' do
     headers(
       'Content-Type': 'text/plain; charset=utf8',

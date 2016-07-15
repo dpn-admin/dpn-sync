@@ -26,6 +26,10 @@
   <input type="submit" value="Add Message">
 </form>
 
+<form method="post" action="msg/clear">
+  <input type="submit" value="Clear Messages">
+</form>
+
 <h3>Messages</h3>
 <% @messages.each do |msg| %>
   <p><%= msg %></p>
