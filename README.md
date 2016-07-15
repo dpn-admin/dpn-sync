@@ -14,18 +14,22 @@ Components:
   - it requires a `local_namespace` to identify a `local_node`
   - it makes an important distinction between a `local_node` and `remote_nodes`
   - it has methods to `sync` data from `remote_nodes` into the `local_node`
-    - various `DPN::Workers::SyncWorker` call the `sync` method
-    - various `DPN::Workers::Sync` implement the `sync` details
+    - the `DPN::Workers::SyncWorker` is a `Sidekiq::Worker`
+    - subclasses of `DPN::Workers::Sync` implement `#sync`
       - they use `DPN::Workers::JobData` for tracking success
 - a node is modeled by the `DPN::Workers::Node` class
   - it requires a node namespace, API URL, and authentication token
   - it contains a `DPN::Client` to access a node's HTTP API
   - the client is from https://github.com/dpn-admin/dpn-client
-  - the HTTP API is from https://github.com/dpn-admin/dpn-server
+  - the HTTP API is https://github.com/dpn-admin/DPN-REST-Wiki
+    - it is implemented in https://github.com/dpn-admin/dpn-server
 
 ## Requirements
 
 - [Sidekiq](https://github.com/mperham/sidekiq) requires the [Redis](http://redis.io/) document store.
+- Access to at least two DPN nodes that host a DPN HTTP-REST-API
+  - https://github.com/dpn-admin/DPN-REST-Wiki
+  - https://github.com/dpn-admin/dpn-server
 
 ## Getting Started
 
@@ -35,12 +39,12 @@ Components:
   bundle install
   # Start the Sidekiq daemon to run background jobs; some
   # jobs are managed by sidekiq-cron, see config/schedule.yml
-  bundle exec rake sidekiq:start
+  bundle exec rake sidekiq:service:start
   # Start the Sidekiq dashboard at http://localhost:9292/
   bundle exec rackup
   # Explore the dashboard web pages and then
   # Cnt-C to stop and then
-  bundle exec rake sidekiq:stop
+  bundle exec rake sidekiq:service:stop
   ```
 
 ## Configuration
@@ -50,6 +54,7 @@ Components:
   - `config/settings/*.yml`
   - `config/initializers/*.rb`
   - additional configuration details may be in the project wiki pages
+    - https://github.com/sul-dlss/dpn-sync/wiki
 
 The `config` gem provides several layers of specificity for settings, see
 https://github.com/railsconfig/config#accessing-the-settings-object
@@ -75,10 +80,48 @@ end.to_yaml
 
 Note that the `auth_credential` values are private and should be kept secret.
 
+The node information can be retrieved from the HTTP-REST-API.  For example, when the `dpn-server` cluster is running locally, it can be retrieved using:
+
+```sh
+curl -k -H "Authorization: Token token=aptrust_token" -L http://127.0.0.1:3001/api-v1/node/
+```
+
+The response will include many details, including those required, but not the `auth_credential` values. An abbridged example looks like:
+
+```json
+{
+  "count": 5,
+  "next": null,
+  "previous": null,
+  "results": [{
+    "name": "APTrust",
+    "namespace": "aptrust",
+    "api_root": "http://127.0.0.1:3001"
+  }, {
+    "name": "Chronopolis",
+    "namespace": "chron",
+    "api_root": "http://127.0.0.1:3002"
+  }, {
+    "name": "Hathi Trust",
+    "namespace": "hathi",
+    "api_root": "http://127.0.0.1:3003"
+  }, {
+    "name": "Stanford Digital Repository",
+    "namespace": "sdr",
+    "api_root": "http://127.0.0.1:3004"
+  }, {
+    "name": "Texas Digital Repository",
+    "namespace": "tdr",
+    "api_root": "http://127.0.0.1:3005"
+  }]
+}
+```
+
 ### Configuring Test Cluster
 
-When running in development, the `dpn-server` project can run a test cluster and the nodes data can be set to work with that cluster; the default values in `config/settings.yml` should work with this cluster.  See
+When running in development, the `dpn-server` project can run a test cluster and the nodes settings can be set to work with that cluster; the default values in `config/settings.yml` should work with this cluster.  See
 - https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
+- https://github.com/dpn-admin/dpn-server/blob/master/script/setup_cluster.rb
 - https://github.com/dpn-admin/dpn-server/blob/master/script/run_cluster.rb
 
 ### Environment Variables
@@ -103,16 +146,40 @@ config/
 └── sidekiq_schedule.yml
 ```
 
+Capistrano can start and stop the `Sidekiq` service.  The tasks include:
+```
+cap sidekiq:quiet                  # Quiet sidekiq (stop processing new tasks)
+cap sidekiq:respawn                # Respawn missing sidekiq processes
+cap sidekiq:restart                # Restart sidekiq
+cap sidekiq:rolling_restart        # Rolling-restart sidekiq
+cap sidekiq:start                  # Start sidekiq
+cap sidekiq:stop                   # Stop sidekiq
+```
+
+## Rake
+
+There are rake tasks for starting `dpn-sync` jobs and inspecting the `Sidekiq` API.  All the tasks can be listed using `bundle exec rake -T`, e.g.
+```
+rake dpn:sync:bags_meta_data        # DPN - queue a job to fetch bags meta-data from remote nodes
+rake dpn:sync:nodes                 # DPN - queue a job to fetch node meta-data from remote nodes
+rake sidekiq:default_queue:clear    # Sidekiq - clear the default queue
+rake sidekiq:default_queue:entries  # Sidekiq - default queue entries
+rake sidekiq:stats:all              # Sidekiq - statistics - all
+rake sidekiq:stats:history[days]    # Sidekiq - statistics - history[days]
+rake sidekiq:stats:reset            # Sidekiq - statistics - reset
+...
+```
+
 ## Development
 
 - To get a console: `bundle exec rackup -d`
   - if anything goes wrong, look at `log/rack_debug.log`
   - if the `dpn-server` cluster is running, the following works:
 
-```ruby
-DPN::Workers.nodes.map(&:alive?)
-#=> [true, true, true, true, true]
-```
+    ```ruby
+    DPN::Workers.nodes.map(&:alive?)
+    #=> [true, true, true, true, true]
+    ```
 
 - To see and test jobs:
   - `bundle exec sidekiq -C ./config/sidekiq.yml -r ./config/initializers/sidekiq.rb`
