@@ -4,7 +4,6 @@ require 'sidekiq/api'
 
 # Usage: bundle exec rake sidekiq:restart RACK_ENV=<environment name>
 namespace :sidekiq do
-
   namespace :service do
     sidekiq_config_file = File.join('config', 'sidekiq.yml')
     sidekiq_config_file = File.expand_path(sidekiq_config_file)
@@ -65,10 +64,9 @@ namespace :sidekiq do
   end
 
   namespace :clear do
-
     desc "Sidekiq - clear the queue[id] (id is 'default' by default)"
-    task :queue, :id do |t, args|
-      args.with_defaults(:id => 'default')
+    task :queue, :id do |_t, args|
+      args.with_defaults(id: 'default')
       Sidekiq::Queue.new(args[:id]).clear
     end
 
@@ -116,14 +114,12 @@ namespace :sidekiq do
     end
 
     desc "Sidekiq - statistics - history[days]"
-    task :history, :days do |t, args|
-      args.with_defaults(:days => '5')
+    task :history, :days do |_t, args|
+      args.with_defaults(days: '5')
       s = Sidekiq::Stats::History.new(args[:days].to_i)
       puts JSON.pretty_generate(
-        {
-          processed: s.processed,
-          failed: s.failed
-        }
+        processed: s.processed,
+        failed: s.failed
       )
     end
   end
