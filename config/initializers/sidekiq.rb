@@ -1,6 +1,6 @@
 # Sidekiq Configuration
-require_relative 'redis'
-require_relative '../../lib/dpn/workers'
+require_relative 'redis_init'
+require_relative 'dpn_workers'
 
 require 'sidekiq'
 require 'sidekiq/api'

@@ -1,6 +1,7 @@
 require 'bundler'
-Bundler.setup
 Bundler.require
+require 'json'
+require 'logger'
 
 ##
 # Initialize Settings from config files
@@ -13,9 +14,9 @@ config_files = [
 ]
 Config.load_and_set_settings(config_files)
 
-require 'json'
-require 'logger'
+require_relative 'workers/job_data'
 require_relative 'workers/sync'
+require_relative 'workers/sync_bag'
 require_relative 'workers/sync_bags'
 require_relative 'workers/sync_nodes'
 require_relative 'workers/node'

@@ -8,21 +8,13 @@ end
 
 require 'bundler'
 Bundler.require
-require 'redis'
-require 'redis-namespace'
-require 'sinatra'
-require 'sinatra/base'
-require 'config'
-require 'sidekiq'
-require 'sidekiq/api'
-require 'sidekiq/web'
-require 'sidekiq/cron/web'
 
 # Local config
 Dir.glob('config/initializers/**/*.rb').each { |r| require r }
 
 # Load app
-Dir.glob('lib/dpn/**/*.rb').each { |r| require r }
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
 require 'app/dpn_sync'
 
 if $DEBUG

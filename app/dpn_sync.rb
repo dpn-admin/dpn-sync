@@ -1,3 +1,5 @@
+require 'sinatra'
+require 'sinatra/base'
 require_relative 'sidekiq_monitor'
 
 ##

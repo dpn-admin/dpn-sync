@@ -1,4 +1,5 @@
 require 'redis'
+require 'redis-namespace'
 require 'yaml'
 
 redis_settings = YAML.load_file('config/redis.yml')
