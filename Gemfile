@@ -2,7 +2,6 @@ source 'https://rubygems.org/'
 
 # App Stack
 gem 'sinatra'
-gem 'sinatra-contrib'
 gem 'config'
 
 # Background Processing Stack
