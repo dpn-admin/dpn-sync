@@ -16,6 +16,7 @@ Config.load_and_set_settings(config_files)
 
 require_relative 'workers/job_data'
 require_relative 'workers/sync'
+require_relative 'workers/sync_content'
 require_relative 'workers/sync_bag'
 require_relative 'workers/sync_bags'
 require_relative 'workers/sync_nodes'

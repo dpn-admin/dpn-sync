@@ -2,57 +2,31 @@ module DPN
   module Workers
     ##
     # Save a bag to a local node
-    class SyncBag
-
-      attr_reader :bag
-
-      def initialize(bag, local_client, logger)
-        @bag = bag
-        @local_client = local_client
-        @logger = logger
-      end
-
-      # @return [Boolean]
-      def create_or_update
-        create_bag || update_bag
-      rescue StandardError => err
-        logger.error "FAILED  bag: #{bag_id}"
-        logger.error err.inspect
-        false
-      end
+    class SyncBag < SyncContent
 
       private
 
-        attr_reader :local_client
-        attr_reader :logger
+        # Custom alias for content
+        # @return [Object] bag
+        alias bag content
 
         # @return [String] bag UUID
-        def bag_id
+        def content_id
           bag[:uuid]
         end
 
         # @return [Boolean]
-        def create_bag
-          response = local_client.create_bag(bag)
-          success = response.success?
-          if success
-            logger.info "SUCCESS create: #{bag_id}"
-          else
-            logger.error "FAILED  create: #{bag_id}, status: #{response.status}"
-          end
-          success
+        def create
+          response = node_client.create_bag(bag)
+          log_result('create', response)
+          response.success?
         end
 
         # @return [Boolean]
-        def update_bag
-          response = local_client.update_bag(bag)
-          success = response.success?
-          if success
-            logger.info "SUCCESS update: #{bag_id}"
-          else
-            logger.error "FAILED  update: #{bag_id}, status: #{response.status}"
-          end
-          success
+        def update
+          response = node_client.update_bag(bag)
+          log_result('update', response)
+          response.success?
         end
     end
   end
