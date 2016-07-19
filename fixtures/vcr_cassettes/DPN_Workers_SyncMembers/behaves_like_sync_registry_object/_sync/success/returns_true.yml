@@ -1,0 +1,499 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3002/api-v1/member/?page=1&page_size=25
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:15 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"01f06ea245c9a0207ecdcbf434c921ad"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - aa8f32d7-85d1-463f-bdb9-406e0c3109f8
+      X-Runtime:
+      - '0.040717'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"count":5,"next":null,"previous":null,"results":[{"uuid":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi
+        Test","email":"dpn_test@hathi.org","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"},{"uuid":"9a000000-0000-4000-a000-000000000004","name":"Greendale
+        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"},{"uuid":"9a000000-0000-4000-a000-000000000001","name":"UC
+        Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"},{"uuid":"9a000000-0000-4000-a000-000000000003","name":"Grand
+        Lakes University","email":"dangerfield@grandlakes.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"},{"uuid":"9a000000-0000-4000-a000-000000000002","name":"Faber
+        College","email":"bluto@faber.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}]}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:15 GMT
+- request:
+    method: post
+    uri: http://localhost:3001/api-v1/member/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:15 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - e61481c1-004d-45e4-a21c-72dad1be1c52
+      X-Runtime:
+      - '0.134783'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:15 GMT
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/member/fe908327-3635-43c2-9ca6-849485febcf3/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:19 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"50efa4c980b33192265d69f94a70769e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - b140c594-8f3b-4ff4-81bd-8b2764b73852
+      X-Runtime:
+      - '0.037376'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-07-19T22:23:10Z","updated_at":"2016-07-19T22:23:10Z"}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:19 GMT
+- request:
+    method: post
+    uri: http://localhost:3001/api-v1/member/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000004","name":"Greendale Community
+        College","email":"lybrerien@greendalecc.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:20 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 861e5990-03a2-42b9-8605-7170a788dc1d
+      X-Runtime:
+      - '0.009984'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:20 GMT
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/member/9a000000-0000-4000-a000-000000000004/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000004","name":"Greendale Community
+        College","email":"lybrerien@greendalecc.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:20 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"0036f9f315608879d2c1d142429d2f75"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9f1d6442-de35-44b3-aa1a-4e5367b0b095
+      X-Runtime:
+      - '0.020429'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000004","name":"Greendale Community
+        College","email":"lybrerien@greendalecc.edu","created_at":"2016-07-19T22:23:10Z","updated_at":"2016-07-19T22:23:10Z"}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:20 GMT
+- request:
+    method: post
+    uri: http://localhost:3001/api-v1/member/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:21 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - f5541571-61e2-4046-9db7-24ab331dfeff
+      X-Runtime:
+      - '0.016238'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:21 GMT
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/member/9a000000-0000-4000-a000-000000000001/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:22 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"e12772a4f06d53be835cff1cacfe2ffc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f2976c37-8bb7-418e-b251-1e86f68cd4b0
+      X-Runtime:
+      - '0.017126'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-07-19T22:23:10Z","updated_at":"2016-07-19T22:23:10Z"}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:22 GMT
+- request:
+    method: post
+    uri: http://localhost:3001/api-v1/member/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:23 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 8270cb73-27d8-4685-acfb-faed626ef649
+      X-Runtime:
+      - '0.010778'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:23 GMT
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/member/9a000000-0000-4000-a000-000000000003/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:23 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"7f68b513e4659b89ebd9fce299b5d586"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 652b5b3f-c582-43eb-a814-030bbefba7d1
+      X-Runtime:
+      - '0.023601'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-07-19T22:23:10Z","updated_at":"2016-07-19T22:23:10Z"}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:23 GMT
+- request:
+    method: post
+    uri: http://localhost:3001/api-v1/member/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:24 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 1b517b24-6c51-4c9f-92ca-32d3f28b9aea
+      X-Runtime:
+      - '0.008412'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:24 GMT
+- request:
+    method: put
+    uri: http://localhost:3001/api-v1/member/9a000000-0000-4000-a000-000000000002/
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-07-19T22:23:12Z","updated_at":"2016-07-19T22:23:12Z"}'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 19 Jul 2016 23:14:24 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"8ab389d4d4a7a40d62c50e4c90da166b"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1f70673b-860c-40eb-a9d4-01c89118b0e0
+      X-Runtime:
+      - '0.012386'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-07-19T22:23:10Z","updated_at":"2016-07-19T22:23:10Z"}'
+    http_version: 
+  recorded_at: Tue, 19 Jul 2016 23:14:24 GMT
+recorded_with: VCR 3.0.3
