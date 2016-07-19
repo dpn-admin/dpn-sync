@@ -15,9 +15,9 @@ module DPN
       # @return [Boolean]
       def create_or_update
         create_bag || update_bag
-      rescue StandardError => e
+      rescue StandardError => err
         logger.error "FAILED  bag: #{bag_id}"
-        logger.error e.inspect
+        logger.error err.inspect
         false
       end
 
@@ -34,23 +34,25 @@ module DPN
         # @return [Boolean]
         def create_bag
           response = local_client.create_bag(bag)
-          if response.success?
+          success = response.success?
+          if success
             logger.info "SUCCESS create: #{bag_id}"
           else
             logger.error "FAILED  create: #{bag_id}, status: #{response.status}"
           end
-          response.success?
+          success
         end
 
         # @return [Boolean]
         def update_bag
           response = local_client.update_bag(bag)
-          if response.success?
+          success = response.success?
+          if success
             logger.info "SUCCESS update: #{bag_id}"
           else
             logger.error "FAILED  update: #{bag_id}, status: #{response.status}"
           end
-          response.success?
+          success
         end
     end
   end
