@@ -7,8 +7,8 @@ module DPN
       # @return [Boolean] success of sync operations
       def sync
         sync_bags
-      rescue StandardError => e
-        logger.error e.inspect
+      rescue StandardError => err
+        logger.error err.inspect
         false
       end
 
@@ -28,22 +28,34 @@ module DPN
 
         # @return [Boolean] success of bag sync operations
         def sync_bags
-          results = []
-          BAG_TYPES.each do |bag_type|
-            query = bag_query(bag_type)
-            remote_client.bags(query) do |response|
-              if response.success?
-                remote_bag = response.body
-                local_bag = DPN::Workers::SyncBag.new(remote_bag, local_client, logger)
-                results << local_bag.create_or_update
-              else
-                results << false
-                logger.error response.body
-              end
-            end
+          success = BAG_TYPES.any? do |bag_type|
+            sync_bag_type(bag_type)
           end
-          last_success_update if results.all?
-          results.all?
+          success ? last_success_update : false
+        end
+
+        # @param [String] DPN bag type (I, R, or D)
+        # @return [Boolean] success of bag sync operation
+        def sync_bag_type(bag_type)
+          result = false
+          query = bag_query(bag_type)
+          remote_client.bags(query) do |response|
+            result = create_or_update_bag(response)
+          end
+          result
+        end
+
+        # @param [DPN::Client::Response]
+        # @return [Boolean] success of bag create or update operation
+        def create_or_update_bag(remote_response)
+          bag_data = remote_response.body
+          if remote_response.success?
+            local_bag = DPN::Workers::SyncBag.new(bag_data, local_client, logger)
+            local_bag.create_or_update
+          else
+            logger.error bag_data
+            false
+          end
         end
     end
   end
