@@ -10,8 +10,8 @@ module DPN
         raise response.body unless response.success?
         logger.info "Updated #{remote_node.namespace} node"
         last_success_update
-      rescue StandardError => e
-        logger.error e.inspect
+      rescue StandardError => err
+        logger.error err.inspect
         false
       end
     end
