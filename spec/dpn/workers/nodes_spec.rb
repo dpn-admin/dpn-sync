@@ -84,39 +84,35 @@ describe DPN::Workers::Nodes do
       expect(result).to be false
     end
     it 'can sync bags' do
-      expect(subject).to receive(:sync_bags)
-      result = subject.sync(:bags) # Symbol arg is OK
+      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncBags)
+      result = subject.sync(:bags) # String or Symbol arg is OK
+      expect(result).to be true
+    end
+    it 'can sync members' do
+      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncMembers)
+      result = subject.sync('members') # String or Symbol arg is OK
       expect(result).to be true
     end
     it 'can sync nodes' do
-      expect(subject).to receive(:sync_nodes)
-      result = subject.sync('nodes') # String arg is OK
+      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncNodes)
+      result = subject.sync('nodes') # String or Symbol arg is OK
       expect(result).to be true
     end
   end
 
   context 'private' do
-    let!(:sync) do
-      local_node = subject.local_node
-      remote_node = subject.remote_nodes.sample(1).first
-      syncer = DPN::Workers::Sync.new(local_node, remote_node)
-      expect(syncer).to receive(:sync).at_least(:once)
-      syncer
-    end
-
-    describe 'sync_bags' do
-      it 'iterates on remote_nodes' do
-        expect(subject).to receive(:remote_nodes).and_call_original
-        expect(DPN::Workers::SyncBags).to receive(:new).at_least(:once).and_return(sync)
-        subject.send(:sync_bags)
+    describe 'sync_data' do
+      let(:syncer) do
+        syncer = double(DPN::Workers::Sync)
+        expect(syncer).to receive(:sync).at_least(:once)
+        syncer
       end
-    end
 
-    describe 'sync_nodes' do
       it 'iterates on remote_nodes' do
+        node_count = subject.remote_nodes.count
         expect(subject).to receive(:remote_nodes).and_call_original
-        expect(DPN::Workers::SyncNodes).to receive(:new).at_least(:once).and_return(sync)
-        subject.send(:sync_nodes)
+        expect(DPN::Workers::SyncBags).to receive(:new).exactly(node_count).and_return(syncer)
+        subject.send(:sync_data, DPN::Workers::SyncBags)
       end
     end
   end

@@ -55,9 +55,11 @@ module DPN
       def sync(content)
         case content.to_sym
         when :bags
-          sync_bags
+          sync_data SyncBags
+        when :members
+          sync_data SyncMembers
         when :nodes
-          sync_nodes
+          sync_data SyncNodes
         else
           return false
         end
@@ -66,14 +68,10 @@ module DPN
 
       private
 
-        # Iterates on remote_nodes to sync bag registry data into local_node
-        def sync_bags
-          remote_nodes.each { |node| SyncBags.new(local_node, node).sync }
-        end
-
-        # Iterates on remote_nodes to sync node registry data into local_node
-        def sync_nodes
-          remote_nodes.each { |node| SyncNodes.new(local_node, node).sync }
+        # Iterates on remote_nodes to sync registry data into local_node
+        # @param [Class] class object to handle content type for sync
+        def sync_data(klass)
+          remote_nodes.each { |node| klass.new(local_node, node).sync }
         end
     end
   end

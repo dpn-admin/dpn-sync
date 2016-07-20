@@ -12,15 +12,21 @@
 # | +---------- Hour              (range: 0-23)
 # +------------ Minute            (range: 0-59)
 
-# SyncBags every 20 mins
+# SyncBags every 30 mins
 sync_bags:
-  cron: "*/20 * * * *"
+  cron: "*/30 * * * * *"
   class: "DPN::Workers::SyncWorker"
   args: "bags" # argument for DPN::Workers::SyncWorker#perform(content)
 
-# SyncNodes every 15 mins
+# SyncMembers every day at 2am
+sync_members:
+  cron: "0 2 * * * *"
+  class: "DPN::Workers::SyncWorker"
+  args: "members" # argument for DPN::Workers::SyncWorker#perform(content)
+
+# SyncNodes every day at 1am
 sync_nodes:
-  cron: "*/15 * * * *"
+  cron: "0 1 * * * *"
   class: "DPN::Workers::SyncWorker"
   args: "nodes" # argument for DPN::Workers::SyncWorker#perform(content)
 
