@@ -40,7 +40,7 @@ module DPN
 
         # @return [DPN::Workers::JobData]
         def job_data
-          @job_data ||= JobData.new(job_name)
+          @job_data ||= DPN::Workers::JobData.new(job_name)
         end
 
         # @return [String]
