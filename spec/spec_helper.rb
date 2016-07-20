@@ -67,6 +67,7 @@ end
 ##
 # Common DPN::Workers::Node instances
 
+# This method smells of :reek:UtilityFunction
 def example_node
   DPN::Workers::Node.new(
     namespace: 'example',
@@ -75,10 +76,12 @@ def example_node
   )
 end
 
+# This method smells of :reek:UtilityFunction
 def local_node
   DPN::Workers.nodes.local_node
 end
 
+# This method smells of :reek:UtilityFunction
 def remote_node
   DPN::Workers.nodes.remote_nodes.first
 end
