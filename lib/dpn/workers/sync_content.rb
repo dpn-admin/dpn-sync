@@ -56,10 +56,11 @@ module DPN
         end
 
         def log_result(operation, response)
+          msg = "#{operation}: #{content_id}"
           if response.success?
-            logger.info "SUCCESS #{operation}: #{content_id}"
+            logger.info msg
           else
-            logger.error "FAILED  #{operation}: #{content_id}, status: #{response.status}"
+            logger.error "#{msg}, status: #{response.status}, error: #{response.body}"
           end
         end
     end
