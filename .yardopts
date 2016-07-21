@@ -1,0 +1,7 @@
+--title "DPN Node Synchronization Services"
+--charset utf-8
+--markup-provider=redcarpet
+--markup=markdown
+--readme README.md
+app/**/*.rb
+lib/**/*.rb

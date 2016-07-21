@@ -26,6 +26,8 @@ group :development, :test do
   gem 'pry-doc'
   gem 'rake'
   gem 'yard'
+  gem 'redcarpet'
+  gem 'github-markup'
 end
 
 group :test do
