@@ -78,7 +78,7 @@ module DPN
         end
 
         # @param [Hash] bag data already in local node that belongs to remote node
-        # @param [DPN::Client::Response] replication response
+        # @param [DPN::Client::Response] response a replication response
         # @return [Boolean] success of replication create or update operation
         def handle_replication_response(bag, response)
           data = response.body

@@ -34,7 +34,7 @@ module DPN
           success ? last_success_update : false
         end
 
-        # @param [String] DPN bag type (I, R, or D)
+        # @param [String] bag_type DPN bag types are: 'I', 'R', or 'D'
         # @return [Boolean] success of bag sync operation
         def sync_bag_type(bag_type)
           result = false
@@ -45,7 +45,7 @@ module DPN
           result
         end
 
-        # @param [DPN::Client::Response]
+        # @param [DPN::Client::Response] remote_response
         # @return [Boolean] success of bag create or update operation
         def create_or_update_bag(remote_response)
           bag_data = remote_response.body

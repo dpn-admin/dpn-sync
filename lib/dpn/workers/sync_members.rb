@@ -23,7 +23,7 @@ module DPN
           success ? last_success_update : false
         end
 
-        # @param [DPN::Client::Response]
+        # @param [DPN::Client::Response] remote_response
         # @return [Boolean] success of member create or update operation
         def create_or_update_member(remote_response)
           json_data = remote_response.body

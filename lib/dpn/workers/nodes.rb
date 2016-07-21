@@ -69,7 +69,7 @@ module DPN
       private
 
         # Iterates on remote_nodes to sync registry data into local_node
-        # @param [Class] class object to handle content type for sync
+        # @param [Class] klass object to handle content type for sync
         def sync_data(klass)
           remote_nodes.each { |node| klass.new(local_node, node).sync }
         end

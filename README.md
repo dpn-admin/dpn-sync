@@ -1,12 +1,13 @@
 
-[![Build Status](https://travis-ci.org/sul-dlss/dpn-sync.svg?branch=master)](https://travis-ci.org/sul-dlss/dpn-sync) [![Coverage Status](https://coveralls.io/repos/github/sul-dlss/dpn-sync/badge.svg?branch=master)](https://coveralls.io/github/sul-dlss/dpn-sync?branch=master) [![Dependency Status](https://gemnasium.com/sul-dlss/dpn-sync.svg)](https://gemnasium.com/sul-dlss/dpn-sync) 
+[![Build Status](https://travis-ci.org/sul-dlss/dpn-sync.svg?branch=master)](https://travis-ci.org/sul-dlss/dpn-sync) [![Coverage Status](https://coveralls.io/repos/github/sul-dlss/dpn-sync/badge.svg?branch=master)](https://coveralls.io/github/sul-dlss/dpn-sync?branch=master) [![Dependency Status](https://gemnasium.com/sul-dlss/dpn-sync.svg)](https://gemnasium.com/sul-dlss/dpn-sync)
 
 # DPN Synchronization
 
 An application for synchronizing DPN registry data from remote nodes, using the
 [Sidekiq](https://github.com/mperham/sidekiq) background jobs framework.
 
-Components:
+## Components
+
 - the DPN nodes are defined in `config/settings.yml`
   - the settings are handled by `DPN::Workers`
   - a set of DPN nodes is loaded by `DPN::Workers.nodes`
