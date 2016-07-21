@@ -31,14 +31,17 @@ class SidekiqMonitor
   end
 
   def ok?
-    @ok ||= size < acceptable_queue_size && latency < acceptable_queue_latency
+    size < acceptable_queue_size && latency < acceptable_queue_latency
   end
 
   private
 
     attr_reader :queue
-    def_delegators :queue, :size
-    def_delegators :queue, :latency
+    def_delegators :queue, :size, :latency
+
+    def_delegators :Settings, :acceptable_queue_size, :acceptable_queue_latency
+
+    def_delegator :Time, :now, :now
 
     # @return [String] queue status with size and latency
     def details
@@ -51,22 +54,5 @@ class SidekiqMonitor
     # @return [String]
     def hostname
       @hostname ||= `hostname`.chomp
-    end
-
-    # @return [Time]
-    def now
-      Time.now.utc
-    end
-
-    # An acceptable schedule queue size for background jobs
-    # @return [Integer]
-    def acceptable_queue_size
-      Settings.acceptable_queue_size
-    end
-
-    # An acceptable response time for background jobs
-    # @return [Integer]
-    def acceptable_queue_latency
-      Settings.acceptable_queue_latency
     end
 end
