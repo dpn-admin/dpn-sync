@@ -7,8 +7,8 @@ module DPN
 
       def perform(msg = 'you forgot a msg!')
         REDIS.lpush('dpn-messages', msg) > 0
-      rescue StandardError => e
-        logger.error e.inspect
+      rescue StandardError => err
+        logger.error err.inspect
         false
       end
     end
