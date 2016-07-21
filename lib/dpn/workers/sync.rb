@@ -4,19 +4,12 @@ module DPN
     # Fetch the latest data from a remote node
     # @!attribute [r] local_node
     #   @return [DPN::Workers::Node] a local node
-    # @!attribute [r] local_client
-    #   @return [DPN::Client::Agent] accessor for local_node.client
     # @!attribute [r] remote_node
     #   @return [DPN::Workers::Node] a remote node
-    # @!attribute [r] remote_client
-    #   @return [DPN::Client::Agent] accessor for remote_node.client
     class Sync
 
       attr_reader :local_node
-      attr_reader :local_client
-
       attr_reader :remote_node
-      attr_reader :remote_client
 
       # Asynchronous updates are pulled from remote_node into local_node; the
       # remote_node must have a different namespace from local_node
@@ -25,9 +18,17 @@ module DPN
       def initialize(local_node, remote_node)
         raise ArgumentError if local_node.namespace == remote_node.namespace
         @local_node = local_node
-        @local_client = local_node.client
         @remote_node = remote_node
-        @remote_client = remote_node.client
+      end
+
+      # @return [DPN::Client::Agent] accessor for local_node.client
+      def local_client
+        local_node.client
+      end
+
+      # @return [DPN::Client::Agent] accessor for remote_node.client
+      def remote_client
+        remote_node.client
       end
 
       # @abstract Subclass and override {#sync} to sync node content
@@ -45,7 +46,7 @@ module DPN
 
         # @return [String]
         def job_name
-          @job_name ||= self.class.name.gsub('::', '_')
+          self.class.name.gsub('::', '_')
         end
 
         # @return [Logger]
