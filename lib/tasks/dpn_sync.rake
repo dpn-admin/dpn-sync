@@ -17,5 +17,10 @@ namespace :dpn do
     task :nodes do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncNodes"
     end
+
+    desc "DPN - queue a job to fetch replication request meta-data from remote nodes"
+    task :replications do
+      DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncReplications"
+    end
   end
 end
