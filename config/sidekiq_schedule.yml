@@ -12,23 +12,32 @@
 # | +---------- Hour              (range: 0-23)
 # +------------ Minute            (range: 0-59)
 
+
+# The `args: "xxx"` argument below is an argument to
+# DPN::Workers::SyncWorker#perform(class_name), which calls
+# DPN::Workers::Nodes#sync(class_name).  To add a new
+# sync process:
+# 1. Subclass DPN::Workers::Sync and implement #sync
+# 2. Create an entry for it below
+# 3. Create a rake task for it in lib/tasks/dpn_sync.rake
+
 # SyncBags every 30 mins
 sync_bags:
   cron: "*/30 * * * * *"
   class: "DPN::Workers::SyncWorker"
-  args: "bags" # argument for DPN::Workers::SyncWorker#perform(content)
+  args: "DPN::Workers::SyncBags"
 
 # SyncMembers every day at 2am
 sync_members:
   cron: "0 2 * * * *"
   class: "DPN::Workers::SyncWorker"
-  args: "members" # argument for DPN::Workers::SyncWorker#perform(content)
+  args: "DPN::Workers::SyncMembers"
 
 # SyncNodes every day at 1am
 sync_nodes:
   cron: "0 1 * * * *"
   class: "DPN::Workers::SyncWorker"
-  args: "nodes" # argument for DPN::Workers::SyncWorker#perform(content)
+  args: "DPN::Workers::SyncNodes"
 
 # example_job:
 #   cron: "*/30 * * * *"

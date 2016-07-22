@@ -6,9 +6,11 @@ module DPN
       include Sidekiq::Worker
       sidekiq_options backtrace: 10
 
-      def perform(content)
+      # @param [String] class_name for a class to perform a sync process
+      # @return [Boolean]
+      def perform(class_name)
         nodes = DPN::Workers.nodes
-        nodes.sync content
+        nodes.sync class_name
       rescue StandardError => err
         logger.error err.inspect
         false
