@@ -161,8 +161,11 @@ cap sidekiq:stop                   # Stop sidekiq
 
 There are rake tasks for starting `dpn-sync` jobs and inspecting the `Sidekiq` API.  All the tasks can be listed using `bundle exec rake -T`, e.g.
 ```
-rake dpn:sync:bags_meta_data        # DPN - queue a job to fetch bags meta-data from remote nodes
+rake dpn:sync:bags                  # DPN - queue a job to fetch bag meta-data from remote nodes
+rake dpn:sync:members               # DPN - queue a job to fetch member meta-data from remote nodes
 rake dpn:sync:nodes                 # DPN - queue a job to fetch node meta-data from remote nodes
+rake dpn:sync:replications          # DPN - queue a job to fetch replication request meta-data from remote nodes
+...
 rake sidekiq:default_queue:clear    # Sidekiq - clear the default queue
 rake sidekiq:default_queue:entries  # Sidekiq - default queue entries
 rake sidekiq:stats:all              # Sidekiq - statistics - all
