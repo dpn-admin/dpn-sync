@@ -50,28 +50,27 @@ module DPN
       end
 
       # Fetch registry content from remote nodes to update local node
-      # @param [String|Symbol] content
+      # @param [String] class_name object name to handle content sync
       # @return [Boolean]
-      def sync(content)
-        case content.to_sym
-        when :bags
-          sync_data SyncBags
-        when :members
-          sync_data SyncMembers
-        when :nodes
-          sync_data SyncNodes
-        else
-          return false
-        end
-        true
+      def sync(class_name)
+        sync_data class_name.constantize
+      rescue ScriptError, StandardError => err
+        logger.error err.inspect + err.backtrace.inspect
+        false
       end
 
       private
 
+        # @return [Logger]
+        def logger
+          @logger ||= DPN::Workers.create_logger self.class.name.gsub('::', '_')
+        end
+
         # Iterates on remote_nodes to sync registry data into local_node
         # @param [Class] klass object to handle content type for sync
+        # @return [Boolean]
         def sync_data(klass)
-          remote_nodes.each { |node| klass.new(local_node, node).sync }
+          remote_nodes.map { |node| klass.new(local_node, node).sync }.any?
         end
     end
   end

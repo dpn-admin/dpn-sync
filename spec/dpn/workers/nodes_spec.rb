@@ -75,28 +75,50 @@ describe DPN::Workers::Nodes do
   end
 
   describe '#sync' do
-    it 'works' do
-      result = subject.sync(:something)
-      expect(result).not_to be_nil
+    def sync_instance(sync_class)
+      sync_instance = double(sync_class)
+      expect(sync_class).to receive(:new).at_least(:once).and_return(sync_instance)
+      expect(sync_instance).to receive(:sync).at_least(:once).and_return(true)
     end
-    it 'returns false for unknown content' do
-      result = subject.sync(:unknown)
-      expect(result).to be false
-    end
-    it 'can sync bags' do
-      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncBags)
-      result = subject.sync(:bags) # String or Symbol arg is OK
+
+    def it_can_sync(class_name)
+      sync_class = class_name.constantize
+      sync_instance sync_class
+      expect(subject).to receive(:sync_data).with(sync_class).and_call_original
+      result = subject.sync(class_name)
       expect(result).to be true
     end
-    it 'can sync members' do
-      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncMembers)
-      result = subject.sync('members') # String or Symbol arg is OK
-      expect(result).to be true
+
+    context 'success' do
+      it 'can sync bags' do
+        it_can_sync 'DPN::Workers::SyncBags'
+      end
+      it 'can sync members' do
+        it_can_sync 'DPN::Workers::SyncMembers'
+      end
+      it 'can sync nodes' do
+        it_can_sync 'DPN::Workers::SyncNodes'
+      end
+      it 'can sync replication requests' do
+        it_can_sync 'DPN::Workers::SyncReplications'
+      end
     end
-    it 'can sync nodes' do
-      expect(subject).to receive(:sync_data).with(DPN::Workers::SyncNodes)
-      result = subject.sync('nodes') # String or Symbol arg is OK
-      expect(result).to be true
+
+    context 'failure' do
+      it 'returns false for an unknown class_name' do
+        result = subject.sync('unknown')
+        expect(result).to be false
+      end
+      it 'returns false for a class that fails to implement #sync' do
+        result = subject.sync('DPN::Workers::Sync')
+        expect(result).to be false
+      end
+      it 'logs errors false for unknown content' do
+        logger = subject.send(:logger)
+        expect(logger).to receive(:error).exactly(:once)
+        result = subject.sync('unknown')
+        expect(result).to be false
+      end
     end
   end
 
