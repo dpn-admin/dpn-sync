@@ -10,7 +10,6 @@ module DPN
       # @param [String] name job name (identifier)
       def initialize(name)
         @name = name
-        @logger = DPN::Workers.create_logger("#{name}_data")
       end
 
       # @param [String] namespace remote node namespace
@@ -24,14 +23,17 @@ module DPN
       # @param namespace [String] remote node namespace
       # @return [Boolean] success of the update
       def last_success_update(namespace)
-        node_data = data_get("#{name}:#{namespace}")
+        data_key = "#{name}:#{namespace}"
+        node_data = data_get(data_key)
         node_data['last_success'] = Time.now.utc
-        data_set("#{name}:#{namespace}", node_data)
+        data_set(data_key, node_data)
       end
 
       private
 
-        attr_reader :logger
+        def logger
+          @logger ||= DPN::Workers.create_logger("#{name}_data")
+        end
 
         # Assume there is no registry data before the year 2000
         DEFAULT_TIME = Time.utc(2000, 01, 01, 0, 0, 0)
@@ -41,16 +43,19 @@ module DPN
         def data_get(key)
           json = REDIS.get(key) || {}.to_json
           JSON.parse(json)
+        rescue Redis::BaseError => err
+          logger.error "Cannot get #{key}.  ERROR: #{err.inspect}"
+          {}
         end
 
         # @param [String] key
         # @param [Hash] data
         # @return [Boolean] success
         def data_set(key, data)
-          REDIS.set(key, data.to_json) == 'OK'
-        rescue Redis::BaseError => e
-          logger.error e.inspect
-          logger.error "FAILED to save #{key} => #{data.to_json}"
+          value = data.to_json
+          REDIS.set(key, value) == 'OK'
+        rescue Redis::BaseError => err
+          logger.error "Cannot save #{key} => #{value}.  ERROR: #{err.inspect}"
           false
         end
     end

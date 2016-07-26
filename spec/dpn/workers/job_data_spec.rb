@@ -2,9 +2,11 @@
 require 'spec_helper'
 
 describe DPN::Workers::JobData do
+  YEAR_2000 = Time.utc(2000, 01, 01, 0, 0, 0)
+
   let(:name) { 'job_name' }
   let(:namespace) { 'namespace' }
-  subject { described_class.new(name) }
+  let(:subject) { described_class.new(name) }
 
   describe '#new' do
     it 'works' do
@@ -30,9 +32,15 @@ describe DPN::Workers::JobData do
     end
 
     it 'defaults to the year 2000' do
-      year_2000 = Time.utc(2000, 01, 01, 0, 0, 0)
       expect(subject).to receive(:data_get).and_return({})
-      expect(result).to eq year_2000
+      expect(result).to eq YEAR_2000
+    end
+
+    it 'logs errors on Redis failure' do
+      logger = subject.send(:logger)
+      expect(logger).to receive(:error)
+      expect(REDIS).to receive(:get).and_raise(Redis::BaseError)
+      expect(result).to eq YEAR_2000
     end
   end
 
@@ -47,6 +55,13 @@ describe DPN::Workers::JobData do
     end
 
     it 'returns False on failure' do
+      expect(REDIS).to receive(:set).and_raise(Redis::BaseError)
+      expect(result).to be false
+    end
+
+    it 'logs errors on Redis failure' do
+      logger = subject.send(:logger)
+      expect(logger).to receive(:error)
       expect(REDIS).to receive(:set).and_raise(Redis::BaseError)
       expect(result).to be false
     end
