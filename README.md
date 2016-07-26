@@ -70,24 +70,28 @@ can be dumped using:
 
 ```ruby
 require 'yaml'
-Node.all.map do |n|
+yml = Node.all.map do |n|
   {
     namespace: n.namespace,
     api_root: n.api_root,
     auth_credential: n.auth_credential
   }
 end.to_yaml
+puts yml
 ```
 
 Note that the `auth_credential` values are private and should be kept secret.
 
-The node information can be retrieved from the HTTP-REST-API.  For example, when the `dpn-server` cluster is running locally, it can be retrieved using:
+The node information can be retrieved from the HTTP-REST-API.  The response
+will include many details, including those required, but not the
+`auth_credential` values. For example, when the `dpn-server` cluster
+is running locally, it can be retrieved using:
 
 ```sh
 curl -k -H "Authorization: Token token=aptrust_token" -L http://127.0.0.1:3001/api-v1/node/
 ```
 
-The response will include many details, including those required, but not the `auth_credential` values. An abbridged example looks like:
+An abridged response looks like:
 
 ```json
 {
