@@ -53,7 +53,6 @@ module DPN
         @namespace = opts[:namespace]
         @api_root = opts[:api_root]
         @auth_credential = opts[:auth_credential]
-        @logger = DPN::Workers.create_logger(namespace)
       end
 
       # Test whether a node responds to a /node API request
@@ -68,10 +67,11 @@ module DPN
       # @return [DPN::Client::Agent]
       def client
         @client ||= begin
-          client = DPN::Client.client
-          client.api_root = api_root
-          client.auth_token = auth_credential
-          client.user_agent = ['dpn-client', namespace].join('-')
+          client = DPN::Client.client(
+            api_root: api_root,
+            auth_token: auth_credential,
+            user_agent: ['dpn-client', namespace].join('-')
+          )
           client.logger = DPN::Workers.create_logger(client.user_agent)
           client
         end
@@ -79,14 +79,10 @@ module DPN
 
       # @return [Hash]
       def to_hash
-        hash = {}
-        instance_variables.each do |var|
-          key = var.to_s.delete('@')
-          next if key == 'client'
-          next if key == 'logger'
-          hash[key] = instance_variable_get(var)
-        end
-        hash.symbolize_keys
+        attributes.map do |var|
+          key = var.to_s.delete('@').to_sym
+          [key, instance_variable_get(var)]
+        end.compact.to_h
       end
 
       # Update instance variables using data from the /node API
@@ -97,28 +93,39 @@ module DPN
 
       private
 
-        attr_reader :logger
+        def attributes
+          skip = [:@client, :@logger]
+          instance_variables.select { |var| !skip.include?(var) }
+        end
+
+        # @return [Logger]
+        def logger
+          @logger ||= DPN::Workers.create_logger(namespace)
+        end
 
         # Retrieve data from the /node API
         # @return [Hash]
         def server_node_data
           response = client.node(namespace)
-          raise response.body unless response.success?
-          response.body
-        rescue StandardError => e
-          logger.error e.inspect
+          response.success? ? response.body : {}
+        rescue SocketError, StandardError => err
+          logger.error err.inspect
           {}
+        end
+
+        # Select additional instance variables from the /node API.
+        # Skip attributes that are explicitly initialized, because all
+        # of these are required to make a successful API call.
+        # @return [Hash]
+        def server_update_data
+          skip = [:api_root, :namespace, :auth_credential]
+          server_node_data.select { |key| !skip.include?(key) }
         end
 
         # Update instance variables using data from the /node API
         # @return [Hash]
         def update_attributes
-          server_node_data.each_pair do |key, value|
-            # Skip attributes that are explicitly initialized, because all
-            # of these are required to make a successful API call.
-            next if key == :api_root
-            next if key == :namespace
-            next if key == :auth_credential
+          server_update_data.each_pair do |key, value|
             instance_variable_set("@#{key}", value)
           end
         end

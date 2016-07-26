@@ -71,8 +71,15 @@ describe DPN::Workers::Node, :vcr do
     it 'works' do
       expect(subject.update).not_to be_nil
     end
-    it 'is a Boolean' do
+    it 'is true for a successful update' do
       expect(subject.update).to be true
+    end
+    it 'is false on failure to update' do
+      expect(example_node.update).to be false
+    end
+    it 'logs errors on failure to retrieve node data' do
+      logger = example_node.send(:logger)
+      expect(logger).to receive(:error)
       expect(example_node.update).to be false
     end
   end
