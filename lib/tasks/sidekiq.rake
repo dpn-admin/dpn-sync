@@ -29,8 +29,8 @@ namespace :sidekiq do
 
     desc "Sidekiq - restart"
     task :restart do
-      Rake::Task['sidekiq:stop'].invoke
-      Rake::Task['sidekiq:start'].invoke
+      Rake::Task['sidekiq:service:stop'].invoke
+      Rake::Task['sidekiq:service:start'].invoke
     end
 
     desc "Sidekiq - start"
