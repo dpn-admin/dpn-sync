@@ -38,7 +38,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundle_audit (0.1.0)
+    capistrano-bundle_audit (0.2.1)
       bundler-audit (~> 0.5)
       capistrano (~> 3.0)
     capistrano-bundler (1.1.4)
@@ -95,7 +95,7 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_nine (0.11.2)
-    json (2.0.1)
+    json (2.0.2)
     method_source (0.8.2)
     minitest (5.9.0)
     multipart-post (2.0.0)
@@ -196,7 +196,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
-    yard (0.9.3)
+    yard (0.9.5)
 
 PLATFORMS
   ruby
