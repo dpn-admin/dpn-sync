@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:11:52 GMT
+      - Wed, 27 Jul 2016 19:10:03 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -20,7 +20,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -35,23 +35,17 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b2331d92-c5fa-43ae-aed6-d996e06e30fd
+      - 2a9a18d5-3131-416e-b17e-f91eeb69a5b8
       X-Runtime:
-      - '0.029349'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:11:52 GMT
-      Content-Length:
-      - '407'
-      Connection:
-      - Keep-Alive
+      - '0.036546'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
         Disk"}}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:11:52 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:03 GMT
 - request:
     method: put
     uri: http://localhost:3001/api-v1/node/chron/
@@ -65,7 +59,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:11:52 GMT
+      - Wed, 27 Jul 2016 19:10:03 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -73,7 +67,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -84,25 +78,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"f6890dbe455193ef98a61365ef2e208b"
+      - W/"fda91a6873fa323951d621a92ec7f69a"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 24765bd6-59a2-474b-90ab-15adb7bcfb2a
+      - f141cef5-b976-4fd6-bdc3-6401b96bb932
       X-Runtime:
-      - '0.053528'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:11:52 GMT
-      Content-Length:
-      - '407'
-      Connection:
-      - Keep-Alive
+      - '0.048216'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
-      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://localhost:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-07-07T00:11:52Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
+      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://localhost:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-07-27T19:10:03Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
         Disk"}}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:11:52 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:03 GMT
 recorded_with: VCR 3.0.3

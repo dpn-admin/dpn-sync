@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
+      - Wed, 27 Jul 2016 19:10:01 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -20,7 +20,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -35,22 +35,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b1ec7aad-d2c6-45f7-a550-e4cd08330910
+      - 3df93525-8b20-4de2-8644-df41c0df4007
       X-Runtime:
-      - '0.028286'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
-      Content-Length:
-      - '52'
-      Connection:
-      - Keep-Alive
+      - '0.017402'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:34:26 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:01 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=R&page=1&page_size=25
@@ -63,7 +57,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
+      - Wed, 27 Jul 2016 19:10:01 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -71,7 +65,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -86,22 +80,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 342f7a31-d387-4be4-81c4-6b7e9c8e4748
+      - a3a3be91-bb34-4b0b-9d9d-b70dd8b38948
       X-Runtime:
-      - '0.019763'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
-      Content-Length:
-      - '52'
-      Connection:
-      - Keep-Alive
+      - '0.019509'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:34:26 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:01 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=D&page=1&page_size=25
@@ -114,7 +102,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
+      - Wed, 27 Jul 2016 19:10:01 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -122,7 +110,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -137,23 +125,17 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 028c0f58-9e2c-4e21-b1c5-86abd8d7e8e0
+      - 5d1f69c3-cc05-499e-aa29-8cd6deb4b437
       X-Runtime:
-      - '0.032976'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
-      Content-Length:
-      - '535'
-      Connection:
-      - Keep-Alive
+      - '0.032412'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
         Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}]}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:34:26 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:02 GMT
 - request:
     method: post
     uri: http://localhost:3001/api-v1/bag/
@@ -167,7 +149,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
+      - Wed, 27 Jul 2016 19:10:02 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -175,7 +157,7 @@ http_interactions:
   response:
     status:
       code: 409
-      message: 'Conflict '
+      message: Conflict
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -188,22 +170,16 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 3fee3e76-2937-4b90-aecc-db7540c4ba5a
+      - 45e8641e-57c0-456f-814b-11cf94174d77
       X-Runtime:
-      - '0.014362'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
-      Content-Length:
-      - '0'
-      Connection:
-      - Keep-Alive
+      - '0.019857'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:34:26 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:02 GMT
 - request:
     method: put
     uri: http://localhost:3001/api-v1/bag/00000000-0000-4000-a000-000000000002/
@@ -217,7 +193,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
+      - Wed, 27 Jul 2016 19:10:02 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -225,7 +201,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 'OK '
+      message: OK
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -236,25 +212,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"cc52b22eb8ebc8821830b1aa21486194"
+      - W/"96a864b53a43a90f987b56266611d77b"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d1e6d788-703e-4ffc-b841-29575f9f656c
+      - 53459c83-c4cb-41ce-ba54-8a917b5aa13c
       X-Runtime:
-      - '0.030441'
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.2.1/2015-02-26)
-      Date:
-      - Thu, 07 Jul 2016 00:34:26 GMT
-      Content-Length:
-      - '483'
-      Connection:
-      - Keep-Alive
+      - '0.034009'
+      Transfer-Encoding:
+      - chunked
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-06T23:50:21Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-27T19:10:01Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
     http_version: 
-  recorded_at: Thu, 07 Jul 2016 00:34:26 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:02 GMT
 recorded_with: VCR 3.0.3
