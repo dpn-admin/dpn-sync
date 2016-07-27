@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,16 +35,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a1adb403-51f6-4d54-a96f-cdc4d5be7724
+      - 0a4cfdf9-f656-4d50-b598-a24c2324ee94
       X-Runtime:
-      - '0.019896'
+      - '0.017116'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=R&page=1&page_size=25
@@ -57,7 +57,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -80,16 +80,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 4b1dfe4e-579b-46d1-99c0-d01e3b9d2647
+      - 0deb3056-d60a-48fe-9fce-87a7486abf3a
       X-Runtime:
-      - '0.027352'
+      - '0.020176'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=D&page=1&page_size=25
@@ -102,7 +102,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -125,9 +125,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b6e9e8d4-1103-4e15-a647-75b012b2a747
+      - 6ce0a853-ae96-420b-8b18-bb71ce7ac968
       X-Runtime:
-      - '0.053705'
+      - '0.036871'
       Transfer-Encoding:
       - chunked
     body:
@@ -135,7 +135,7 @@ http_interactions:
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
         Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}]}'
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 - request:
     method: post
     uri: http://localhost:3001/api-v1/bag/
@@ -149,7 +149,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -170,16 +170,16 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 1c474616-aa69-4901-9184-1a545e827a1c
+      - 6ff316fc-7c35-4380-852f-d1e09f816644
       X-Runtime:
-      - '0.026087'
+      - '0.015223'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 - request:
     method: put
     uri: http://localhost:3001/api-v1/bag/00000000-0000-4000-a000-000000000002/
@@ -193,7 +193,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -212,21 +212,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"6ae3f5e7f70a054ca6a653694125eda7"
+      - W/"96a864b53a43a90f987b56266611d77b"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 69db2352-89f9-4a23-b76c-26afff3393a7
+      - a9e7bb66-0430-4462-8f3d-ca4651768e36
       X-Runtime:
-      - '0.065225'
+      - '0.043360'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-21T01:29:16Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-27T19:10:01Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 - request:
     method: get
     uri: http://localhost:3001/api-v1/bag/?admin_node=example&page=1&page_size=25
@@ -239,7 +239,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 21 Jul 2016 01:29:50 GMT
+      - Wed, 27 Jul 2016 19:10:04 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -258,20 +258,20 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"f0eb14739c75b6947c4a13f9807b156f"
+      - W/"7bd5d86e078120f6d91a2d0216956f6a"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 898bc26f-cd4c-47c3-beee-a81632368a47
+      - e49392c3-bbef-428a-826d-ed517c3a7bcf
       X-Runtime:
-      - '0.032910'
+      - '0.028277'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":2,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-21T01:29:16Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}},{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-27T19:10:01Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}},{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
         Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001","fixities":{"sha256":"e39a201a88bc3d7803a5e375d9752439d328c2e85b4f1ba70a6d984b6c5378bd"}}]}'
     http_version: 
-  recorded_at: Thu, 21 Jul 2016 01:29:50 GMT
+  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
 recorded_with: VCR 3.0.3
