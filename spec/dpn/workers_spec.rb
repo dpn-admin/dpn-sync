@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe DPN::Workers do
   describe '.nodes' do
-    let(:subject) { described_class.nodes }
+    let(:subject) { nodes }
     it 'works' do
       expect(subject).to be_an DPN::Workers::Nodes
     end
