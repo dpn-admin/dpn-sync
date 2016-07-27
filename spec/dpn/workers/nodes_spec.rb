@@ -2,10 +2,10 @@
 require 'spec_helper'
 
 describe DPN::Workers::Nodes do
-  let(:nodes) { Settings.nodes.map(&:to_hash) }
+  let(:node_data) { Settings.nodes.map(&:to_hash) }
   let(:node_names) { Settings.nodes.map(&:namespace) }
   let(:local_namespace) { Settings.local_namespace }
-  subject { described_class.new(nodes, local_namespace) }
+  let(:subject) { described_class.new(node_data, local_namespace) }
 
   describe '#new' do
     it 'works' do

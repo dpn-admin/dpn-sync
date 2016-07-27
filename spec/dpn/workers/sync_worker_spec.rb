@@ -6,7 +6,6 @@ describe DPN::Workers::SyncWorker do
     before do
       expect(DPN::Workers).to receive(:nodes).and_return(nodes)
     end
-    let(:nodes) { DPN::Workers.nodes }
     let(:sync_bags) { 'DPN::Workers::SyncBags' }
     it 'returns true for success' do
       expect(nodes).to receive(:sync).with(sync_bags).and_return(true)

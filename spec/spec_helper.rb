@@ -25,15 +25,11 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   ])
 SimpleCov.start 'dpn-sync'
 
-require 'bundler'
-Bundler.setup
-Bundler.require
-
 ENV['RACK_ENV'] = 'test'
-
+require 'bundler'
+Bundler.require
 require 'pry'
 require 'rack/test'
-require 'rspec'
 require 'fakeredis'
 require 'fakeredis/rspec'
 
@@ -51,7 +47,30 @@ module RSpecMixin
     DpnSync
   end
 end
-RSpec.configure { |c| c.include RSpecMixin }
+
+module GlobalLetDeclarations
+  extend RSpec::SharedContext
+  let(:null_logger) { Logger.new(File::NULL) }
+  let(:nodes) { DPN::Workers.nodes }
+  let(:local_node) { nodes.local_node }
+  let(:remote_node) { nodes.remote_nodes.first }
+  let(:example_node) do
+    DPN::Workers::Node.new(
+      namespace: 'example',
+      api_root: 'http://node.example.org',
+      auth_credential: 'example_token'
+    )
+  end
+end
+
+RSpec.configure do |config|
+  config.include RSpecMixin
+  config.include GlobalLetDeclarations
+  config.before(:each) do
+    allow(Logger).to receive(:new).and_return(null_logger)
+    allow(Sidekiq).to receive(:logger).and_return(null_logger)
+  end
+end
 
 require 'vcr'
 VCR.configure do |c|
@@ -62,26 +81,4 @@ VCR.configure do |c|
     record: :new_episodes, # :once is default
   }
   c.configure_rspec_metadata!
-end
-
-##
-# Common DPN::Workers::Node instances
-
-# This method smells of :reek:UtilityFunction
-def example_node
-  DPN::Workers::Node.new(
-    namespace: 'example',
-    api_root: 'http://node.example.org',
-    auth_credential: 'example_token'
-  )
-end
-
-# This method smells of :reek:UtilityFunction
-def local_node
-  DPN::Workers.nodes.local_node
-end
-
-# This method smells of :reek:UtilityFunction
-def remote_node
-  DPN::Workers.nodes.remote_nodes.first
 end

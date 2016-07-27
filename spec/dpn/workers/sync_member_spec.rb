@@ -15,8 +15,7 @@ describe DPN::Workers::SyncMember, :vcr do
   let(:time) { Time.now.utc.iso8601 }
   let(:uuid) { SecureRandom.uuid }
   let(:node_client) { local_node.client }
-  let(:logger) { Logger.new(File::NULL) }
-  subject { described_class.new member, node_client, logger }
+  let(:subject) { described_class.new member, node_client, null_logger }
 
   it_behaves_like 'sync_content'
 
@@ -44,6 +43,7 @@ describe DPN::Workers::SyncMember, :vcr do
         expect(subject.send(:create)).to be true
       end
       it 'logs info from requests to node_client.create_member' do
+        logger = subject.send(:logger)
         expect(logger).to receive(:info).at_least(:once).and_call_original
         expect(subject.send(:create)).to be true
       end
@@ -60,6 +60,7 @@ describe DPN::Workers::SyncMember, :vcr do
         expect(subject.send(:create)).to be false
       end
       it 'logs errors from requests to node_client.create_member' do
+        logger = subject.send(:logger)
         expect(logger).to receive(:error).at_least(:once).and_call_original
         expect(subject.send(:create)).to be false
       end
@@ -79,6 +80,7 @@ describe DPN::Workers::SyncMember, :vcr do
         expect(subject.send(:update)).to be true
       end
       it 'logs info from requests to node_client.update_member' do
+        logger = subject.send(:logger)
         expect(logger).to receive(:info).at_least(:once).and_call_original
         expect(subject.send(:update)).to be true
       end
@@ -95,6 +97,7 @@ describe DPN::Workers::SyncMember, :vcr do
         expect(subject.send(:update)).to be false
       end
       it 'logs errors from requests to node_client.update_member' do
+        logger = subject.send(:logger)
         expect(logger).to receive(:error).at_least(:once).and_call_original
         expect(subject.send(:update)).to be false
       end

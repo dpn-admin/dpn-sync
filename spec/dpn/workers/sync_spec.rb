@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe DPN::Workers::Sync do
-  subject { described_class.new(local_node, remote_node) }
+  let(:subject) { described_class.new(local_node, remote_node) }
 
   describe '#new' do
     it 'works' do
@@ -47,8 +47,8 @@ describe DPN::Workers::Sync do
     end
 
     describe '#logger' do
-      let(:logger) { subject.send(:logger) }
       it 'works' do
+        logger = subject.send(:logger)
         expect(logger).to be_an Logger
       end
     end

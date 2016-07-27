@@ -17,6 +17,7 @@ RSpec.shared_examples 'sync_content' do
       error = RuntimeError.new 'create failure'
       expect(subject).to receive(:create).and_raise(error)
       expect(subject).not_to receive(:update)
+      logger = subject.send(:logger)
       expect(logger).to receive(:error).with(/FAILED/)
       expect(logger).to receive(:error).with(/create failure/)
       subject.create_or_update
