@@ -12,6 +12,15 @@ class DpnSync < Sinatra::Base
 
   register Config
 
+  configure do
+    unless ENV['RACK_ENV'] == 'test'
+      enable :logging
+      file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+      file.sync = true
+      use Rack::CommonLogger, file
+    end
+  end
+
   get '/' do
     erb :welcome
   end
