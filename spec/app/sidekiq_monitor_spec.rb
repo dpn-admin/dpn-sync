@@ -2,38 +2,49 @@
 require 'spec_helper'
 
 describe SidekiqMonitor do
-  # TODO: auto-generated
+  let(:message) { subject.message }
+  let(:size) { Settings.acceptable_queue_size }
+  let(:latency) { Settings.acceptable_queue_latency }
+
   describe '#new' do
     it 'works' do
-      result = described_class.new
-      expect(result).not_to be_nil
+      expect(subject).not_to be_nil
     end
   end
 
-  # TODO: auto-generated
   describe '#message' do
     it 'works' do
-      sidekiq_monitor = described_class.new
-      result = sidekiq_monitor.message
-      expect(result).not_to be_nil
+      expect(message).not_to be_nil
+    end
+    it 'is a String' do
+      expect(message).to be_an String
     end
   end
 
-  # TODO: auto-generated
-  describe '#status' do
-    it 'works' do
-      sidekiq_monitor = described_class.new
-      result = sidekiq_monitor.status
-      expect(result).not_to be_nil
-    end
-  end
-
-  # TODO: auto-generated
   describe '#ok?' do
     it 'works' do
-      sidekiq_monitor = described_class.new
-      result = sidekiq_monitor.ok?
+      result = subject.ok?
       expect(result).not_to be_nil
+    end
+    it 'is true when Sidekiq queue is small and fast' do
+      queue = subject.send(:queue)
+      expect(queue).to receive(:size).and_return(size - 1)
+      expect(queue).to receive(:latency).and_return(latency - 1)
+      result = subject.ok?
+      expect(result).to be true
+    end
+    it 'is false when Sidekiq queue is large' do
+      queue = subject.send(:queue)
+      expect(queue).to receive(:size).and_return(size + 1)
+      result = subject.ok?
+      expect(result).to be false
+    end
+    it 'is false when Sidekiq queue is small, but slow' do
+      queue = subject.send(:queue)
+      expect(queue).to receive(:size).and_return(size - 1)
+      expect(queue).to receive(:latency).and_return(latency + 1)
+      result = subject.ok?
+      expect(result).to be false
     end
   end
 end

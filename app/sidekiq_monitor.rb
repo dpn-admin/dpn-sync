@@ -10,26 +10,14 @@ class SidekiqMonitor
     @queue = Sidekiq::Queue.new
   end
 
-  # @return [String] message
+  # @return [String] queue status with size and latency
   def message
-    start = now
-    msg = details # calculate it now to get elapsed time
-    done = (now - start).to_f * 1000 # milliseconds
-    <<-MESSAGE
-      Host: #{hostname}
-      PID:  #{$PID}
-      Timestamp: #{start}
-      Elapsed Time: #{done.to_f} milliseconds
-
-      #{msg}
-    MESSAGE
+    msg = ok? ? 'OK:' : 'WARNING:'
+    msg += " Sidekiq Queue: SIZE: #{size}, LATENCY: #{latency}\n"
+    msg
   end
 
-  # @return [Integer] HTTP status code
-  def status
-    ok? ? 200 : 500
-  end
-
+  # @return [Boolean] queue has acceptable size and latency
   def ok?
     size < acceptable_queue_size && latency < acceptable_queue_latency
   end
@@ -38,21 +26,5 @@ class SidekiqMonitor
 
     attr_reader :queue
     def_delegators :queue, :size, :latency
-
     def_delegators :Settings, :acceptable_queue_size, :acceptable_queue_latency
-
-    def_delegator :Time, :now, :now
-
-    # @return [String] queue status with size and latency
-    def details
-      msg = ok? ? 'OK:' : 'WARNING:'
-      msg += " QUEUE SIZE: #{size},"
-      msg += " QUEUE LATENCY: #{latency}"
-      msg
-    end
-
-    # @return [String]
-    def hostname
-      @hostname ||= `hostname`.chomp
-    end
 end

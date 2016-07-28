@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'sinatra/base'
-require_relative 'sidekiq_monitor'
+require_relative 'monitors'
 
 ##
 # DPN Registry Sync
@@ -44,13 +44,10 @@ class DpnSync < Sinatra::Base
   end
 
   get '/is_it_working' do
-    headers(
-      'Content-Type': 'text/plain; charset=utf8',
-      'Cache-Control': 'no-cache',
-      'Date': Time.now.utc.httpdate
-    )
-    monitor = SidekiqMonitor.new
-    status monitor.status
-    body monitor.message
+    content_type 'text/plain'
+    cache_control :none
+    monitors = Monitors.new
+    status monitors.status
+    body monitors.messages
   end
 end
