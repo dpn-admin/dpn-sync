@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe DPN::Workers::Node, :vcr do
   let(:subject) { local_node }
+  let(:client) { subject.client }
 
   describe '#new' do
     it 'works' do
@@ -14,10 +15,35 @@ describe DPN::Workers::Node, :vcr do
     it 'works' do
       expect(subject.alive?).to be true
     end
+    it 'is true when node is alive' do
+      response = double(DPN::Client::Response)
+      expect(response).to receive(:success?).and_return(true)
+      expect(client).to receive(:node).and_return(response)
+      expect(subject.alive?).to be true
+    end
+    it 'is false when node is not alive' do
+      response = double(DPN::Client::Response)
+      expect(response).to receive(:success?).and_return(false)
+      expect(client).to receive(:node).and_return(response)
+      expect(subject.alive?).to be false
+    end
+  end
+
+  describe '#status' do
+    it 'works' do
+      expect(subject.status).not_to be_nil
+    end
+    it 'contains OK when node is alive' do
+      expect(subject).to receive(:alive?).and_return(true)
+      expect(subject.status).to include 'OK'
+    end
+    it 'contains WARNING when node is not alive' do
+      expect(subject).to receive(:alive?).and_return(false)
+      expect(subject.status).to include 'WARNING'
+    end
   end
 
   describe '#client' do
-    let(:client) { subject.client }
     it 'works' do
       expect(client).not_to be_nil
     end

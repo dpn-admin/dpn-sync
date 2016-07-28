@@ -62,6 +62,17 @@ module DPN
         response.success?
       end
 
+      # A connection status message that depends on whether a
+      # node responds to a /node API request.
+      # @return [String] connection status
+      def status
+        if alive?
+          "OK: DPN node '#{namespace}' is alive"
+        else
+          "WARNING: DPN node '#{namespace}' is not responding"
+        end
+      end
+
       # A client for interactions with a DPN REST API
       # @see https://github.com/dpn-admin/DPN-REST-Wiki
       # @return [DPN::Client::Agent]
