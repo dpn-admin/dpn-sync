@@ -15,8 +15,8 @@ describe DpnSync, :vcr do
       allow(queue).to receive(:latency).and_return(latency)
       queue
     end
-    let(:size) { Settings.acceptable_queue_size - 1 }
-    let(:latency) { Settings.acceptable_queue_latency - 1 }
+    let(:size) { Settings.sidekiq.acceptable_queue_size - 1 }
+    let(:latency) { Settings.sidekiq.acceptable_queue_latency - 1 }
 
     def check_status(status)
       expect(Sidekiq::Queue).to receive(:new).and_return(queue)
@@ -30,13 +30,13 @@ describe DpnSync, :vcr do
         expect(last_response.body).to match(/OK:/)
       end
       it 'is too large - it responds with 500 status' do
-        size = Settings.acceptable_queue_size + 1
+        size = Settings.sidekiq.acceptable_queue_size + 1
         allow(queue).to receive(:size).and_return(size)
         check_status 500
         expect(last_response.body).to match(/WARNING:/)
       end
       it 'is too slow - it responds with 500 status' do
-        latency = Settings.acceptable_queue_latency + 1
+        latency = Settings.sidekiq.acceptable_queue_latency + 1
         allow(queue).to receive(:latency).and_return(latency)
         check_status 500
         expect(last_response.body).to match(/WARNING:/)
@@ -54,24 +54,26 @@ describe DpnSync, :vcr do
       stats = double(Sidekiq::Stats)
       expect(stats).to receive(:processed).and_return(5)
       expect(stats).to receive(:failed).and_return(5)
+      expect(stats).to receive(:enqueued).and_return(5)
       expect(Sidekiq::Stats).to receive(:new).and_return(stats)
       get '/test'
       expect(last_response.body).to match(/Failed:.*5/)
       expect(last_response.body).to match(/Processed:.*5/)
+      expect(last_response.body).to match(/Enqueued:.*5/)
     end
 
     it 'displays messages' do
       expect(REDIS).to receive(:lrange).and_return(['a', 'b'])
       get '/test'
-      expect(last_response.body).to match(/<h3>Messages<\/h3>\n.*<p>a<\/p>\n.*<p>b<\/p>\n/)
+      expect(last_response.body).to match(/<h3>Timestamps Processed<\/h3>\n.*<p>a<\/p>\n.*<p>b<\/p>\n/)
     end
   end
 
   describe 'POST /msg' do
-    let(:msg) { 'rspec test' }
+    let(:msg) { Time.now.utc.httpdate }
 
     it 'initiates async message processing' do
-      expect(DPN::Workers::TestWorker).to receive(:perform_async).with(msg)
+      expect(DPN::Workers::TestWorker).to receive(:perform_async)
       post '/msg', msg: msg
     end
 
@@ -83,8 +85,8 @@ describe DpnSync, :vcr do
   end
 
   describe 'POST /msg/clear' do
-    it 'clears the redis list for "dpn-messages"' do
-      expect(REDIS).to receive(:del).with('dpn-messages')
+    it 'clears the redis list for Settings.sidekiq.test_message_store' do
+      expect(REDIS).to receive(:del).with(Settings.sidekiq.test_message_store)
       post '/msg/clear'
     end
 

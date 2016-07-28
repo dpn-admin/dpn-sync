@@ -8,6 +8,7 @@ class SidekiqMonitor
 
   def initialize
     @queue = Sidekiq::Queue.new
+    @settings = Settings.sidekiq
   end
 
   # @return [String] queue status with size and latency
@@ -26,5 +27,7 @@ class SidekiqMonitor
 
     attr_reader :queue
     def_delegators :queue, :size, :latency
-    def_delegators :Settings, :acceptable_queue_size, :acceptable_queue_latency
+
+    attr_reader :settings
+    def_delegators :settings, :acceptable_queue_size, :acceptable_queue_latency
 end

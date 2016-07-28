@@ -1,13 +1,5 @@
 # To develop with different settings, use settings.local.yml
 
-# How many background jobs in the schedule queue are reasonable before
-# alarms raise attention from system or developer teams?
-acceptable_queue_size: 250
-
-# An acceptable response time could be several minutes.
-# This value is in seconds.
-acceptable_queue_latency: 300
-
 log_level: info
 
 # Create test cluster nodes and use those node parameters here, see
@@ -34,3 +26,13 @@ nodes:
     namespace: tdr
     api_root: http://localhost:3005
     auth_credential: tdr_token
+
+sidekiq:
+  # How many background jobs in the schedule queue are reasonable before
+  # alarms raise attention from system or developer teams?
+  acceptable_queue_size: 250
+  # An acceptable response time could be several minutes.
+  # This value is in seconds.
+  acceptable_queue_latency: 300
+  # The redis namespace for test messages
+  test_message_store: dpn-test-timestamps

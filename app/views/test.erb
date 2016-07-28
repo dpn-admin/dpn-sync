@@ -1,6 +1,3 @@
-<h2>Failed: <%= @failed %></h2>
-<h2>Processed: <%= @processed %></h2>
-
 <p>
   <ul style="list-style: square;">
     <li><a href="sidekiq">Sidekiq Dashboard</a></li>
@@ -21,16 +18,30 @@
   the queue and they will appear here after you <a href="test">Refresh page</a>.
 </p>
 
-<form method="post" action="msg">
-  <input type="text" name="msg">
-  <input type="submit" value="Add Message">
-</form>
+<h3>Sidekiq Tests</h3>
+<table>
+  <tr>
+    <td>
+      <form method="post" action="msg">
+        <input type="submit" value="Add Timestamp">
+      </form>
+    </td>
+    <td>
+      <form method="post" action="msg/clear">
+        <input type="submit" value="Clear Timestamps">
+      </form>
+    </td>
+  </tr>
+</table>
 
-<form method="post" action="msg/clear">
-  <input type="submit" value="Clear Messages">
-</form>
+<h3>Sidekiq Stats</h3>
+<table>
+  <tr><td>Enqueued:</td><td><%= @stats.enqueued %></td></tr>
+  <tr><td>Failed:</td><td><%= @stats.failed %></td></tr>
+  <tr><td>Processed:</td><td><%= @stats.processed %></td></tr>
+</table>
 
-<h3>Messages</h3>
+<h3>Timestamps Processed</h3>
 <% @messages.each do |msg| %>
-  <p><%= msg %></p>
+  <p><%= Rack::Utils.escape_html msg %></p>
 <% end %>

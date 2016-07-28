@@ -3,8 +3,9 @@ require 'spec_helper'
 
 describe SidekiqMonitor do
   let(:message) { subject.message }
-  let(:size) { Settings.acceptable_queue_size }
-  let(:latency) { Settings.acceptable_queue_latency }
+  let(:settings) { Settings.sidekiq }
+  let(:size) { settings.acceptable_queue_size }
+  let(:latency) { settings.acceptable_queue_latency }
 
   describe '#new' do
     it 'works' do
