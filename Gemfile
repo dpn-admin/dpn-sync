@@ -18,16 +18,17 @@ gem 'dpn-client', git: 'https://github.com/dpn-admin/dpn-client.git'
 group :development do
   gem 'thin' # app server
   gem 'reek'
+  gem 'yard'
+  gem 'redcarpet'
+  gem 'github-markup'
 end
 
 group :development, :test do
   gem 'dpn_cops', git: 'https://github.com/dpn-admin/dpn_cops.git'
   gem 'pry'
   gem 'pry-doc'
+  gem 'pry-stack_explorer'
   gem 'rake'
-  gem 'yard'
-  gem 'redcarpet'
-  gem 'github-markup'
 end
 
 group :test do
