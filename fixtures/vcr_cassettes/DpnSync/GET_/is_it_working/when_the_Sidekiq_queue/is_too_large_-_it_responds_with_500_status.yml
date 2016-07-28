@@ -1,0 +1,233 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3001/api-v1/node/aptrust/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 27 Jul 2016 23:51:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1f1b9c4daf93638856570dec43ec4287"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 07a5ab52-78b1-47ae-b747-a17248499a57
+      X-Runtime:
+      - '0.028896'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"Virginia","type":"Magnetic
+        Disk"}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 23:51:52 GMT
+- request:
+    method: get
+    uri: http://localhost:3002/api-v1/node/chron/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 27 Jul 2016 23:51:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"6454680df09e7d89e4fc1264929d6731"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7079d80b-7283-4fac-a42a-341a619dc5d9
+      X-Runtime:
+      - '0.042683'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
+        Disk"}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 23:51:52 GMT
+- request:
+    method: get
+    uri: http://localhost:3003/api-v1/node/hathi/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 27 Jul 2016 23:51:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"2c321d0e4e5bf752984569791581c03b"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 60d687d5-f148-4581-9410-7171a0a80605
+      X-Runtime:
+      - '0.033016'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Hathi Trust","namespace":"hathi","api_root":"http://127.0.0.1:3003","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","tdr","sdr","aptrust"],"replicate_to":["tdr","sdr","aptrust","chron"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"Michigan","type":"Magnetic
+        Disk"}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 23:51:52 GMT
+- request:
+    method: get
+    uri: http://localhost:3004/api-v1/node/sdr/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-sdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 27 Jul 2016 23:51:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token sdr_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"e0a157ed97edd13bbe0f30d0b7baf6e8"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9210d5bf-8144-498e-a086-d8b3c91266de
+      X-Runtime:
+      - '0.022867'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Stanford Digital Repository","namespace":"sdr","api_root":"http://127.0.0.1:3004","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","tdr"],"replicate_to":["tdr","hathi","chron","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
+        Disk"}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 23:51:52 GMT
+- request:
+    method: get
+    uri: http://localhost:3005/api-v1/node/tdr/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-tdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 27 Jul 2016 23:51:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token tdr_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"7459563fc7e666a57c77fdfc5d7579f0"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - da0993ad-81ae-4455-8705-ea444520722c
+      X-Runtime:
+      - '0.022295'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Texas Digital Repository","namespace":"tdr","api_root":"http://127.0.0.1:3005","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","sdr"],"replicate_to":["hathi","chron","sdr","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"Texas","type":"Magnetic
+        Disk"}}'
+    http_version: 
+  recorded_at: Wed, 27 Jul 2016 23:51:52 GMT
+recorded_with: VCR 3.0.3

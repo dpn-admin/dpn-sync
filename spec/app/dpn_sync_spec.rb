@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DpnSync do
+describe DpnSync, :vcr do
   describe 'GET /' do
     it 'responds with a welcome message' do
       get '/'
