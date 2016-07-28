@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.5.0'
+lock '3.6.0'
 
 set :application, 'dpn_sync'
 set :repo_url, 'https://github.com/sul-dlss/dpn-sync.git'
