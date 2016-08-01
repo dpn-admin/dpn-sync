@@ -7,9 +7,6 @@ module DPN
       # @return [Boolean] success of sync operations
       def sync
         sync_replications
-      rescue StandardError => err
-        logger.error err.inspect
-        false
       end
 
       private

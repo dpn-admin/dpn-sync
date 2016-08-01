@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:04 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,16 +35,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d3d5825c-b914-44e5-a509-97f221e7beda
+      - 634d5c39-da85-4f11-a93d-06bbd2b98e9b
       X-Runtime:
-      - '0.017917'
+      - '0.015803'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:04 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=R&page=1&page_size=25
@@ -57,7 +57,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:04 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -80,16 +80,16 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b71e3b57-f2ed-40da-8c37-4b8f34cd6aa2
+      - 18174475-7571-48c0-baf8-edcda053c341
       X-Runtime:
-      - '0.019574'
+      - '0.020929'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[]}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:05 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v1/bag/?admin_node=chron&after=2000-01-01%2000:00:00%20UTC&bag_type=D&page=1&page_size=25
@@ -102,7 +102,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:05 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -125,9 +125,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 4be2b1ad-18cc-471b-b737-23258c3882f7
+      - cef3764f-c137-4d95-8e53-4e272c860eae
       X-Runtime:
-      - '0.023792'
+      - '0.024835'
       Transfer-Encoding:
       - chunked
     body:
@@ -135,7 +135,7 @@ http_interactions:
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
         Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}]}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:05 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 - request:
     method: post
     uri: http://localhost:3001/api-v1/bag/
@@ -149,7 +149,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:05 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -170,16 +170,16 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 1e8f4f14-8d5b-4628-b5d4-fbdf015e96c1
+      - a9568d55-7367-40f9-b157-aafddf2de019
       X-Runtime:
-      - '0.024362'
+      - '0.017042'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:05 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 - request:
     method: put
     uri: http://localhost:3001/api-v1/bag/00000000-0000-4000-a000-000000000002/
@@ -193,7 +193,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:05 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -212,21 +212,21 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"96a864b53a43a90f987b56266611d77b"
+      - W/"1d7c6f57c6b677b69b7878d13fd7d4c8"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e22ff07d-af9b-449e-8978-46eaea5048a6
+      - 1653ce6e-7d1d-4e36-b1cc-e1186352ccc8
       X-Runtime:
-      - '0.034519'
+      - '0.048215'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-27T19:10:01Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-08-01T22:58:20Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:05 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 - request:
     method: get
     uri: http://localhost:3001/api-v1/bag/?admin_node=chron&page=1&page_size=25
@@ -239,7 +239,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:05 GMT
+      - Mon, 01 Aug 2016 22:59:41 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -258,19 +258,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"54a9e411429328de8b24738264d0881b"
+      - W/"14b2b4cd6f093efe629f200ff20a5a16"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - a0b85b14-7dac-43c9-aa76-6b561da266df
+      - ec970bb5-ccf2-407a-85d3-2d4237245b71
       X-Runtime:
-      - '0.024124'
+      - '0.026685'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000002","local_id":"Chronopolis
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-07-27T19:10:01Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}]}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-08-01T22:58:20Z","ingest_node":"chron","admin_node":"chron","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":[],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000002","fixities":{"sha256":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b"}}]}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:05 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
 recorded_with: VCR 3.0.3

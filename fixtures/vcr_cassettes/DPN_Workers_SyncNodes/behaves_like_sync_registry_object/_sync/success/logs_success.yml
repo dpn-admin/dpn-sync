@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:03 GMT
+      - Mon, 01 Aug 2016 22:59:40 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,9 +35,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1ecfe832-d2d7-4d5c-bc98-5b9dc94ce059
+      - f64520b3-a03b-4b01-8359-576a36398a31
       X-Runtime:
-      - '0.024429'
+      - '0.030151'
       Transfer-Encoding:
       - chunked
     body:
@@ -45,7 +45,7 @@ http_interactions:
       string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
         Disk"}}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:03 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:40 GMT
 - request:
     method: put
     uri: http://localhost:3001/api-v1/node/chron/
@@ -59,7 +59,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:03 GMT
+      - Mon, 01 Aug 2016 22:59:40 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -78,19 +78,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"fda91a6873fa323951d621a92ec7f69a"
+      - W/"040177c5c2c8c8983de8a699f7570150"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8dd800fb-efad-421b-8cc6-1dad5239a532
+      - deded455-2b87-4ff2-b2ed-67be5fc0e7a4
       X-Runtime:
-      - '0.055986'
+      - '0.032500'
       Transfer-Encoding:
       - chunked
     body:
       encoding: UTF-8
-      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://localhost:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-07-27T19:10:03Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
+      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://localhost:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-08-01T22:59:40Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"California","type":"Magnetic
         Disk"}}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:03 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:40 GMT
 recorded_with: VCR 3.0.3

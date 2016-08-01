@@ -19,13 +19,10 @@ RSpec.shared_examples 'sync_registry_object' do
 
     context 'failure' do
       let(:failure_nodes) { described_class.new local_node, example_node }
-      it 'returns false' do
-        expect(failure_nodes.sync).to be false
-      end
-      it 'logs failure' do
-        logger = failure_nodes.send(:logger)
-        expect(logger).to receive(:error).at_least(:once).and_call_original
-        expect(failure_nodes.sync).to be false
+      it 'raises exception on failure to connect to node' do
+        RSpec::Expectations.configuration.on_potential_false_positives = :nothing
+        expect { failure_nodes.sync }.to raise_error
+        RSpec::Expectations.configuration.on_potential_false_positives = :warn
       end
     end
   end

@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 27 Jul 2016 19:10:00 GMT
+      - Mon, 01 Aug 2016 22:59:38 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,9 +35,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 11259f84-5b43-4dca-b693-45b7534a5c65
+      - c29925d7-cd2f-44f8-b10f-579fa6cb62ef
       X-Runtime:
-      - '0.329281'
+      - '0.146347'
       Transfer-Encoding:
       - chunked
     body:
@@ -45,5 +45,5 @@ http_interactions:
       string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"Virginia","type":"Magnetic
         Disk"}}'
     http_version: 
-  recorded_at: Wed, 27 Jul 2016 19:10:01 GMT
+  recorded_at: Mon, 01 Aug 2016 22:59:38 GMT
 recorded_with: VCR 3.0.3
