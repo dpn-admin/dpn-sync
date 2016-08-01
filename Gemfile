@@ -1,6 +1,7 @@
 source 'https://rubygems.org/'
 
 # App Stack
+gem 'rack'
 gem 'sinatra'
 gem 'config'
 

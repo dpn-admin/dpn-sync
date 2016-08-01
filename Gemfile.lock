@@ -224,6 +224,7 @@ DEPENDENCIES
   pry
   pry-doc
   pry-stack_explorer
+  rack
   rack-test
   rake
   redcarpet
