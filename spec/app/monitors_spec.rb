@@ -2,6 +2,13 @@
 require 'spec_helper'
 
 describe Monitors do
+  let(:monitor) do
+    monitor = double
+    allow(monitor).to receive(:message).and_return('OK')
+    allow(monitor).to receive(:ok?).and_return(true)
+  end
+  let(:subject) { described_class.new [monitor] }
+
   describe '#new' do
     it 'works' do
       expect(subject).not_to be_nil

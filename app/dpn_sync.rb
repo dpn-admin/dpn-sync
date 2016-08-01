@@ -44,7 +44,7 @@ class DpnSync < Sinatra::Base
   get '/is_it_working' do
     content_type 'text/plain'
     cache_control :none
-    monitors = Monitors.new
+    monitors = Monitors.new [SidekiqMonitor.new, DPN::Monitor.new]
     status monitors.status
     body monitors.messages
   end

@@ -6,8 +6,10 @@ require_relative 'sidekiq_monitor'
 class Monitors
   extend Forwardable
 
-  def initialize
-    @monitors = [SidekiqMonitor.new, DPN::Monitor.new]
+  # A 'Monitor' implements a role interface that responds to :message and :ok?
+  # @param [Array<Monitor>] monitors
+  def initialize(monitors)
+    @monitors = monitors
   end
 
   # @return [String] messages from all monitors
