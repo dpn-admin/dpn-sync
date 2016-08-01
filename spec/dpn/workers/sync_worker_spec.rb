@@ -17,11 +17,9 @@ describe DPN::Workers::SyncWorker do
       result = subject.perform(sync_bags)
       expect(result).to be false
     end
-    it 'logs exceptions for failure' do
+    it 'raises exceptions for failure' do
       expect(nodes).to receive(:sync).with(sync_bags).and_raise('failed')
-      expect(subject.logger).to receive(:error)
-      result = subject.perform(sync_bags)
-      expect(result).to be false
+      expect { subject.perform(sync_bags) }.to raise_error(RuntimeError)
     end
   end
 end

@@ -9,11 +9,7 @@ module DPN
       # @param [String] class_name for a class to perform a sync process
       # @return [Boolean]
       def perform(class_name)
-        nodes = DPN::Workers.nodes
-        nodes.sync class_name
-      rescue StandardError => err
-        logger.error err.inspect
-        false
+        DPN::Workers.nodes.sync class_name
       end
     end
   end
