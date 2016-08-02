@@ -8,7 +8,7 @@ class SidekiqMonitor
 
   def initialize
     @queue = Sidekiq::Queue.new
-    @settings = Settings.sidekiq
+    @settings = SyncSettings.sidekiq
   end
 
   # @return [String] queue status with size and latency

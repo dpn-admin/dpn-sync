@@ -27,7 +27,7 @@ class DpnSync < Sinatra::Base
 
   get '/test' do
     @stats = Sidekiq::Stats.new
-    @messages = REDIS.lrange(Settings.sidekiq.test_message_store, 0, -1)
+    @messages = REDIS.lrange(SyncSettings.sidekiq.test_message_store, 0, -1)
     erb :test
   end
 
@@ -37,7 +37,7 @@ class DpnSync < Sinatra::Base
   end
 
   post '/msg/clear' do
-    REDIS.del(Settings.sidekiq.test_message_store)
+    REDIS.del(SyncSettings.sidekiq.test_message_store)
     redirect to("test")
   end
 

@@ -406,4 +406,49 @@ http_interactions:
       string: '{"replication_id":"20000000-0000-4000-a000-000000000007","fixity_nonce":null,"fixity_value":null,"fixity_accept":false,"bag_valid":true,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"aptrust"}'
     http_version: 
   recorded_at: Mon, 01 Aug 2016 22:59:41 GMT
+- request:
+    method: get
+    uri: http://localhost:3002/api-v1/replicate/?bag=00000000-0000-4000-a000-000000000002&from_node=chron&page=1&page_size=50&to_node=aptrust
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 02 Aug 2016 22:09:26 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"281ff202ebbedf937f3805f8834f6dea"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 501ead61-e0cc-46a4-a223-25cbdc076230
+      X-Runtime:
+      - '0.019287'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"count":1,"next":null,"previous":null,"results":[{"replication_id":"20000000-0000-4000-a000-000000000007","fixity_nonce":null,"fixity_value":null,"fixity_accept":false,"bag_valid":true,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"aptrust"}]}'
+    http_version: 
+  recorded_at: Tue, 02 Aug 2016 22:09:26 GMT
 recorded_with: VCR 3.0.3

@@ -49,11 +49,11 @@ module DPN
         end
 
         # @param [String] bag_uuid
-        # @return [Hash] has keys :bag_id, :from_node, :to_node
+        # @return [Hash] has keys :bag, :from_node, :to_node
         def replication_query(bag_uuid)
           {
             page_size: 50,
-            bag_id: bag_uuid,
+            bag: bag_uuid,
             from_node: remote_node.namespace,
             to_node: local_node.namespace
             # TODO: after: last_success
@@ -93,9 +93,11 @@ module DPN
         # @return [Boolean] success of replication persistence
         def save_replication(bag, replication)
           # TODO: remove bag if https://github.com/dpn-admin/dpn-server/issues/23 is fixed
-          replication[:bag_id] = bag[:uuid]
+          replication[:bag] = bag[:uuid]
           local_replication = DPN::Workers::SyncReplication.new(replication, local_client, logger)
-          local_replication.create_or_update
+          saved = local_replication.create_or_update
+          DPN::Workers::BagWorker.perform_async replication if saved
+          saved
         end
     end
   end

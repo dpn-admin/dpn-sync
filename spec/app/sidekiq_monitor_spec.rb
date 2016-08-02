@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe SidekiqMonitor do
   let(:message) { subject.message }
-  let(:settings) { Settings.sidekiq }
+  let(:settings) { SyncSettings.sidekiq }
   let(:size) { settings.acceptable_queue_size }
   let(:latency) { settings.acceptable_queue_latency }
 

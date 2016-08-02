@@ -2,8 +2,8 @@
 
 log_level: info
 
-# Create test cluster nodes and use those node parameters here, see
-# https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
+# Create test cluster nodes and use those node parameters here,
+# @see https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
 local_namespace: aptrust
 nodes:
   -
@@ -26,6 +26,12 @@ nodes:
     namespace: tdr
     api_root: http://localhost:3005
     auth_credential: tdr_token
+
+# Settings for DPN::Workers::BagReplicator
+replication:
+  staging_dir: a_staging_path
+  storage_dir: a_storage_path
+  ssh_identity_file: a_path_to_ssh_public_key_file
 
 sidekiq:
   # How many background jobs in the schedule queue are reasonable before
