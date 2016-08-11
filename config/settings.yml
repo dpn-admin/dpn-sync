@@ -27,7 +27,7 @@ nodes:
     api_root: http://localhost:3005
     auth_credential: tdr_token
 
-# Settings for DPN::Workers::BagReplicator
+# Settings for DPN::Workers::BagReplication
 replication:
   staging_dir: a_staging_path
   storage_dir: a_storage_path

@@ -50,17 +50,20 @@ module DPN
         # null or boolean set by to_node to record results of bag validation
         bag_valid: nil,
         # status - String status of the transfer:
-        #  'requested' - set by the from_node to indicate the bag is staged for transfer and awaiting response from to_node.
+        #  'requested' - set by the from_node to indicate the bag is staged for
+        #                transfer and awaiting response from to_node.
         #  'rejected' - set by the to_node to indicate it will not perform the transfer.
         #  'received' - set by the to_node to indicate it has performed the transfer.
         #  'confirmed' - set by the from_node after it receives all data to confirm a good transfer.
-        #  'stored' - set by the to_node to indicate the bag has been transferred into its storage repository from the staging area. The to_node promises to fulfill replicating node duties by setting this status.
+        #  'stored' - set by the to_node to indicate the bag has been transferred
+        #             into its storage repository from the staging area.
+        #             The to_node promises to fulfill replicating node duties by setting this status.
         #  'cancelled' - set by either node to indicate the transfer was cancelled.
         status: 'requested',
         # String used to identify the transfer protocol
         protocol: 'rsync',
         # String of transfer link to be used for the specified protocol
-        link: '/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar',
+        link: File.join(Dir.pwd, 'fixtures', 'testbags', '00000000-0000-4000-a000-000000000002.tar'),
         # String in DPN DateTime Format of the record creation date
         created_at: '2015-09-15T19:38:31Z',
         # String in DPN DateTime Format of last record update
