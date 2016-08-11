@@ -6,7 +6,6 @@ module DPN
       include Sidekiq::Worker
       sidekiq_options backtrace: 10
 
-      # Ignore :reek:UtilityFunction
       # Worker called from DPN::Workers::SyncReplications#save_replication
       # @see DPN::Workers::SyncReplications#save_replication
       # @see https://github.com/dpn-admin/DPN-REST-Wiki/blob/master/Replication-Transfer-Resource.md
