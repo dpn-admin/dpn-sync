@@ -434,9 +434,6 @@ describe DPN::Workers::BagReplication, :vcr do
       # assume an rsync transfer has already completed successfully
       allow(File).to receive(:exist?).and_return(true)
     end
-    after do
-      cleanup_path settings.staging_dir
-    end
     it "works" do
       expect(retrieve_path).not_to be_nil
     end
@@ -564,9 +561,6 @@ describe DPN::Workers::BagReplication, :vcr do
 
   describe "#staging_path" do
     let(:staging_path) { subject.send(:staging_path) }
-    after do
-      cleanup_path settings.staging_dir
-    end
     it "works" do
       expect(staging_path).not_to be_nil
     end
@@ -581,9 +575,6 @@ describe DPN::Workers::BagReplication, :vcr do
 
   describe "#storage_path" do
     let(:storage_path) { subject.send(:storage_path) }
-    after do
-      cleanup_path settings.storage_dir
-    end
     it "works" do
       expect(storage_path).not_to be_nil
     end

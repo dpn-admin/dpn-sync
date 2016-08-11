@@ -6,21 +6,10 @@ describe DPN::Workers::BagPaths do
   let(:settings) { SyncSettings.replication }
   let(:subject) { described_class.new }
 
-  # Ignore :reek:UtilityFunction
-  def cleanup_path(dir)
-    path = File.join(dir, '*')
-    FileUtils.rm_rf(Dir.glob(path), secure: true)
-  end
-
   before do
     # Everything about replication depends on writable disk directories
     expect(File.writable?(settings.staging_dir)).to be true
     expect(File.writable?(settings.storage_dir)).to be true
-  end
-
-  after do
-    cleanup_path settings.storage_dir
-    cleanup_path settings.staging_dir
   end
 
   it 'works' do
