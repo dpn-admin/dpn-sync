@@ -1,6 +1,7 @@
 GIT
-  remote: https://github.com/dpn-admin/dpn-client.git
+  remote: git://github.com/dpn-admin/dpn-client.git
   revision: 1d05ecf859727402e05257eb83d8c231ec34b53d
+  tag: v1.3.1
   specs:
     dpn-client (1.3.1)
       httpclient (~> 2.6.0.1)
