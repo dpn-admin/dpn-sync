@@ -3,26 +3,21 @@
 require 'single_cov'
 SingleCov.setup :rspec
 
-require 'simplecov'
-require 'coveralls'
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
 
+require 'simplecov'
 SimpleCov.profiles.define 'dpn-sync' do
   add_filter '.gems'
   add_filter '/config/environments/'
   add_filter 'pkg'
   add_filter 'spec'
   add_filter 'vendor'
-
   # Simplecov can detect changes using data from the
   # last rspec run.  Travis will never have a previous
   # dataset for comparison, so it can't fail a travis build.
   maximum_coverage_drop 0.1
 end
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-  [
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ])
 SimpleCov.start 'dpn-sync'
 
 ENV['RACK_ENV'] = 'test'

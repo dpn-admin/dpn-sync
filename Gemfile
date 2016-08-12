@@ -36,7 +36,7 @@ group :test do
   gem 'rspec'
   gem 'fakeredis', require: 'fakeredis/rspec'
   gem 'rack-test'
-  gem 'coveralls', require: false
+  gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'single_cov'
   gem 'vcr'
