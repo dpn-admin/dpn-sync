@@ -75,9 +75,6 @@ GEM
       capistrano-one_time_key
       capistrano-releaseboard
     docile (1.1.5)
-    dpn_cops (0.0.3)
-      rubocop (~> 0.37.0)
-      rubocop-rspec (~> 1.4.0)
     equalizer (0.0.11)
     eventmachine (1.2.0.1)
     fakeredis (0.5.0)
@@ -206,7 +203,6 @@ DEPENDENCIES
   config
   dlss-capistrano
   dpn-client!
-  dpn_cops
   fakeredis
   github-markup
   hiredis
@@ -221,6 +217,8 @@ DEPENDENCIES
   redis-namespace
   reek
   rspec
+  rubocop
+  rubocop-rspec
   sidekiq
   sidekiq-cron
   simplecov

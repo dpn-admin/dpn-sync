@@ -25,11 +25,12 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dpn_cops'
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-stack_explorer'
   gem 'rake'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
 end
 
 group :test do
