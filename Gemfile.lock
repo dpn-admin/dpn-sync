@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/dpn-admin/dpn-client.git
-  revision: 1d05ecf859727402e05257eb83d8c231ec34b53d
-  tag: v1.3.1
-  specs:
-    dpn-client (1.3.1)
-      httpclient (~> 2.6.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -75,6 +67,8 @@ GEM
       capistrano-one_time_key
       capistrano-releaseboard
     docile (1.1.5)
+    dpn-client (1.3.1)
+      httpclient (~> 2.6.0.1)
     equalizer (0.0.11)
     eventmachine (1.2.0.1)
     fakeredis (0.5.0)
@@ -202,7 +196,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   config
   dlss-capistrano
-  dpn-client!
+  dpn-client (~> 1.3)
   fakeredis
   github-markup
   hiredis

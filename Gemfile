@@ -14,7 +14,7 @@ gem 'redis', require: ['redis/connection/hiredis', 'redis']
 gem 'redis-namespace'
 
 # DPN
-gem 'dpn-client', github: 'dpn-admin/dpn-client', :tag => 'v1.3.1'
+gem 'dpn-client', '~> 1.3'
 
 group :development do
   gem 'thin' # app server
