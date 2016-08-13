@@ -3,24 +3,6 @@ require 'spec_helper'
 require 'shared_examples/sync_content'
 
 describe DPN::Workers::SyncReplication, :vcr do
-  let(:replication) do
-    {
-      replication_id: '20000000-0000-4000-a000-000000000007',
-      fixity_nonce: nil,
-      fixity_value: nil,
-      fixity_accept: false,
-      bag_valid: true,
-      status: 'requested',
-      link: '/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar',
-      created_at: '2015-09-15T19:38:31Z',
-      updated_at: '2015-09-15T19:38:31Z',
-      uuid: '00000000-0000-4000-a000-000000000002', # this is a bag UUID
-      fixity_algorithm: 'sha256',
-      protocol: 'rsync',
-      from_node: 'chron',
-      to_node: 'aptrust'
-    }
-  end
   let(:node_client) { local_node.client }
   let(:subject) { described_class.new replication, node_client, null_logger }
 

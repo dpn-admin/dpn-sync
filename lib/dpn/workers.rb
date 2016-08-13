@@ -31,11 +31,11 @@ module DPN
     class << self
       ##
       # Create a new instance of DPN::Workers::Nodes using the
-      # definition in Settings.nodes and Settings.local_namespace
+      # definition in SyncSettings.nodes and SyncSettings.local_namespace
       # @return [DPN::Workers::Nodes]
       def nodes
-        DPN::Workers::Nodes.new Settings.nodes.map(&:to_hash),
-                                Settings.local_namespace
+        DPN::Workers::Nodes.new SyncSettings.nodes.map(&:to_hash),
+                                SyncSettings.local_namespace
       end
 
       # Create a log file with monthly rotation
@@ -51,7 +51,7 @@ module DPN
 
         # @return [Integer] a Logger log level constant
         def log_level
-          log_level = Settings.log_level || 'info'
+          log_level = SyncSettings.log_level || 'info'
           Logger.const_get log_level.upcase
         rescue
           Logger::INFO

@@ -43,27 +43,20 @@ module RSpecMixin
   end
 end
 
-module GlobalLetDeclarations
-  extend RSpec::SharedContext
-  let(:null_logger) { Logger.new(File::NULL) }
-  let(:nodes) { DPN::Workers.nodes }
-  let(:local_node) { nodes.local_node }
-  let(:remote_node) { nodes.remote_nodes.first }
-  let(:example_node) do
-    DPN::Workers::Node.new(
-      namespace: 'example',
-      api_root: 'http://node.example.org',
-      auth_credential: 'example_token'
-    )
-  end
-end
+require_relative 'fixtures/fixtures'
 
 RSpec.configure do |config|
   config.include RSpecMixin
-  config.include GlobalLetDeclarations
+  config.include DPN::Fixtures
+
   config.before(:each) do
     allow(Logger).to receive(:new).and_return(null_logger)
     allow(Sidekiq).to receive(:logger).and_return(null_logger)
+  end
+
+  config.after(:suite) do
+    cleanup_path SyncSettings.replication.staging_dir
+    cleanup_path SyncSettings.replication.storage_dir
   end
 end
 
@@ -77,5 +70,10 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.allow_http_connections_when_no_cassette = false
   c.ignore_hosts 'codeclimate.com'
+end
+
+def cleanup_path(dir)
+  path = File.join(dir, '*')
+  FileUtils.rm_rf(Dir.glob(path))
 end
 

@@ -7,7 +7,7 @@ module DPN
 
       def perform(msg = 'you forgot a msg!')
         msg += " (processed at #{Time.now.utc.httpdate})"
-        REDIS.lpush(Settings.sidekiq.test_message_store, msg) > 0
+        REDIS.lpush(SyncSettings.sidekiq.test_message_store, msg) > 0
       end
     end
   end

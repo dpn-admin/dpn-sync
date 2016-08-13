@@ -1,0 +1,22 @@
+---
+DuplicateMethodCall:
+  exclude:
+  - DPN::Workers::BagReplication#update_replication
+TooManyInstanceVariables:
+  exclude:
+  - DPN::Workers::BagReplication
+  - DPN::Workers::Node
+TooManyMethods:
+  exclude:
+  - DPN::Workers::BagReplication
+UtilityFunction:
+  exclude:
+  - DPN::Workers::BagReplication#preserve_rsync_options
+  - DPN::Workers::BagWorker#perform
+  - DPN::Workers::SyncWorker#perform
+  - DPN::Workers::TestWorker#perform
+  - cleanup_path
+TooManyStatements:
+  exclude:
+  - initialize
+  - DPN::Workers::Node#server_node_data

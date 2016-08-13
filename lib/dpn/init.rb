@@ -4,16 +4,11 @@ require 'json'
 require 'logger'
 
 ##
-# Initialize Settings from config files
-require 'config'
-config_files = [
-  'config/settings.yml',
-  "config/settings/#{ENV['RACK_ENV']}.yml",
-  'config/settings.local.yml',
-  "config/settings/#{ENV['RACK_ENV']}.local.yml"
-]
-Config.load_and_set_settings(config_files)
+# Initialize SyncSettings from config files
+require_relative '../../config/initializers/config'
 
+##
+# Load DPN workers
 require_relative 'workers/job_data'
 require_relative 'workers/sync'
 require_relative 'workers/sync_content'
