@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe DPN::Workers::JobData do
-  YEAR_2000 = Time.utc(2000, 01, 01, 0, 0, 0)
+  YEAR_2000 = Time.utc(2000, 1, 1, 0, 0, 0)
 
   let(:name) { 'job_name' }
   let(:namespace) { 'namespace' }

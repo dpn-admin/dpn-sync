@@ -36,7 +36,7 @@ module DPN
         end
 
         # Assume there is no registry data before the year 2000
-        DEFAULT_TIME = Time.utc(2000, 01, 01, 0, 0, 0)
+        DEFAULT_TIME = Time.utc(2000, 1, 1, 0, 0, 0)
 
         # @param [String] key
         # @return [Hash] data
