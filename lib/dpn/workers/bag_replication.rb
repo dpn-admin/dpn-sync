@@ -6,7 +6,7 @@
 # Licensed according to the terms of the Revised BSD License
 # See LICENSE.md for details.
 
-require 'rsync'
+require_relative 'bag_rsync'
 
 module DPN
   module Workers
@@ -103,21 +103,7 @@ module DPN
 
         # @return [Boolean] success of rsync transfer
         def preserve_rsync
-          Rsync.run(bagit_path, storage_path, preserve_rsync_options) do |result|
-            raise "Failed to preserve: #{result.error}" unless result.success?
-          end
-          true
-        end
-
-        # @return [String] rsync options for preservation
-        def preserve_rsync_options
-          [
-            '--copy-dirlinks',
-            '--copy-unsafe-links',
-            '--partial',
-            '--quiet',
-            '--recursive'
-          ].join(' ')
+          DPN::Workers::BagRsync.new(bagit_path, storage_path, 'preserve').rsync
         end
 
         # @return [Boolean] validity of preserved bag
@@ -169,40 +155,7 @@ module DPN
 
         # @return [Boolean] success of rsync transfer
         def retrieve_rsync
-          Rsync.run(link, staging_path, retrieve_rsync_options) do |result|
-            raise "Failed to retrieve: #{result.error}" unless result.success?
-          end
-          true
-        end
-
-        # @return [String] rsync options for retrieval
-        def retrieve_rsync_options
-          [
-            '--archive',
-            '--copy-dirlinks',
-            '--copy-unsafe-links',
-            '--partial',
-            '--quiet',
-            retrieve_ssh
-          ].join(' ')
-        end
-
-        # Construct an ssh command for rsync, if an ssh identity file is
-        # provided in the SyncSettings.replication configuration.
-        # @return [String] ssh command
-        def retrieve_ssh
-          @_retrieve_ssh ||= begin
-            ssh_id_file = paths.ssh_identity_file
-            return '' unless File.exist? ssh_id_file
-            ssh_cmd = [
-              'ssh',
-              '-o PasswordAuthentication=no',
-              '-o UserKnownHostsFile=/dev/null',
-              '-o StrictHostKeyChecking=no',
-              "-i #{ssh_id_file}"
-            ].join(' ')
-            "-e '#{ssh_cmd}'"
-          end
+          DPN::Workers::BagRsync.new(link, staging_path, 'retrieve').rsync
         end
 
         # @return [Boolean] success of unpacking a bagit from a replication .tar archive

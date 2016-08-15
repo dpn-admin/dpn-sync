@@ -131,16 +131,6 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#paths" do
-    let(:paths) { subject.send(:paths) }
-    it "works" do
-      expect(paths).not_to be_nil
-    end
-    it "returns a DPN::Workers::BagPaths" do
-      expect(paths).to be_an DPN::Workers::BagPaths
-    end
-  end
-
   describe '#preserve' do
     it "checks the replication status" do
       expect(subject).to receive(:status).twice.and_return('received')
@@ -203,34 +193,32 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#preserve_rsync" do
-    let(:bagit) do
-      bag = double(DPN::Bagit::Bag)
-      allow(bag).to receive(:location).and_return('a_bag_location')
-      bag
-    end
-    let(:bagit_path) { subject.send(:bagit_path) }
-    let(:options) { subject.send(:preserve_rsync_options) }
-    let(:rsync) { subject.send(:preserve_rsync) }
-    let(:rsync_result) { double }
-    let(:storage_path) { subject.send(:storage_path) }
+  shared_examples "bag_rsync_mocks" do
+    let(:bagit) { double(DPN::Bagit::Bag) }
+    let(:bag_sync) { double(DPN::Workers::BagRsync) }
     context 'rsync mock behavior' do
       before do
+        allow(bagit).to receive(:location).and_return('a_bag_location')
         allow(subject).to receive(:bagit).and_return(bagit)
-        expect(Rsync).to receive(:run).with(bagit_path, storage_path, options).and_yield(rsync_result)
+        expect(DPN::Workers::BagRsync).to receive(:new).and_return(bag_sync)
       end
       it 'works' do
-        expect(rsync_result).to receive(:success?).and_return(true)
+        expect(bag_sync).to receive(:rsync).and_return(true)
         expect(rsync).to be true
       end
       it 'raises RuntimeError when rsync fails' do
-        expect(rsync_result).to receive(:success?).and_return(false)
-        expect(rsync_result).to receive(:error).and_return('rsync error')
+        expect(bag_sync).to receive(:rsync).and_raise('rsync failed')
         expect { rsync }.to raise_error(RuntimeError)
       end
     end
+  end
+
+  describe "#preserve_rsync" do
+    let(:rsync) { subject.send(:preserve_rsync) }
+    it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
       let(:bagit) { subject.send(:bagit) }
+      let(:storage_path) { subject.send(:storage_path) }
       before do
         # perform retrieval tasks so a bag is available for preservation
         expect(subject.send(:retrieve_rsync)).to be true
@@ -247,31 +235,6 @@ describe DPN::Workers::BagReplication, :vcr do
         expect(File.exist?(bag_path_after)).to be true
         expect(bag_path_before).not_to eq bag_path_after
       end
-    end
-  end
-
-  describe "#preserve_rsync_options" do
-    let(:options) { subject.send(:preserve_rsync_options) }
-    it 'works' do
-      expect(options).not_to be_nil
-    end
-    it 'returns a String' do
-      expect(options).to be_an String
-    end
-    it 'contains the "--copy-dirlinks" option' do
-      expect(options).to include '--copy-dirlinks'
-    end
-    it 'contains the "--copy-unsafe-links" option' do
-      expect(options).to include '--copy-unsafe-links'
-    end
-    it 'contains the "--partial" option' do
-      expect(options).to include '--partial'
-    end
-    it 'contains the "--quiet" option' do
-      expect(options).to include '--quiet'
-    end
-    it 'contains the "--recursive" option' do
-      expect(options).to include '--recursive'
     end
   end
 
@@ -297,7 +260,6 @@ describe DPN::Workers::BagReplication, :vcr do
       expect(subject).to receive(:update_replication).with('received').and_return(true)
       subject.send(:retrieve)
     end
-
     shared_examples 'retrieval_is_done' do
       it 'returns true without doing any retrieval tasks' do
         expect(subject).to receive(:status).once.and_return(status)
@@ -308,22 +270,18 @@ describe DPN::Workers::BagReplication, :vcr do
         expect(subject.send(:retrieve)).to be true
       end
     end
-
     context "when the replication status is 'confirmed'" do
       let(:status) { 'confirmed' }
       it_behaves_like 'retrieval_is_done'
     end
-
     context "when the replication status is 'received'" do
       let(:status) { 'received' }
       it_behaves_like 'retrieval_is_done'
     end
-
     context "when the replication status is 'stored'" do
       let(:status) { 'stored' }
       it_behaves_like 'retrieval_is_done'
     end
-
     shared_examples 'retrieve_raises_exception' do
       before do
         expect(subject).to receive(:status).exactly(3).times.and_return(status)
@@ -339,12 +297,10 @@ describe DPN::Workers::BagReplication, :vcr do
         expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
       end
     end
-
     context "when the replication status is 'cancelled'" do
       let(:status) { 'cancelled' }
       it_behaves_like 'retrieve_raises_exception'
     end
-
     context "when the replication status is 'rejected'" do
       let(:status) { 'rejected' }
       it_behaves_like 'retrieve_raises_exception'
@@ -449,112 +405,19 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#retrieve_rsync" do
-    let(:link) { subject.send(:link) }
-    let(:options) { subject.send(:retrieve_rsync_options) }
     let(:rsync) { subject.send(:retrieve_rsync) }
-    let(:rsync_result) { double }
-    let(:staging_path) { subject.send(:staging_path) }
-    let(:retrieve_path) { subject.send(:retrieve_path) }
-    context 'rsync mock behavior' do
-      before do
-        expect(Rsync).to receive(:run).with(link, staging_path, options).and_yield(rsync_result)
-      end
-      it 'works' do
-        expect(rsync_result).to receive(:success?).and_return(true)
-        expect(rsync).to be true
-      end
-      it 'raises RuntimeError when rsync fails' do
-        expect(rsync_result).to receive(:success?).and_return(false)
-        expect(rsync_result).to receive(:error).and_return('rsync error')
-        expect { rsync }.to raise_error(RuntimeError)
-      end
-    end
+    it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
+      let(:link) { subject.send(:link) }
+      let(:staging_path) { subject.send(:staging_path) }
+      let(:retrieve_path) { subject.send(:retrieve_path) }
       before do
         expect(File.exist?(link)).to be true
         expect(File.exist?(staging_path)).to be true
-        expect(Rsync).to receive(:run).with(link, staging_path, options).and_call_original
       end
       it 'works' do
         expect(rsync).to be true
         expect(File.exist?(retrieve_path)).to be true
-      end
-    end
-  end
-
-  describe "#retrieve_rsync_options" do
-    let(:options) { subject.send(:retrieve_rsync_options) }
-    it 'works' do
-      expect(options).not_to be_nil
-    end
-    it 'returns a String' do
-      expect(options).to be_an String
-    end
-    it 'contains the "--archive" option' do
-      expect(options).to include '--archive'
-    end
-    it 'contains the "--copy-dirlinks" option' do
-      expect(options).to include '--copy-dirlinks'
-    end
-    it 'contains the "--copy-unsafe-links" option' do
-      expect(options).to include '--copy-unsafe-links'
-    end
-    it 'contains the "--partial" option' do
-      expect(options).to include '--partial'
-    end
-    it 'contains the "--quiet" option' do
-      expect(options).to include '--quiet'
-    end
-    it 'calls #retrieve_ssh' do
-      expect(subject).to receive(:retrieve_ssh)
-      options
-    end
-  end
-
-  describe "#retrieve_ssh" do
-    let(:ssh) { subject.send(:retrieve_ssh) }
-    let(:ssh_id_file) { 'id_rsa' }
-
-    it "works" do
-      expect(ssh).not_to be_nil
-    end
-    it "returns a String" do
-      expect(ssh).to be_an String
-    end
-
-    context 'there is an ssh_identity_file' do
-      before do
-        allow(File).to receive(:exist?).and_return(true)
-        expect(settings).to receive(:ssh_identity_file).and_return(ssh_id_file)
-      end
-      it 'starts with the "-e" option for rsync' do
-        expect(ssh).to start_with '-e'
-      end
-      it 'contains the "ssh" keyword' do
-        expect(ssh).to include 'ssh'
-      end
-      it 'contains an option to disable PasswordAuthentication' do
-        expect(ssh).to include '-o PasswordAuthentication=no'
-      end
-      it 'contains an option to disable UserKnownHostsFile' do
-        expect(ssh).to include '-o UserKnownHostsFile=/dev/null'
-      end
-      it 'contains an option to disable StrictHostKeyChecking' do
-        expect(ssh).to include '-o StrictHostKeyChecking=no'
-      end
-      it 'contains an option to specify the ssh_identity_file' do
-        expect(ssh).to include "-i #{ssh_id_file}"
-      end
-    end
-
-    context 'there is no ssh_identity_file' do
-      before do
-        allow(File).to receive(:exist?).and_return(false)
-        expect(settings).to receive(:ssh_identity_file).and_return('')
-      end
-      it 'returns an empty String' do
-        expect(ssh).to be_an String
-        expect(ssh).to be_empty
       end
     end
   end

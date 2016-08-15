@@ -11,7 +11,6 @@ TooManyMethods:
   - DPN::Workers::BagReplication
 UtilityFunction:
   exclude:
-  - DPN::Workers::BagReplication#preserve_rsync_options
   - DPN::Workers::BagWorker#perform
   - DPN::Workers::SyncWorker#perform
   - DPN::Workers::TestWorker#perform
