@@ -1,5 +1,6 @@
 require 'rsync'
 require_relative 'bag_paths'
+require_relative 'bag_ssh'
 
 module DPN
   module Workers
@@ -55,23 +56,16 @@ module DPN
 
         # @return [String] rsync options for retrieval
         def retrieve_options
-          COMMON_OPTIONS + ' --archive' + retrieve_ssh
+          COMMON_OPTIONS + ' --archive' + ssh_option
         end
 
-        # Construct an ssh command for rsync, if an ssh identity file is
-        # provided in the SyncSettings.replication configuration.
-        # @return [String] ssh command
-        def retrieve_ssh
-          ssh_id_file = paths.ssh_identity_file
-          return '' unless File.exist? ssh_id_file
-          ssh_cmd = [
-            'ssh',
-            '-o PasswordAuthentication=no',
-            '-o UserKnownHostsFile=/dev/null',
-            '-o StrictHostKeyChecking=no',
-            "-i #{ssh_id_file}"
-          ].join(' ')
-          " -e '#{ssh_cmd}'"
+        # @return [String] ssh option for retrieval
+        def ssh_option
+          @ssh_option ||= begin
+            ssh = DPN::Workers::BagSSH.new
+            ssh_cmd = ssh.retrieve_command
+            ssh_cmd.empty? ? '' : " -e #{ssh_cmd}"
+          end
         end
     end
   end

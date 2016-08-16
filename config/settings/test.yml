@@ -2,9 +2,13 @@
 log_level: debug
 
 # Settings for DPN::Workers::BagReplication
-# The 'ssh_identity_file' is blank because the test bag retrieval is a local
-# file system transfer that does not require ssh.
 replication:
   staging_dir: <%= File.join(Dir.pwd, 'fixtures', 'staging') %>
   storage_dir: <%= File.join(Dir.pwd, 'fixtures', 'storage') %>
-  ssh_identity_file:
+
+# Settings for DPN::Workers::BagRsync
+# The 'user' and the 'identity_file' are blank because the test bag retrieval
+# is a local file system transfer that does not require ssh.
+ssh:
+  user: ''
+  identity_file: ''

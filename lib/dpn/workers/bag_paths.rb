@@ -9,7 +9,7 @@ module DPN
       extend Forwardable
 
       # Public accessors for SyncSettings.replication parameters
-      def_delegators :settings, :staging_dir, :storage_dir, :ssh_identity_file
+      def_delegators :settings, :staging_dir, :storage_dir
 
       # Initialize accessors for SyncSettings.replication parameters
       # @raise RuntimeError

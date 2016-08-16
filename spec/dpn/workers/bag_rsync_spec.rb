@@ -14,7 +14,7 @@ describe DPN::Workers::BagRsync do
 
   let(:preserve_source) { retrieve_target_file }
   let(:preserve_target) do
-    path = File.join(settings.staging_dir, 'test_rsync_preserve')
+    path = File.join(settings.storage_dir, 'test_rsync_preserve')
     FileUtils.mkdir_p(path).first
   end
   let(:preserve_target_file) { File.join(preserve_target, retrieve_file) }
@@ -54,6 +54,8 @@ describe DPN::Workers::BagRsync do
     end
     it 'works' do
       expect(rsync_result).to receive(:success?).and_return(true)
+      expect(subject).to be_an described_class
+      expect(subject).to respond_to(:rsync)
       expect(subject.rsync).to be true
     end
     it 'raises RuntimeError when rsync fails' do
@@ -66,8 +68,6 @@ describe DPN::Workers::BagRsync do
   context '#rsync "retrieve"' do
     it 'works' do
       expect(File.exist?(source)).to be true
-      expect(subject).to be_an described_class
-      expect(subject).to respond_to(:rsync)
       subject.rsync
       expect(File.exist?(retrieve_target_file)).to be true
     end
@@ -77,8 +77,8 @@ describe DPN::Workers::BagRsync do
       it 'contains the "--archive" option' do
         expect(options).to include '--archive'
       end
-      it 'calls #retrieve_ssh' do
-        expect(subject).to receive(:retrieve_ssh).and_call_original
+      it 'calls #ssh_option' do
+        expect(subject).to receive(:ssh_option).and_call_original
         options
       end
     end
@@ -112,54 +112,6 @@ describe DPN::Workers::BagRsync do
       let(:options) { subject.send(:options) }
       it 'raises RuntimeError' do
         expect { options }.to raise_error(RuntimeError)
-      end
-    end
-  end
-
-  ##
-  # PRIVATE
-
-  describe "#retrieve_ssh" do
-    let(:ssh) { subject.send(:retrieve_ssh) }
-    let(:ssh_id_file) { 'id_rsa' }
-    it "works" do
-      expect(ssh).not_to be_nil
-    end
-    it "returns a String" do
-      expect(ssh).to be_an String
-    end
-    context 'there is an ssh_identity_file' do
-      before do
-        allow(File).to receive(:exist?).and_return(true)
-        expect(settings).to receive(:ssh_identity_file).and_return(ssh_id_file)
-      end
-      it 'starts with a "-e" option for rsync' do
-        expect(ssh).to include '-e'
-      end
-      it 'contains the "ssh" keyword' do
-        expect(ssh).to include 'ssh'
-      end
-      it 'contains an option to disable PasswordAuthentication' do
-        expect(ssh).to include '-o PasswordAuthentication=no'
-      end
-      it 'contains an option to disable UserKnownHostsFile' do
-        expect(ssh).to include '-o UserKnownHostsFile=/dev/null'
-      end
-      it 'contains an option to disable StrictHostKeyChecking' do
-        expect(ssh).to include '-o StrictHostKeyChecking=no'
-      end
-      it 'contains an option to specify the ssh_identity_file' do
-        expect(ssh).to include "-i #{ssh_id_file}"
-      end
-    end
-    context 'there is no ssh_identity_file' do
-      before do
-        allow(File).to receive(:exist?).and_return(false)
-        expect(settings).to receive(:ssh_identity_file).and_return('')
-      end
-      it 'returns an empty String' do
-        expect(ssh).to be_an String
-        expect(ssh).to be_empty
       end
     end
   end

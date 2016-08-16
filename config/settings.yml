@@ -1,4 +1,11 @@
-# To develop with different settings, use settings.local.yml
+# Files in config/settings/*.yml are merged into config/settings.yml, e.g.
+# - the development settings are in config/settings/development.yml
+# - the production settings are in config/settings/production.yml
+# - the test settings are in config/settings/test.yml
+
+# Any *.local.yml files are merged into the corresponding file, like
+# config/settings/test.local.yml is merged into config/settings/test.yml
+# which, in turn, is merged into config/settings.yml
 
 log_level: info
 
@@ -31,7 +38,11 @@ nodes:
 replication:
   staging_dir: a_staging_path
   storage_dir: a_storage_path
-  ssh_identity_file: a_path_to_ssh_public_key_file
+
+# Settings for DPN::Workers::BagRsync
+ssh:
+  user: an_ssh_login_name
+  identity_file: an_ssh_identity_file
 
 sidekiq:
   # How many background jobs in the schedule queue are reasonable before
