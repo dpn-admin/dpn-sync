@@ -5,6 +5,7 @@ DuplicateMethodCall:
 TooManyInstanceVariables:
   exclude:
   - DPN::Workers::BagReplication
+  - DPN::Workers::BagRsync
   - DPN::Workers::Node
 TooManyMethods:
   exclude:
