@@ -4,6 +4,9 @@ module DPN
     # Fetch the latest data from a remote node
     class SyncNodes < Sync
 
+      # Sync node information from remote_node
+      #
+      # @return [Boolean] success
       def sync
         remote_node.update
         save_remote_node

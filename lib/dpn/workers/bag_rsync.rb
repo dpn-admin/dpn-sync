@@ -1,4 +1,5 @@
 require 'rsync'
+require_relative 'bag_paths'
 
 module DPN
   module Workers
@@ -6,7 +7,9 @@ module DPN
     # A Bag Rsync Transfer
     class BagRsync
 
-      # @param [Hash] replication transfer resource
+      # @param [String] source location for transfer resource
+      # @param [String] target location for transfer resource
+      # @param [String] type of transfer ('retrieve' || 'preserve')
       def initialize(source, target, type)
         @paths = DPN::Workers::BagPaths.new
         @source = source
@@ -14,7 +17,7 @@ module DPN
         @type = type
       end
 
-      # @return [Boolean] success of rsync transfer
+      # @return [Boolean] success of transfer
       def rsync
         Rsync.run(source, target, options) do |result|
           raise "Failed #{type} rsync: #{result.error}" unless result.success?
@@ -48,7 +51,6 @@ module DPN
           '--recursive'
         ].join(' ')
 
-        # @return [String] rsync options for preservation
         PRESERVE_OPTIONS = COMMON_OPTIONS + ' --recursive'
 
         # @return [String] rsync options for retrieval

@@ -6,6 +6,7 @@
 # Licensed according to the terms of the Revised BSD License
 # See LICENSE.md for details.
 
+require_relative 'bag_paths'
 require_relative 'bag_rsync'
 
 module DPN

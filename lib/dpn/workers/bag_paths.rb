@@ -20,11 +20,19 @@ module DPN
         @pairtree = ::Pairtree.at(storage_dir, create: true)
       end
 
+      # Create a staging directory for 'location'
+      #
+      # @param [String] location in staging_dir
+      # @return [String] path for staging location
       def staging(location)
         destination = File.join(staging_dir, location)
         FileUtils.mkpath(destination).first
       end
 
+      # Create a storage pairtree for 'location'
+      #
+      # @param [String] location in storage_dir
+      # @return [String] path of pairtree for storage location
       def storage(location)
         ppath = pairtree.mk(location)
         ppath.path
