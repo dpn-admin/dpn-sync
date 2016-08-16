@@ -35,7 +35,7 @@ An application for synchronizing DPN registry data from remote nodes, using the
 ## Getting Started
 
   ```sh
-  git clone git@github.com:sul-dlss/dpn-sync.git
+  git clone git@github.com:dpn-admin/dpn-sync.git
   cd dpn-sync
   bundle install
   # Start the Sidekiq daemon to run background jobs; some
@@ -55,7 +55,7 @@ An application for synchronizing DPN registry data from remote nodes, using the
   - `config/settings/*.yml`
   - `config/initializers/*.rb`
   - additional configuration details may be in the project wiki pages
-    - https://github.com/sul-dlss/dpn-sync/wiki
+    - https://github.com/dpn-admin/dpn-sync/wiki
 
 The `config` gem provides several layers of specificity for settings, see
 https://github.com/railsconfig/config#accessing-the-settings-object
