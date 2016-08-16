@@ -16,7 +16,6 @@ describe DPN::Workers::BagPaths do
     expect(subject).to be_an described_class
     expect(subject).to respond_to(:staging_dir)
     expect(subject).to respond_to(:storage_dir)
-    expect(subject).to respond_to(:ssh_identity_file)
     expect(subject).to respond_to(:staging)
     expect(subject).to respond_to(:storage)
   end
@@ -46,20 +45,6 @@ describe DPN::Workers::BagPaths do
       allow(File).to receive(:writable?).with(settings.staging_dir).and_return(true)
       expect(File).to receive(:writable?).with(settings.storage_dir).and_return(false)
       expect { subject }.to raise_error(RuntimeError)
-    end
-  end
-
-  context 'ssh_identity_file' do
-    it 'is blank' do
-      expect(settings).to receive(:ssh_identity_file).and_return(nil)
-      expect { subject }.not_to raise_error
-      expect(subject.ssh_identity_file).to be_nil
-    end
-
-    it 'returns SyncSettings.replication.ssh_identity_file' do
-      ssh_file = 'ssh_identity_file'
-      expect(settings).to receive(:ssh_identity_file).and_return(ssh_file)
-      expect(subject.ssh_identity_file).to eq ssh_file
     end
   end
 
