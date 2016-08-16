@@ -15,7 +15,7 @@ gem 'redis-namespace'
 
 # DPN
 gem 'dpn-client', '~> 1.3'
-gem 'dpn-bagit', github: 'malakai97/dpn-bagit'
+gem 'dpn-bagit'
 gem 'rpairtree'
 gem 'rsync'
 
