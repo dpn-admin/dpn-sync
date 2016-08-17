@@ -14,7 +14,6 @@ UtilityFunction:
   exclude:
   - DPN::Workers::BagWorker#perform
   - DPN::Workers::SyncWorker#perform
-  - DPN::Workers::TestWorker#perform
   - cleanup_path
 TooManyStatements:
   exclude:
