@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/dpn-admin/dpn-bagit.git
+  remote: https://github.com/dpn-admin/dpn-bagit.git
   revision: 84dd196757255db4f5864e2c0a0d43cb05704386
   tag: v0.3.1
   specs:
