@@ -1,7 +1,7 @@
 require_relative 'init'
 
 ##
-# @see https://github.com/dpn-admin/DPN-REST-Wiki
+# @see https://github.com/dpn-admin/dpn-rest-spec
 module DPN
   ##
   # DPN Workers
