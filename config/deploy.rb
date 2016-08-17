@@ -2,7 +2,7 @@
 lock '3.6.0'
 
 set :application, 'dpn_sync'
-set :repo_url, 'https://github.com/sul-dlss/dpn-sync.git'
+set :repo_url, 'https://github.com/dpn-admin/dpn-sync.git'
 
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
