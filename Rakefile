@@ -12,10 +12,3 @@ begin
 rescue LoadError
   puts 'RSpec is not available' if ENV['RACK_ENV'] == 'test'
 end
-
-begin
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
-rescue LoadError
-  puts 'Coveralls is not available' if ENV['RACK_ENV'] == 'test'
-end
