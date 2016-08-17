@@ -1,4 +1,5 @@
 # Sidekiq Configuration
+require_relative 'config'
 require_relative 'redis_init'
 require_relative 'dpn_workers'
 

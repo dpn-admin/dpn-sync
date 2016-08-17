@@ -3,7 +3,7 @@ Bundler.require
 require 'json'
 require 'logger'
 
-# Initialize SyncSettings from config files
+# Ensure that SyncSettings is initialized from config files
 require_relative '../../config/initializers/config'
 
 # DPN nodes

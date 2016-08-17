@@ -31,3 +31,20 @@ Config.setup do |config|
   #
   # config.env_parse_values = true
 end
+
+# The explicit call to `Config.load_and_set_settings` is required by the
+# sidekiq jobs, which run outside of rails/sinatra (which have automated
+# calls to load and setup the Config gem).  For sidekiq jobs to get an
+# initialized config, they start by loading `config/initializers/sidekiq`.  It
+# requires `config/initializers/config` (this file).  It also
+# requires `config/initializers/dpn_workers`, which requires
+# `lib/dpn/workers/workers` and that requires `lib/dpn/workers/init` and
+# it ensures the settings are loade by requiring this file.
+# https://github.com/railsconfig/config#installing-on-sinatra
+config_files = [
+  'config/settings.yml',
+  "config/settings/#{ENV['RACK_ENV']}.yml",
+  'config/settings.local.yml',
+  "config/settings/#{ENV['RACK_ENV']}.local.yml"
+]
+Config.load_and_set_settings(config_files)
