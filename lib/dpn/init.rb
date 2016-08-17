@@ -24,6 +24,7 @@ require_relative 'workers/sync_members'
 require_relative 'workers/sync_nodes'
 require_relative 'workers/sync_replication'
 require_relative 'workers/sync_replications'
+require_relative 'workers/test_messages'
 # Sidekiq workers
 require_relative 'workers/bag_worker'
 require_relative 'workers/sync_worker'
