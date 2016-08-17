@@ -86,13 +86,26 @@ describe DpnSync, :vcr do
   end
 
   describe 'POST /msg/clear' do
-    it 'clears the redis list for SyncSettings.sidekiq.test_message_store' do
-      expect(REDIS).to receive(:del).with(settings.sidekiq.test_message_store)
+    it 'calls DPN::Workers::TestMessages.clear' do
+      expect(DPN::Workers::TestMessages).to receive(:clear)
       post '/msg/clear'
     end
 
     it 'redirects to the /test page' do
       post '/msg/clear'
+      expect(last_response.status).to eq 302
+      expect(last_response.location).to match(/\/test$/)
+    end
+  end
+
+  describe 'POST /msg/fail' do
+    it 'initiates async message processing' do
+      expect(DPN::Workers::TestWorker).to receive(:perform_async).with(/fail/i)
+      post '/msg/fail'
+    end
+
+    it 'redirects to the /test page' do
+      post '/msg/fail'
       expect(last_response.status).to eq 302
       expect(last_response.location).to match(/\/test$/)
     end

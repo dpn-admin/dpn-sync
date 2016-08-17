@@ -31,6 +31,11 @@
         <input type="submit" value="Clear Timestamps">
       </form>
     </td>
+    <td>
+      <form method="post" action="msg/fail">
+        <input type="submit" value="Test Failure" style="color: red">
+      </form>
+    </td>
   </tr>
 </table>
 
@@ -43,5 +48,5 @@
 
 <h3>Timestamps Processed</h3>
 <% @messages.each do |msg| %>
-  <p><%= Rack::Utils.escape_html msg %></p>
+  <p><%= msg %></p>
 <% end %>

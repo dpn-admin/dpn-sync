@@ -27,17 +27,24 @@ class DpnSync < Sinatra::Base
 
   get '/test' do
     @stats = Sidekiq::Stats.new
-    @messages = REDIS.lrange(SyncSettings.sidekiq.test_message_store, 0, -1)
+    @messages = DPN::Workers::TestMessages.all
     erb :test
   end
 
   post '/msg' do
-    DPN::Workers::TestWorker.perform_async Time.now.utc.httpdate
+    DPN::Workers::TestWorker.perform_async Time.now.httpdate
+    sleep 1 # wait for sidekiq to process the request
     redirect to("test")
   end
 
   post '/msg/clear' do
-    REDIS.del(SyncSettings.sidekiq.test_message_store)
+    DPN::Workers::TestMessages.clear
+    redirect to("test")
+  end
+
+  post '/msg/fail' do
+    DPN::Workers::TestWorker.perform_async 'fail for sure'
+    sleep 1 # wait for sidekiq to process the request
     redirect to("test")
   end
 
