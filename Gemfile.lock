@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/dpn-admin/dpn-bagit.git
-  revision: 84dd196757255db4f5864e2c0a0d43cb05704386
-  tag: v0.3.1
-  specs:
-    dpn-bagit (0.3.1)
-      bagit (~> 0.3.2)
-      configliere
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -83,6 +74,9 @@ GEM
       capistrano-releaseboard
     docile (1.1.5)
     docopt (0.5.0)
+    dpn-bagit (0.3.1)
+      bagit (~> 0.3.2)
+      configliere
     dpn-client (1.3.1)
       httpclient (~> 2.6.0.1)
     equalizer (0.0.11)
@@ -217,7 +211,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   config
   dlss-capistrano
-  dpn-bagit!
+  dpn-bagit
   dpn-client (~> 1.3)
   fakeredis
   github-markup
