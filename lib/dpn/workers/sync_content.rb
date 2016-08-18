@@ -16,10 +16,6 @@ module DPN
       # @return [Boolean]
       def create_or_update
         create || update
-      rescue StandardError => err
-        logger.error "FAILED  : #{content_id}"
-        logger.error err.inspect
-        false
       end
 
       private

@@ -68,7 +68,6 @@ module DPN
           remote_client.replications(query) do |response|
             # the paginated response should contain only one replication
             # see https://github.com/dpn-admin/dpn-client/blob/master/lib/dpn/client/agent/connection.rb#L98
-            # TODO: remove bag if https://github.com/dpn-admin/dpn-server/issues/23 is fixed
             success << handle_replication_response(bag, response)
           end
           success.any?
@@ -80,7 +79,6 @@ module DPN
         def handle_replication_response(bag, response)
           data = response.body
           if response.success?
-            # TODO: remove bag if https://github.com/dpn-admin/dpn-server/issues/23 is fixed
             save_replication(bag, data)
           else
             logger.error data
@@ -92,7 +90,6 @@ module DPN
         # @param [Hash] replication data
         # @return [Boolean] success of replication persistence
         def save_replication(bag, replication)
-          # TODO: remove bag if https://github.com/dpn-admin/dpn-server/issues/23 is fixed
           replication[:bag] = bag[:uuid]
           local_replication = DPN::Workers::SyncReplication.new(replication, local_client, logger)
           saved = local_replication.create_or_update

@@ -105,13 +105,8 @@ module DPN
       private
 
         def attributes
-          skip = [:@client, :@logger]
+          skip = [:@client,]
           instance_variables.select { |var| !skip.include?(var) }
-        end
-
-        # @return [Logger]
-        def logger
-          @logger ||= DPN::Workers.create_logger(namespace)
         end
 
         # Retrieve data from the /node API
@@ -119,9 +114,6 @@ module DPN
         def server_node_data
           response = client.node(namespace)
           response.success? ? response.body : {}
-        rescue SocketError, StandardError => err
-          logger.error err.inspect
-          {}
         end
 
         # Select additional instance variables from the /node API.

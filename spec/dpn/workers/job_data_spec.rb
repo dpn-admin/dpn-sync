@@ -54,16 +54,11 @@ describe DPN::Workers::JobData do
       expect(result).to be true
     end
 
-    it 'returns False on failure' do
-      expect(REDIS).to receive(:set).and_raise(Redis::BaseError)
-      expect(result).to be false
-    end
-
-    it 'logs errors on Redis failure' do
+    it 'logs errors and raises exception on Redis write failure' do
       logger = subject.send(:logger)
       expect(logger).to receive(:error)
       expect(REDIS).to receive(:set).and_raise(Redis::BaseError)
-      expect(result).to be false
+      expect { result }.to raise_error(Redis::BaseError)
     end
   end
 end

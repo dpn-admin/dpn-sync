@@ -56,7 +56,7 @@ module DPN
           REDIS.set(key, value) == 'OK'
         rescue Redis::BaseError => err
           logger.error "Cannot save #{key} => #{value}.  ERROR: #{err.inspect}"
-          false
+          raise err
         end
     end
   end
