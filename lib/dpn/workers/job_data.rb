@@ -60,10 +60,7 @@ module DPN
         end
 
         def data_store
-          @data_store ||= begin
-            ns = REDIS_CONFIG[:namespace] + '-job-data'
-            Redis::Namespace.new(ns, redis: REDIS)
-          end
+          REDIS_JOB_DATA
         end
     end
   end

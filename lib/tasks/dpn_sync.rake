@@ -22,5 +22,13 @@ namespace :dpn do
     task :replications do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncReplications"
     end
+
+    namespace :redis do
+      desc "DPN - reset redis store for job data"
+      task :reset_job_data do
+        keys = REDIS_JOB_DATA.keys
+        keys.each { |k| REDIS_JOB_DATA.del(k) }
+      end
+    end
   end
 end
