@@ -40,8 +40,8 @@ module DPN
 
       private
 
-        attr_reader :pairtree
-        attr_reader :settings # accessor for SyncSettings.replication
+      attr_reader :pairtree
+      attr_reader :settings # accessor for SyncSettings.replication
     end
   end
 end

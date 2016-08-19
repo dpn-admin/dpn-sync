@@ -67,7 +67,7 @@ module DPN
         # String in DPN DateTime Format of the record creation date
         created_at: '2015-09-15T19:38:31Z',
         # String in DPN DateTime Format of last record update
-        updated_at: '2015-09-15T19:38:31Z',
+        updated_at: '2015-09-15T19:38:31Z'
       }
     end
   end

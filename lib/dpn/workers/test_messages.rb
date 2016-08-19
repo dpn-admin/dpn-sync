@@ -3,7 +3,6 @@ module DPN
     ##
     # Test messages
     class TestMessages
-
       class << self
         # All test messages
         #
@@ -30,23 +29,23 @@ module DPN
 
         private
 
-          # Persist a message
-          #
-          # @param [String] msg
-          # @return [Boolean] success
-          def persist(msg)
-            REDIS.ltrim(redis_key, 0, 25) # limit the list size
-            success = REDIS.lpush(redis_key, msg) > 0
-            raise "Failed to persist message: #{msg}" unless success
-            success
-          end
+        # Persist a message
+        #
+        # @param [String] msg
+        # @return [Boolean] success
+        def persist(msg)
+          REDIS.ltrim(redis_key, 0, 25) # limit the list size
+          success = REDIS.lpush(redis_key, msg) > 0
+          raise "Failed to persist message: #{msg}" unless success
+          success
+        end
 
-          # A redis key for storing test messages
-          #
-          # @return [String] redis_key
-          def redis_key
-            SyncSettings.sidekiq.test_message_store
-          end
+        # A redis key for storing test messages
+        #
+        # @return [String] redis_key
+        def redis_key
+          SyncSettings.sidekiq.test_message_store
+        end
       end
     end
   end

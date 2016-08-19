@@ -5,21 +5,21 @@ require 'shared_examples/sync_content'
 describe DPN::Workers::SyncBag, :vcr do
   let(:bag) do
     {
-      uuid: "00000000-0000-4000-a000-000000000002",
-      local_id: "Chronopolis Bag 1",
+      uuid: '00000000-0000-4000-a000-000000000002',
+      local_id: 'Chronopolis Bag 1',
       size: 71_680,
       version: 1,
-      created_at: "2015-09-15T17:56:03Z",
-      updated_at: "2015-09-15T17:56:03Z",
-      ingest_node: "chron",
-      admin_node: "chron",
-      member: "9a000000-0000-4000-a000-000000000001",
+      created_at: '2015-09-15T17:56:03Z',
+      updated_at: '2015-09-15T17:56:03Z',
+      ingest_node: 'chron',
+      admin_node: 'chron',
+      member: '9a000000-0000-4000-a000-000000000001',
       interpretive: [],
       rights: [],
       replicating_nodes: [],
-      bag_type: "D",
-      first_version_uuid: "00000000-0000-4000-a000-000000000002",
-      fixities: { sha256: "cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b" }
+      bag_type: 'D',
+      first_version_uuid: '00000000-0000-4000-a000-000000000002',
+      fixities: { sha256: 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b' }
     }
   end
   let(:node_client) { local_node.client }

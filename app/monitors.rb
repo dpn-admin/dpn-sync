@@ -27,23 +27,23 @@ class Monitors
 
   private
 
-    attr_reader :monitors
-    def_delegator :Time, :now, :now
+  attr_reader :monitors
+  def_delegator :Time, :now, :now
 
-    # @return [String]
-    def hostname
-      @hostname ||= `hostname`.chomp
-    end
+  # @return [String]
+  def hostname
+    @hostname ||= `hostname`.chomp
+  end
 
-    # @param [Time] start
-    def preamble(start)
-      elapsed = (now - start).to_f * 1000 # milliseconds
-      <<-MESSAGE
+  # @param [Time] start
+  def preamble(start)
+    elapsed = (now - start).to_f * 1000 # milliseconds
+    <<-MESSAGE
 Host: #{hostname}
 PID:  #{$PID}
 Timestamp: #{start.httpdate}
 Elapsed Time: #{elapsed} milliseconds
 
 MESSAGE
-    end
+  end
 end

@@ -3,7 +3,6 @@ module DPN
     ##
     # Save a member to a local node
     class SyncMember < SyncContent
-
       private
 
         # Custom alias for content

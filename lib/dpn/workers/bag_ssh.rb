@@ -37,7 +37,7 @@ module DPN
 
       private
 
-        attr_reader :settings
+      attr_reader :settings
     end
   end
 end

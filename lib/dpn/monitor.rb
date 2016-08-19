@@ -2,7 +2,6 @@ module DPN
   ##
   # DPN Node Monitor
   class Monitor
-
     def initialize
       @nodes = DPN::Workers.nodes
     end
@@ -20,6 +19,6 @@ module DPN
 
     private
 
-      attr_reader :nodes
+    attr_reader :nodes
   end
 end

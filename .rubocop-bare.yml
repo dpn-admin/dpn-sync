@@ -16,6 +16,3 @@ AllCops:
     - 'config/**/*.yml'
     - '.gems/*'
     - 'vendor/**/*'
-
-inherit_from: .rubocop_todo.yml
-

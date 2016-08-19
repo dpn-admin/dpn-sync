@@ -47,14 +47,14 @@ describe DPN::Workers::BagSSH do
     end
   end
 
-  describe "#retrieve_command" do
+  describe '#retrieve_command' do
     let(:ssh_cmd) { subject.retrieve_command }
     let(:ssh_file) { 'ssh_identity_file' }
     let(:ssh_user) { 'ssh_user' }
-    it "works" do
+    it 'works' do
       expect(ssh_cmd).not_to be_nil
     end
-    it "returns a String" do
+    it 'returns a String' do
       expect(ssh_cmd).to be_an String
     end
     context 'there is an ssh user and identity_file' do
