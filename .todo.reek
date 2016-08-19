@@ -6,7 +6,6 @@ TooManyInstanceVariables:
   exclude:
   - DPN::Workers::BagReplication
   - DPN::Workers::BagRsync
-  - DPN::Workers::Node
 TooManyMethods:
   exclude:
   - DPN::Workers::BagReplication
@@ -15,7 +14,3 @@ UtilityFunction:
   - DPN::Workers::BagWorker#perform
   - DPN::Workers::SyncWorker#perform
   - cleanup_path
-TooManyStatements:
-  exclude:
-  - initialize
-  - DPN::Workers::Node#server_node_data
