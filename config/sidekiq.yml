@@ -1,8 +1,19 @@
+# Sidekiq will run this file through ERB when reading it.
 # https://github.com/mperham/sidekiq/wiki/Advanced-Options
+# https://github.com/mperham/sidekiq/blob/master/examples/config.yml
 # https://github.com/seuros/capistrano-sidekiq#usage
 # See also config/deploy.rb
 ---
 :concurrency: 8
+
+# Set timeout to 8 on Heroku, longer if you manage your own systems.
+:timeout: 60
+
+# Use a default queue, otherwise set the queues here:
+#:queues:
+#  - critical
+#  - default
+#  - <%= `hostname`.strip %>
 
 test:
   :logfile: ./log/sidekiq_test.log
