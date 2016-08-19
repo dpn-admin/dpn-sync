@@ -1,2 +1,57 @@
+# Files in config/settings/*.yml are merged into config/settings.yml, e.g.
+# - the development settings are in config/settings/development.yml
+# - the production settings are in config/settings/production.yml
+# - the test settings are in config/settings/test.yml
+
+# Any *.local.yml files are merged into the corresponding file, like
+# config/settings/test.local.yml is merged into config/settings/test.yml
+# which, in turn, is merged into config/settings.yml
 
 log_level: debug
+
+# Create test cluster nodes and use those node parameters here,
+# @see https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
+local_namespace: sdr
+nodes:
+  -
+    namespace: aptrust
+    api_root: http://localhost:3001
+    auth_credential: aptrust_token
+  -
+    namespace: chron
+    api_root: http://localhost:3002
+    auth_credential: chron_token
+  -
+    namespace: hathi
+    api_root: http://localhost:3003
+    auth_credential: hathi_token
+  -
+    namespace: sdr
+    api_root: http://localhost:3004
+    auth_credential: sdr_token
+  -
+    namespace: tdr
+    api_root: http://localhost:3005
+    auth_credential: tdr_token
+
+# Settings for DPN::Workers::BagReplication
+replication:
+  # staging_dir: <%= Dir.mktmpdir('dpn_staging') %>
+  # storage_dir: <%= Dir.mktmpdir('dpn_storage') %>
+  staging_dir: <%= FileUtils.mkpath(File.join('tmp','dpn_staging')).first %>
+  storage_dir: <%= FileUtils.mkpath(File.join('tmp','dpn_storage')).first %>
+
+# Settings for DPN::Workers::BagRsync
+ssh:
+  user: ''
+  identity_file: ''
+
+sidekiq:
+  # How many background jobs in the schedule queue are reasonable before
+  # alarms raise attention from system or developer teams?
+  acceptable_queue_size: 250
+  # An acceptable response time could be several minutes.
+  # This value is in seconds.
+  acceptable_queue_latency: 300
+  # The redis namespace for test messages
+  test_message_store: dpn-test-timestamps
