@@ -34,12 +34,12 @@ module DPN
         # @param [String] bag_type DPN bag types are: 'I', 'R', or 'D'
         # @return [Boolean] success of bag sync operation
         def sync_bag_type(bag_type)
-          result = false
+          result = []
           query = bag_query(bag_type)
           remote_client.bags(query) do |response|
-            result = create_or_update_bag(response)
+            result << create_or_update_bag(response)
           end
-          result
+          result.all?
         end
 
         # @param [DPN::Client::Response] remote_response

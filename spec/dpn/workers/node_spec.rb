@@ -93,13 +93,8 @@ describe DPN::Workers::Node, :vcr do
       expect(subject.update).to be true
     end
     context 'failure' do
-      it 'returns false' do
-        expect(example_node.update).to be false
-      end
-      it 'logs errors' do
-        logger = example_node.send(:logger)
-        expect(logger).to receive(:error)
-        expect(example_node.update).to be false
+      it 'raises exception' do
+        expect { example_node.update }.to raise_error(SocketError)
       end
     end
   end

@@ -13,11 +13,11 @@ module DPN
 
         # @return [Boolean] success of member sync operations
         def sync_members
-          success = false
+          success = []
           remote_client.members do |response|
-            success = create_or_update_member(response)
+            success << create_or_update_member(response)
           end
-          success ? last_success_update : false
+          success.all? ? last_success_update : false
         end
 
         # @param [DPN::Client::Response] remote_response
