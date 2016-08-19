@@ -25,9 +25,9 @@ module DPN
 
         # @return [Boolean] success of bag sync operations
         def sync_bags
-          success = BAG_TYPES.any? do |bag_type|
+          success = BAG_TYPES.map do |bag_type|
             sync_bag_type(bag_type)
-          end
+          end.any?
           success ? last_success_update : false
         end
 
