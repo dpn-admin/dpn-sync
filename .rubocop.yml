@@ -11,13 +11,10 @@ AllCops:
     - 'Gemfile.lock'
     - '**/*.md'
     - 'bin/*'
+    - '.binstubs/*'
+    - '.bundle/*'
     - 'config/**/*.yml'
-    - 'db/**/*'
-    - 'script/**/*'
-    - '.internal_test_app/**/*'
-    - 'spec/fixtures/**/*'
-    - 'spec/internal/**/*'
-    - 'spec/test_app_templates/**/*'
+    - '.gems/*'
     - 'vendor/**/*'
 
 # DPN configuration changes for these cops enabled by default in Rubocop
