@@ -3,7 +3,6 @@ module DPN
     ##
     # Save a replication to a node
     class SyncReplication < SyncContent
-
       private
 
         # Custom alias for content

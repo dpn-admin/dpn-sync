@@ -64,7 +64,7 @@ describe DpnSync, :vcr do
     end
 
     it 'displays messages' do
-      expect(REDIS).to receive(:lrange).and_return(['a', 'b'])
+      expect(REDIS).to receive(:lrange).and_return(%w(a b))
       get '/test'
       expect(last_response.body).to match(/<h3>Timestamps Processed<\/h3>\n.*<p>a<\/p>\n.*<p>b<\/p>\n/)
     end

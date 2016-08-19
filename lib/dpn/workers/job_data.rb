@@ -4,7 +4,6 @@ module DPN
     # @!attribute [r] name
     #   @return [String] the name of the worker or job
     class JobData
-
       attr_reader :name
 
       # @param [String] name job name (identifier)
@@ -31,33 +30,33 @@ module DPN
 
       private
 
-        def logger
-          @logger ||= DPN::Workers.create_logger("#{name}_data")
-        end
+      def logger
+        @logger ||= DPN::Workers.create_logger("#{name}_data")
+      end
 
-        # Assume there is no registry data before the year 2000
-        DEFAULT_TIME = Time.utc(2000, 1, 1, 0, 0, 0)
+      # Assume there is no registry data before the year 2000
+      DEFAULT_TIME = Time.utc(2000, 1, 1, 0, 0, 0)
 
-        # @param [String] key
-        # @return [Hash] data
-        def data_get(key)
-          json = REDIS.get(key) || {}.to_json
-          JSON.parse(json)
-        rescue Redis::BaseError => err
-          logger.error "Cannot get #{key}.  ERROR: #{err.inspect}"
-          {}
-        end
+      # @param [String] key
+      # @return [Hash] data
+      def data_get(key)
+        json = REDIS.get(key) || {}.to_json
+        JSON.parse(json)
+      rescue Redis::BaseError => err
+        logger.error "Cannot get #{key}.  ERROR: #{err.inspect}"
+        {}
+      end
 
-        # @param [String] key
-        # @param [Hash] data
-        # @return [Boolean] success
-        def data_set(key, data)
-          value = data.to_json
-          REDIS.set(key, value) == 'OK'
-        rescue Redis::BaseError => err
-          logger.error "Cannot save #{key} => #{value}.  ERROR: #{err.inspect}"
-          raise err
-        end
+      # @param [String] key
+      # @param [Hash] data
+      # @return [Boolean] success
+      def data_set(key, data)
+        value = data.to_json
+        REDIS.set(key, value) == 'OK'
+      rescue Redis::BaseError => err
+        logger.error "Cannot save #{key} => #{value}.  ERROR: #{err.inspect}"
+        raise err
+      end
     end
   end
 end

@@ -71,7 +71,7 @@ describe DPN::Workers::BagRsync do
       subject.rsync
       expect(File.exist?(retrieve_target_file)).to be true
     end
-    describe "#options" do
+    describe '#options' do
       let(:options) { subject.send(:options) }
       it_behaves_like 'common_options'
       it 'contains the "--archive" option' do
@@ -96,7 +96,7 @@ describe DPN::Workers::BagRsync do
       subject.rsync
       expect(File.exist?(preserve_target_file)).to be true
     end
-    describe "#options" do
+    describe '#options' do
       let(:options) { subject.send(:options) }
       it_behaves_like 'common_options'
       it 'contains the "--recursive" option' do
@@ -108,7 +108,7 @@ describe DPN::Workers::BagRsync do
   context '#rsync "unknown"' do
     # Test failures for 'unknown' rsync type
     let(:type) { 'unknown' }
-    describe "#options" do
+    describe '#options' do
       let(:options) { subject.send(:options) }
       it 'raises RuntimeError' do
         expect { options }.to raise_error(RuntimeError)

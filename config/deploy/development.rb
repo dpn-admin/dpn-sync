@@ -4,4 +4,3 @@ Capistrano::OneTimeKey.generate_one_time_key!
 
 set :rails_env, 'development'
 set :bundle_without, 'test'
-

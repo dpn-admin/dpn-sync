@@ -61,17 +61,17 @@ module DPN
 
       private
 
-        # @return [Logger]
-        def logger
-          @logger ||= DPN::Workers.create_logger self.class.name.gsub('::', '_')
-        end
+      # @return [Logger]
+      def logger
+        @logger ||= DPN::Workers.create_logger self.class.name.gsub('::', '_')
+      end
 
-        # Iterates on remote_nodes to sync registry data into local_node
-        # @param [Class] klass object to handle content type for sync
-        # @return [Boolean]
-        def sync_data(klass)
-          remote_nodes.map { |node| klass.new(local_node, node).sync }.any?
-        end
+      # Iterates on remote_nodes to sync registry data into local_node
+      # @param [Class] klass object to handle content type for sync
+      # @return [Boolean]
+      def sync_data(klass)
+        remote_nodes.map { |node| klass.new(local_node, node).sync }.any?
+      end
     end
   end
 end

@@ -25,9 +25,9 @@ class SidekiqMonitor
 
   private
 
-    attr_reader :queue
-    def_delegators :queue, :size, :latency
+  attr_reader :queue
+  def_delegators :queue, :size, :latency
 
-    attr_reader :settings
-    def_delegators :settings, :acceptable_queue_size, :acceptable_queue_latency
+  attr_reader :settings
+  def_delegators :settings, :acceptable_queue_size, :acceptable_queue_latency
 end

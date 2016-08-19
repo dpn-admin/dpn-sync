@@ -34,18 +34,18 @@ class DpnSync < Sinatra::Base
   post '/msg' do
     DPN::Workers::TestWorker.perform_async Time.now.httpdate
     sleep 1 # wait for sidekiq to process the request
-    redirect to("test")
+    redirect to('test')
   end
 
   post '/msg/clear' do
     DPN::Workers::TestMessages.clear
-    redirect to("test")
+    redirect to('test')
   end
 
   post '/msg/fail' do
     DPN::Workers::TestWorker.perform_async 'fail for sure'
     sleep 1 # wait for sidekiq to process the request
-    redirect to("test")
+    redirect to('test')
   end
 
   get '/is_it_working' do

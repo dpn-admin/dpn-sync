@@ -3,7 +3,6 @@ module DPN
     ##
     # Save a bag to a local node
     class SyncBag < SyncContent
-
       private
 
         # Custom alias for content

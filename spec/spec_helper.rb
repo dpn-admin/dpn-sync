@@ -3,7 +3,7 @@
 require 'single_cov'
 SingleCov.setup :rspec
 
-require "codeclimate-test-reporter"
+require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 
 require 'simplecov'
@@ -76,4 +76,3 @@ def cleanup_path(dir)
   path = File.join(dir, '*')
   FileUtils.rm_rf(Dir.glob(path))
 end
-

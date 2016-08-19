@@ -49,13 +49,13 @@ module DPN
 
       private
 
-        # @return [Integer] a Logger log level constant
-        def log_level
-          log_level = SyncSettings.log_level || 'info'
-          Logger.const_get log_level.upcase
-        rescue
-          Logger::INFO
-        end
+      # @return [Integer] a Logger log level constant
+      def log_level
+        log_level = SyncSettings.log_level || 'info'
+        Logger.const_get log_level.upcase
+      rescue
+        Logger::INFO
+      end
     end
   end
 end

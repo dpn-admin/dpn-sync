@@ -7,7 +7,6 @@ module DPN
     # @!attribute [r] remote_node
     #   @return [DPN::Workers::Node] a remote node
     class Sync
-
       attr_reader :local_node
       attr_reader :remote_node
 
@@ -39,30 +38,30 @@ module DPN
 
       private
 
-        # @return [DPN::Workers::JobData]
-        def job_data
-          @job_data ||= DPN::Workers::JobData.new(job_name)
-        end
+      # @return [DPN::Workers::JobData]
+      def job_data
+        @job_data ||= DPN::Workers::JobData.new(job_name)
+      end
 
-        # @return [String]
-        def job_name
-          self.class.name.gsub('::', '_')
-        end
+      # @return [String]
+      def job_name
+        self.class.name.gsub('::', '_')
+      end
 
-        # @return [Logger]
-        def logger
-          @logger ||= DPN::Workers.create_logger(job_name)
-        end
+      # @return [Logger]
+      def logger
+        @logger ||= DPN::Workers.create_logger(job_name)
+      end
 
-        # @return [Time] last_success
-        def last_success
-          job_data.last_success(remote_node.namespace)
-        end
+      # @return [Time] last_success
+      def last_success
+        job_data.last_success(remote_node.namespace)
+      end
 
-        # @return [Boolean] updated
-        def last_success_update
-          job_data.last_success_update(remote_node.namespace)
-        end
+      # @return [Boolean] updated
+      def last_success_update
+        job_data.last_success_update(remote_node.namespace)
+      end
     end
   end
 end

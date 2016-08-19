@@ -38,7 +38,7 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe '#replicate' do
-    it "checks the replication status" do
+    it 'checks the replication status' do
       allow(subject).to receive(:retrieve)
       allow(subject).to receive(:preserve)
       expect(subject).to receive(:status).twice.and_return('requested')
@@ -46,10 +46,10 @@ describe DPN::Workers::BagReplication, :vcr do
     end
 
     shared_examples 'do_nothing' do
-      it "returns a boolean result" do
+      it 'returns a boolean result' do
         expect(subject.replicate).to be result
       end
-      it "does not initiate replication tasks" do
+      it 'does not initiate replication tasks' do
         expect(subject).not_to receive(:retrieve)
         expect(subject).not_to receive(:preserve)
         expect(subject.replicate).to be result
@@ -93,7 +93,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
 
     context "when the replication status is 'requested'" do
-      it "performs replication tasks" do
+      it 'performs replication tasks' do
         expect(subject).to receive(:retrieve).once.and_return(true)
         expect(subject).to receive(:preserve).once.and_return(true)
         expect(subject).to receive(:status).twice.and_return('requested')
@@ -117,22 +117,22 @@ describe DPN::Workers::BagReplication, :vcr do
   ##
   # PRIVATE
 
-  describe "#file" do
+  describe '#file' do
     let(:file) { subject.send(:file) }
-    it "works" do
+    it 'works' do
       expect(file).not_to be_nil
     end
-    it "returns a String" do
+    it 'returns a String' do
       expect(file).to be_an String
     end
-    it "returns the basename of the replication[:link]" do
+    it 'returns the basename of the replication[:link]' do
       link = replication[:link]
       expect(file).to eq File.basename(link)
     end
   end
 
   describe '#preserve' do
-    it "checks the replication status" do
+    it 'checks the replication status' do
       expect(subject).to receive(:status).twice.and_return('received')
       expect(subject).to receive(:preserve_rsync).and_return(true)
       expect(subject).to receive(:preserve_validate).and_return(true)
@@ -153,7 +153,7 @@ describe DPN::Workers::BagReplication, :vcr do
 
     context "when the replication status is 'received'" do
       let(:status) { 'received' }
-      it "performs preservation tasks" do
+      it 'performs preservation tasks' do
         expect(subject).to receive(:status).twice.and_return(status)
         expect(subject).to receive(:preserve_rsync).and_return(true)
         expect(subject).to receive(:preserve_validate).and_return(true)
@@ -166,10 +166,10 @@ describe DPN::Workers::BagReplication, :vcr do
       before do
         expect(subject).to receive(:status).exactly(3).times.and_return(status)
       end
-      it "raises RuntimeError" do
+      it 'raises RuntimeError' do
         expect { subject.send(:preserve) }.to raise_error(RuntimeError)
       end
-      it "does not initiate preservation tasks" do
+      it 'does not initiate preservation tasks' do
         expect(subject).not_to receive(:preserve_rsync)
         expect(subject).not_to receive(:preserve_validate)
         expect(subject).not_to receive(:update_replication)
@@ -193,7 +193,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  shared_examples "bag_rsync_mocks" do
+  shared_examples 'bag_rsync_mocks' do
     let(:bagit) { double(DPN::Bagit::Bag) }
     let(:bag_sync) { double(DPN::Workers::BagRsync) }
     context 'rsync mock behavior' do
@@ -213,7 +213,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#preserve_rsync" do
+  describe '#preserve_rsync' do
     let(:rsync) { subject.send(:preserve_rsync) }
     it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
@@ -238,21 +238,21 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#remote_node" do
+  describe '#remote_node' do
     let(:remote_node) { subject.send(:remote_node) }
-    it "works" do
+    it 'works' do
       expect(remote_node).not_to be_nil
     end
-    it "returns a DPN::Workers::Node" do
+    it 'returns a DPN::Workers::Node' do
       expect(remote_node).to be_an DPN::Workers::Node
     end
-    it "has the namespace of the replication[:from_node]" do
+    it 'has the namespace of the replication[:from_node]' do
       expect(remote_node.namespace).to eq replication[:from_node]
     end
   end
 
   describe '#retrieve' do
-    it "checks the replication status" do
+    it 'checks the replication status' do
       expect(subject).to receive(:status).twice.and_return('requested')
       expect(subject).to receive(:retrieve_rsync).and_return(true)
       expect(subject).to receive(:retrieve_validate).and_return(true)
@@ -286,10 +286,10 @@ describe DPN::Workers::BagReplication, :vcr do
       before do
         expect(subject).to receive(:status).exactly(3).times.and_return(status)
       end
-      it "raises RuntimeError" do
+      it 'raises RuntimeError' do
         expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
       end
-      it "does not initiate retrieval tasks" do
+      it 'does not initiate retrieval tasks' do
         expect(subject).not_to receive(:retrieve_rsync)
         expect(subject).not_to receive(:retrieve_validate)
         expect(subject).not_to receive(:retrieve_fixity)
@@ -307,7 +307,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#retrieve_bagit" do
+  describe '#retrieve_bagit' do
     let(:bagit) { subject.send(:bagit) }
     let(:bagit_id) { subject.bag_id }
     let(:bagit_path) { subject.send(:bagit_path) }
@@ -357,7 +357,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#retrieve_fixity" do
+  describe '#retrieve_fixity' do
     context 'calculates fixity on a bagit bag' do
       before do
         # perform retrieval tasks so a bagit bag is available
@@ -382,7 +382,7 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#retrieve_path" do
+  describe '#retrieve_path' do
     let(:file) { subject.send(:file) }
     let(:retrieve_path) { subject.send(:retrieve_path) }
     let(:staging_path) { subject.send(:staging_path) }
@@ -390,21 +390,21 @@ describe DPN::Workers::BagReplication, :vcr do
       # assume an rsync transfer has already completed successfully
       allow(File).to receive(:exist?).and_return(true)
     end
-    it "works" do
+    it 'works' do
       expect(retrieve_path).not_to be_nil
     end
-    it "returns a String" do
+    it 'returns a String' do
       expect(retrieve_path).to be_an String
     end
-    it "creates a path beginning with the #staging_path" do
+    it 'creates a path beginning with the #staging_path' do
       expect(retrieve_path).to start_with(staging_path)
     end
-    it "creates a path ending in the #file" do
+    it 'creates a path ending in the #file' do
       expect(retrieve_path).to end_with(file)
     end
   end
 
-  describe "#retrieve_rsync" do
+  describe '#retrieve_rsync' do
     let(:rsync) { subject.send(:retrieve_rsync) }
     it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
@@ -422,35 +422,35 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#staging_path" do
+  describe '#staging_path' do
     let(:staging_path) { subject.send(:staging_path) }
-    it "works" do
+    it 'works' do
       expect(staging_path).not_to be_nil
     end
-    it "returns a String" do
+    it 'returns a String' do
       expect(staging_path).to be_an String
     end
-    it "creates a path ending in the replication[:replication_id]" do
+    it 'creates a path ending in the replication[:replication_id]' do
       id = replication[:replication_id]
       expect(staging_path).to end_with(id)
     end
   end
 
-  describe "#storage_path" do
+  describe '#storage_path' do
     let(:storage_path) { subject.send(:storage_path) }
-    it "works" do
+    it 'works' do
       expect(storage_path).not_to be_nil
     end
-    it "returns a String" do
+    it 'returns a String' do
       expect(storage_path).to be_an String
     end
-    it "creates a path ending in the replication[:bag]" do
+    it 'creates a path ending in the replication[:bag]' do
       id = replication[:bag]
       expect(storage_path).to end_with(id)
     end
   end
 
-  describe "#update_replication" do
+  describe '#update_replication' do
     let(:update) { subject.send(:update_replication) }
     let(:client) { subject.send(:remote_node).client }
     let(:response) { double(DPN::Client::Response) }
@@ -460,10 +460,10 @@ describe DPN::Workers::BagReplication, :vcr do
         allow(response).to receive(:body).and_return(subject.to_h)
         expect(client).to receive(:update_replication).and_return(response)
       end
-      it "works" do
+      it 'works' do
         expect(update).not_to be_nil
       end
-      it "returns true when the remote_node returns a successful response" do
+      it 'returns true when the remote_node returns a successful response' do
         expect(update).to be true
       end
     end
@@ -479,7 +479,7 @@ describe DPN::Workers::BagReplication, :vcr do
       expect(subject.send(:update_replication, status)).to be true
       expect(subject.to_h).to eq(replication_changed)
     end
-    it "raises RuntimeError when the remote_node update request fails" do
+    it 'raises RuntimeError when the remote_node update request fails' do
       allow(response).to receive(:success?).and_return(false)
       allow(response).to receive(:body).and_return('error')
       expect(client).to receive(:update_replication).and_return(response)
@@ -487,21 +487,21 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
-  describe "#validate" do
+  describe '#validate' do
     let(:validate) { subject.send(:validate) }
     let(:bagit) { double(DPN::Bagit::Bag) }
     before do
       allow(subject).to receive(:bagit).and_return(bagit)
     end
-    it "works" do
+    it 'works' do
       expect(bagit).to receive(:valid?).and_return(true)
       expect(validate).not_to be_nil
     end
-    it "returns true when bagit.valid? is true" do
+    it 'returns true when bagit.valid? is true' do
       expect(bagit).to receive(:valid?).and_return(true)
       expect(validate).to be true
     end
-    it "raises RuntimeError if #bagit.valid? is false" do
+    it 'raises RuntimeError if #bagit.valid? is false' do
       expect(bagit).to receive(:valid?).and_return(false)
       expect(bagit).to receive(:errors).and_return('error')
       expect { validate }.to raise_error(RuntimeError)

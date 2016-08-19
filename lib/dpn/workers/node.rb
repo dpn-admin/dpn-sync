@@ -104,34 +104,34 @@ module DPN
 
       private
 
-        def attributes
-          skip = [:@client,]
-          instance_variables.select { |var| !skip.include?(var) }
-        end
+      def attributes
+        skip = [:@client]
+        instance_variables.select { |var| !skip.include?(var) }
+      end
 
-        # Retrieve data from the /node API
-        # @return [Hash]
-        def server_node_data
-          response = client.node(namespace)
-          response.success? ? response.body : {}
-        end
+      # Retrieve data from the /node API
+      # @return [Hash]
+      def server_node_data
+        response = client.node(namespace)
+        response.success? ? response.body : {}
+      end
 
-        # Select additional instance variables from the /node API.
-        # Skip attributes that are explicitly initialized, because all
-        # of these are required to make a successful API call.
-        # @return [Hash]
-        def server_update_data
-          skip = [:api_root, :namespace, :auth_credential]
-          server_node_data.select { |key| !skip.include?(key) }
-        end
+      # Select additional instance variables from the /node API.
+      # Skip attributes that are explicitly initialized, because all
+      # of these are required to make a successful API call.
+      # @return [Hash]
+      def server_update_data
+        skip = [:api_root, :namespace, :auth_credential]
+        server_node_data.select { |key| !skip.include?(key) }
+      end
 
-        # Update instance variables using data from the /node API
-        # @return [Hash]
-        def update_attributes
-          server_update_data.each_pair do |key, value|
-            instance_variable_set("@#{key}", value)
-          end
+      # Update instance variables using data from the /node API
+      # @return [Hash]
+      def update_attributes
+        server_update_data.each_pair do |key, value|
+          instance_variable_set("@#{key}", value)
         end
+      end
     end
   end
 end
