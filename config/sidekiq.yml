@@ -16,11 +16,11 @@
 #  - <%= `hostname`.strip %>
 
 test:
-  :logfile: ./log/sidekiq_test.log
+  :logfile: ./log/dpn_sidekiq_test.log
 
 development:
-  :logfile: ./log/sidekiq_dev.log
+  :logfile: ./log/dpn_sidekiq_dev.log
 
 production:
   :concurrency: 16
-  :logfile: ./log/sidekiq_prod.log
+  :logfile: ./log/dpn_sidekiq_prod.log
