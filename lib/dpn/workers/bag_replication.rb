@@ -127,22 +127,25 @@ module DPN
           return true if status =~ /confirmed|received|stored/i
           raise "Replication transfer status is not 'requested' (status=#{status})" unless status =~ /requested/i
           retrieve_rsync && retrieve_validate && retrieve_fixity
+          retrieve_success?
+        end
+
+        # Update the replication status to 'received' and
+        # verify the fixity with the admin node.
+        # @return [Boolean] success of retrieval
+        def retrieve_success?
           update_replication 'received'
+          raise "Admin node did not accept fixity: #{fixity_value}" unless fixity_accept
+          fixity_accept
         end
 
         # Calculate bag fixity to set the replication fixity_value
-        # and verify the fixity with the admin node
-        # @return [Boolean] fixity accepted
+        # @return [String] fixity value
         def retrieve_fixity
-          @_fixity ||= begin
-            raise 'There is no bagit to calculate fixity' unless bagit
-            # TODO: confirm whether to calculate fixity using the bagit or
-            #       calculate a fixity on the .tar transfer file.
-            @fixity_value = bagit.fixity(:sha256)
-            update_replication
-            raise 'Admin node did not accept fixity' unless fixity_accept
-            fixity_accept
-          end
+          raise 'There is no bagit to calculate fixity' unless bagit
+          # TODO: confirm whether to calculate fixity using the bagit or
+          #       calculate a fixity on the .tar transfer file.
+          @fixity_value = bagit.fixity(:sha256)
         end
 
         # @return [String]

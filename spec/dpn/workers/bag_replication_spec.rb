@@ -257,7 +257,7 @@ describe DPN::Workers::BagReplication, :vcr do
       expect(subject).to receive(:retrieve_rsync).and_return(true)
       expect(subject).to receive(:retrieve_validate).and_return(true)
       expect(subject).to receive(:retrieve_fixity).and_return(true)
-      expect(subject).to receive(:update_replication).with('received').and_return(true)
+      expect(subject).to receive(:retrieve_success?).and_return(true)
       subject.send(:retrieve)
     end
     shared_examples 'retrieval_is_done' do
@@ -357,6 +357,28 @@ describe DPN::Workers::BagReplication, :vcr do
     end
   end
 
+  describe "#retrieve_success?" do
+    context 'calculates fixity on a bagit bag' do
+      before do
+        # perform retrieval tasks so a bagit bag has a fixity value
+        expect(subject.send(:retrieve_rsync)).to be true
+        expect(subject.send(:retrieve_bagit)).to be true
+        expect(File.directory?(subject.send(:bagit_path))).to be true
+        expect(subject.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
+      end
+      it 'works when the remote node accepts the fixity_value' do
+        expect(subject).to receive(:update_replication).with('received').and_return(true)
+        expect(subject).to receive(:fixity_accept).twice.and_return(true)
+        expect(subject.send(:retrieve_success?)).to be true
+      end
+      it 'raises RuntimeError when the remote node rejects the fixity_value' do
+        expect(subject).to receive(:update_replication).with('received').and_return(true)
+        expect(subject).to receive(:fixity_accept).and_return(false)
+        expect { subject.send(:retrieve_success?) }.to raise_error(RuntimeError)
+      end
+    end
+  end
+
   describe "#retrieve_fixity" do
     context 'calculates fixity on a bagit bag' do
       before do
@@ -365,15 +387,8 @@ describe DPN::Workers::BagReplication, :vcr do
         expect(subject.send(:retrieve_bagit)).to be true
         expect(File.directory?(subject.send(:bagit_path))).to be true
       end
-      it 'works when the remote node accepts the fixity_value' do
-        expect(subject).to receive(:update_replication).and_return(true)
-        expect(subject).to receive(:fixity_accept).twice.and_return(true)
-        expect(subject.send(:retrieve_fixity)).to be true
-      end
-      it 'raises RuntimeError when the remote node rejects the fixity_value' do
-        expect(subject).to receive(:update_replication).and_return(true)
-        expect(subject).to receive(:fixity_accept).and_return(false)
-        expect { subject.send(:retrieve_fixity) }.to raise_error(RuntimeError)
+      it 'works' do
+        expect(subject.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
       end
     end
     it 'raises RuntimeError when a bagit bag is not available' do
