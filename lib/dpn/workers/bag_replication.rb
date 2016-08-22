@@ -9,6 +9,8 @@
 require_relative 'bag_paths'
 require_relative 'bag_rsync'
 
+require 'forwardable'
+
 module DPN
   module Workers
     ##
@@ -16,12 +18,11 @@ module DPN
     # @see https://github.com/dpn-admin/DPN-REST-Wiki/blob/master/Replication-Transfer-Resource.md
     # @see https://wiki.duraspace.org/display/DPNC/BagIt+Specification
     class BagReplication
-
-      attr_reader :status
+      extend Forwardable
 
       # @param [Hash] replication transfer resource
       def initialize(replication)
-        create_attributes(replication)
+        @_replication = OpenStruct.new(replication)
         @_paths = DPN::Workers::BagPaths.new
       end
 
@@ -43,28 +44,29 @@ module DPN
 
       # @return [Boolean] success of replication transfer
       def replicate
-        return false if status =~ /cancelled|rejected/
-        return true if status =~ /confirmed|stored/
+        return false if cancelled
+        return true if stored
         retrieve && preserve
       end
 
       # @return [Hash]
       def to_h
-        attributes.map do |var|
-          key = var.to_s.delete('@').to_sym
-          [key, instance_variable_get(var)]
-        end.to_h
+        @_replication.to_h
       end
 
       private
 
-        attr_reader :replication_id,
-                    :bag, :bag_valid,
-                    :created_at, :updated_at,
-                    :fixity_accept, :fixity_algorithm, :fixity_nonce, :fixity_value,
-                    :link,
-                    :from_node, :to_node,
-                    :protocol
+        def_delegators :@_replication,
+          :replication_id,
+          :bag,
+          :cancelled, :cancel_reason, :cancel_reason_detail,
+          :created_at, :updated_at,
+          :fixity_algorithm, :fixity_nonce, :fixity_value,
+          :link,
+          :from_node, :to_node,
+          :protocol,
+          :store_requested,
+          :stored
 
         def bagit
           @_bagit
@@ -78,16 +80,6 @@ module DPN
           @_paths
         end
 
-        # @return [Array] instance variable symbols
-        def attributes
-          instance_variables.select { |var| !var.to_s.start_with?('@_') }
-        end
-
-        # @param [Hash] opts
-        def create_attributes(opts)
-          opts.each { |key, val| instance_variable_set("@#{key}", val) }
-        end
-
         # Replication file - the basename for the replication link
         # @return [String] file
         def file
@@ -96,10 +88,11 @@ module DPN
 
         # @return [Boolean] success of preservation
         def preserve
-          return true if status =~ /stored/i
-          raise "Replication transfer status is not 'received' (status=#{status})" unless status =~ /received/i
+          return false if cancelled
+          return true if stored
+          raise 'Replication transfer - storage is not requested' unless store_requested
           preserve_rsync && preserve_validate
-          update_replication 'stored'
+          update_replication
         end
 
         # @return [Boolean] success of rsync transfer
@@ -110,7 +103,7 @@ module DPN
         # @return [Boolean] validity of preserved bag
         def preserve_validate
           @_bagit = DPN::Bagit::Bag.new(storage_path)
-          validate
+          @_replication[:stored] = true if validate
           # TODO: cleanup the staging path?
         end
 
@@ -124,8 +117,8 @@ module DPN
 
         # @return [Boolean] success of retrieval
         def retrieve
-          return true if status =~ /confirmed|received|stored/i
-          raise "Replication transfer status is not 'requested' (status=#{status})" unless status =~ /requested/i
+          return false if cancelled
+          return true if stored
           retrieve_rsync && retrieve_validate && retrieve_fixity
           retrieve_success?
         end
@@ -134,18 +127,16 @@ module DPN
         # verify the fixity with the admin node.
         # @return [Boolean] success of retrieval
         def retrieve_success?
-          update_replication 'received'
-          raise "Admin node did not accept fixity: #{fixity_value}" unless fixity_accept
-          fixity_accept
+          update_replication
+          raise "Admin node did not accept fixity: #{fixity_value}" unless store_requested
+          store_requested
         end
 
         # Calculate bag fixity to set the replication fixity_value
         # @return [String] fixity value
         def retrieve_fixity
           raise 'There is no bagit to calculate fixity' unless bagit
-          # TODO: confirm whether to calculate fixity using the bagit or
-          #       calculate a fixity on the .tar transfer file.
-          @fixity_value = bagit.fixity(:sha256)
+          @_replication[:fixity_value] = bagit.fixity(:sha256)
         end
 
         # @return [String]
@@ -194,24 +185,13 @@ module DPN
           @_storage ||= paths.storage(bag_id)
         end
 
-        # Update the replication transfer resource status on the remote node
-        # @param [String|nil] status of replication transfer
-        #   'requested' - set by the from_node to indicate the bag is staged for
-        #                 transfer and awaiting response from to_node.
-        #   'rejected' - set by the to_node to indicate it will not perform the transfer.
-        #   'received' - set by the to_node to indicate it has performed the transfer.
-        #   'confirmed' - set by the from_node after it receives all data to confirm a good transfer.
-        #   'stored' - set by the to_node to indicate the bag has been transferred into
-        #              its storage repository from the staging area. The to_node promises
-        #              to fulfill replicating node duties by setting this status.
-        #   'cancelled' - set by either node to indicate the transfer was cancelled.
+        # Update the replication transfer resource on the remote node
         # @return [Boolean]
-        def update_replication(status = nil)
-          @status = status if status
+        def update_replication
           response = remote_node.client.update_replication(to_h)
-          raise "Failed to update replication: #{response.body}" unless response.success?
-          # TODO: check the response.body can be assigned OK here
-          create_attributes(response.body)
+          data = response.body
+          raise "Failed to update replication: #{data}" unless response.success?
+          @_replication = OpenStruct.new(data)
           true
         end
 
@@ -219,9 +199,7 @@ module DPN
         # @return [Boolean] true when bagit.valid? is true
         # @raise [RuntimeError] if bagit.valid? is false
         def validate
-          @bag_valid = bagit.valid?
-          raise "Bag invalid: #{bagit.errors}" unless bag_valid
-          bag_valid
+          bagit.valid? || raise("Bag invalid: #{bagit.errors}")
         end
     end
   end

@@ -13,6 +13,13 @@ describe DPN::Workers::BagReplication, :vcr do
     expect(subject).to respond_to(:to_h)
   end
 
+  it 'has private accessors for replication data' do
+    replication.keys do |key|
+      expect { subject.send(key) }.not_to raise_error
+      expect(subject.send(key)).to eq(replication[key])
+    end
+  end
+
   describe '#id' do
     it 'works' do
       expect(subject.id).not_to be_nil
@@ -38,10 +45,9 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe '#replicate' do
-    it "checks the replication status" do
-      allow(subject).to receive(:retrieve)
-      allow(subject).to receive(:preserve)
-      expect(subject).to receive(:status).twice.and_return('requested')
+    it "checks if the replication was cancelled" do
+      expect(subject).to receive(:retrieve)
+      expect(subject).to receive(:cancelled).and_return(false)
       subject.replicate
     end
 
@@ -56,47 +62,28 @@ describe DPN::Workers::BagReplication, :vcr do
       end
     end
 
-    context "when the replication status is 'cancelled'" do
-      let(:status) { 'cancelled' }
+    context "when the replication is cancelled" do
       let(:result) { false }
       before do
-        expect(subject).to receive(:status).once.and_return(status)
+        expect(subject).to receive(:cancelled).and_return(true)
       end
       it_behaves_like 'do_nothing'
     end
 
-    context "when the replication status is 'rejected'" do
-      let(:status) { 'rejected' }
-      let(:result) { false }
-      before do
-        expect(subject).to receive(:status).once.and_return(status)
-      end
-      it_behaves_like 'do_nothing'
-    end
-
-    context "when the replication status is 'confirmed'" do
-      let(:status) { 'confirmed' }
+    context "when the replication is 'stored'" do
       let(:result) { true }
       before do
-        expect(subject).to receive(:status).twice.and_return(status)
+        expect(subject).to receive(:stored).and_return(true)
       end
       it_behaves_like 'do_nothing'
     end
 
-    context "when the replication status is 'stored'" do
-      let(:status) { 'stored' }
-      let(:result) { true }
-      before do
-        expect(subject).to receive(:status).twice.and_return(status)
-      end
-      it_behaves_like 'do_nothing'
-    end
-
-    context "when the replication status is 'requested'" do
-      it "performs replication tasks" do
+    context "when the replication is not 'cancelled' or 'stored'" do
+      it 'performs replication tasks' do
         expect(subject).to receive(:retrieve).once.and_return(true)
         expect(subject).to receive(:preserve).once.and_return(true)
-        expect(subject).to receive(:status).twice.and_return('requested')
+        expect(subject).to receive(:cancelled).and_return(false)
+        expect(subject).to receive(:stored).and_return(false)
         expect(subject.replicate).to be true
       end
     end
@@ -132,18 +119,19 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe '#preserve' do
-    it "checks the replication status" do
-      expect(subject).to receive(:status).twice.and_return('received')
+    it 'does preservation tasks when !cancelled && !stored && store_requested' do
+      expect(subject).to receive(:cancelled).and_return(false)
+      expect(subject).to receive(:stored).and_return(false)
+      expect(subject).to receive(:store_requested).and_return(true)
       expect(subject).to receive(:preserve_rsync).and_return(true)
       expect(subject).to receive(:preserve_validate).and_return(true)
-      expect(subject).to receive(:update_replication).with('stored').and_return(true)
+      expect(subject).to receive(:update_replication).and_return(true)
       subject.send(:preserve)
     end
 
-    context "when the replication status is 'stored'" do
-      let(:status) { 'stored' }
+    context "when the replication is 'stored'" do
       it 'returns true without doing any preservation tasks' do
-        expect(subject).to receive(:status).once.and_return(status)
+        expect(subject).to receive(:stored).and_return(true)
         expect(subject).not_to receive(:preserve_rsync)
         expect(subject).not_to receive(:preserve_validate)
         expect(subject).not_to receive(:update_replication)
@@ -151,49 +139,23 @@ describe DPN::Workers::BagReplication, :vcr do
       end
     end
 
-    context "when the replication status is 'received'" do
-      let(:status) { 'received' }
-      it "performs preservation tasks" do
-        expect(subject).to receive(:status).twice.and_return(status)
-        expect(subject).to receive(:preserve_rsync).and_return(true)
-        expect(subject).to receive(:preserve_validate).and_return(true)
-        expect(subject).to receive(:update_replication).and_return(true)
-        expect(subject.send(:preserve)).to be true
-      end
-    end
-
-    shared_examples 'preserve_raises_exception' do
+    context "when the replication is 'cancelled'" do
       before do
-        expect(subject).to receive(:status).exactly(3).times.and_return(status)
+        expect(subject).to receive(:cancelled).and_return(true)
       end
-      it "raises RuntimeError" do
-        expect { subject.send(:preserve) }.to raise_error(RuntimeError)
+      it 'returns false' do
+        expect(subject.send(:preserve)).to be false
       end
-      it "does not initiate preservation tasks" do
+      it 'does not initiate preservation tasks' do
         expect(subject).not_to receive(:preserve_rsync)
         expect(subject).not_to receive(:preserve_validate)
         expect(subject).not_to receive(:update_replication)
-        expect { subject.send(:preserve) }.to raise_error(RuntimeError)
+        expect(subject.send(:preserve)).to be false
       end
-    end
-
-    context "when the replication status is 'cancelled'" do
-      let(:status) { 'cancelled' }
-      it_behaves_like 'preserve_raises_exception'
-    end
-
-    context "when the replication status is 'rejected'" do
-      let(:status) { 'rejected' }
-      it_behaves_like 'preserve_raises_exception'
-    end
-
-    context "when the replication status is 'confirmed'" do
-      let(:status) { 'confirmed' }
-      it_behaves_like 'preserve_raises_exception'
     end
   end
 
-  shared_examples "bag_rsync_mocks" do
+  shared_examples 'bag_rsync_mocks' do
     let(:bagit) { double(DPN::Bagit::Bag) }
     let(:bag_sync) { double(DPN::Workers::BagRsync) }
     context 'rsync mock behavior' do
@@ -252,58 +214,32 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe '#retrieve' do
-    it "checks the replication status" do
-      expect(subject).to receive(:status).twice.and_return('requested')
+    it 'returns true after all retrieval tasks when !cancelled && !stored' do
+      expect(subject).to receive(:cancelled).and_return(false)
+      expect(subject).to receive(:stored).and_return(false)
       expect(subject).to receive(:retrieve_rsync).and_return(true)
       expect(subject).to receive(:retrieve_validate).and_return(true)
       expect(subject).to receive(:retrieve_fixity).and_return(true)
       expect(subject).to receive(:retrieve_success?).and_return(true)
       subject.send(:retrieve)
     end
-    shared_examples 'retrieval_is_done' do
-      it 'returns true without doing any retrieval tasks' do
-        expect(subject).to receive(:status).once.and_return(status)
-        expect(subject).not_to receive(:retrieve_rsync)
-        expect(subject).not_to receive(:retrieve_validate)
-        expect(subject).not_to receive(:retrieve_fixity)
-        expect(subject).not_to receive(:update_replication)
-        expect(subject.send(:retrieve)).to be true
-      end
+    it 'returns true without any retrieval tasks when !cancelled && stored' do
+      expect(subject).to receive(:cancelled).and_return(false)
+      expect(subject).to receive(:stored).and_return(true)
+      expect(subject).not_to receive(:retrieve_rsync)
+      expect(subject).not_to receive(:retrieve_validate)
+      expect(subject).not_to receive(:retrieve_fixity)
+      expect(subject).not_to receive(:update_replication)
+      expect(subject.send(:retrieve)).to be true
     end
-    context "when the replication status is 'confirmed'" do
-      let(:status) { 'confirmed' }
-      it_behaves_like 'retrieval_is_done'
-    end
-    context "when the replication status is 'received'" do
-      let(:status) { 'received' }
-      it_behaves_like 'retrieval_is_done'
-    end
-    context "when the replication status is 'stored'" do
-      let(:status) { 'stored' }
-      it_behaves_like 'retrieval_is_done'
-    end
-    shared_examples 'retrieve_raises_exception' do
-      before do
-        expect(subject).to receive(:status).exactly(3).times.and_return(status)
-      end
-      it "raises RuntimeError" do
-        expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
-      end
-      it "does not initiate retrieval tasks" do
-        expect(subject).not_to receive(:retrieve_rsync)
-        expect(subject).not_to receive(:retrieve_validate)
-        expect(subject).not_to receive(:retrieve_fixity)
-        expect(subject).not_to receive(:update_replication)
-        expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
-      end
-    end
-    context "when the replication status is 'cancelled'" do
-      let(:status) { 'cancelled' }
-      it_behaves_like 'retrieve_raises_exception'
-    end
-    context "when the replication status is 'rejected'" do
-      let(:status) { 'rejected' }
-      it_behaves_like 'retrieve_raises_exception'
+    it 'returns false without any retrieval tasks when cancelled' do
+      expect(subject).to receive(:cancelled).and_return(true)
+      expect(subject).not_to receive(:stored)
+      expect(subject).not_to receive(:retrieve_rsync)
+      expect(subject).not_to receive(:retrieve_validate)
+      expect(subject).not_to receive(:retrieve_fixity)
+      expect(subject).not_to receive(:update_replication)
+      expect(subject.send(:retrieve)).to be false
     end
   end
 
@@ -367,13 +303,13 @@ describe DPN::Workers::BagReplication, :vcr do
         expect(subject.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
       end
       it 'works when the remote node accepts the fixity_value' do
-        expect(subject).to receive(:update_replication).with('received').and_return(true)
-        expect(subject).to receive(:fixity_accept).twice.and_return(true)
+        expect(subject).to receive(:update_replication).and_return(true)
+        expect(subject).to receive(:store_requested).twice.and_return(true)
         expect(subject.send(:retrieve_success?)).to be true
       end
       it 'raises RuntimeError when the remote node rejects the fixity_value' do
-        expect(subject).to receive(:update_replication).with('received').and_return(true)
-        expect(subject).to receive(:fixity_accept).and_return(false)
+        expect(subject).to receive(:update_replication).and_return(true)
+        expect(subject).to receive(:store_requested).and_return(false)
         expect { subject.send(:retrieve_success?) }.to raise_error(RuntimeError)
       end
     end
@@ -475,23 +411,24 @@ describe DPN::Workers::BagReplication, :vcr do
         allow(response).to receive(:body).and_return(subject.to_h)
         expect(client).to receive(:update_replication).and_return(response)
       end
-      it "works" do
+      it 'works' do
         expect(update).not_to be_nil
       end
-      it "returns true when the remote_node returns a successful response" do
+      it 'returns true when the remote_node returns a successful response' do
         expect(update).to be true
       end
     end
-    it "updates the replication 'status'" do
-      status = 'stored'
+    it 'updates the replication data' do
+      # simulate calculating the bagit fixity
       replication_changed = replication.dup
-      replication_changed[:status] = status
-      expect(replication_changed).not_to eq(replication)
+      replication_changed[:fixity_value] = 'abc123'
+      subject.instance_variable_set('@_replication', OpenStruct.new(replication_changed))
+      expect(subject.to_h).not_to eq(replication)
+      # simulate and HTTP update for the replication
       expect(response).to receive(:success?).and_return(true)
       expect(response).to receive(:body).and_return(replication_changed)
       expect(client).to receive(:update_replication).with(replication_changed).and_return(response)
-      expect(subject.to_h).to eq(replication)
-      expect(subject.send(:update_replication, status)).to be true
+      expect(subject.send(:update_replication)).to be true
       expect(subject.to_h).to eq(replication_changed)
     end
     it "raises RuntimeError when the remote_node update request fails" do

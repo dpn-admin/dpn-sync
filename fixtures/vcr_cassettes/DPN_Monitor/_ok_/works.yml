@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cea5aeb8-54e6-4941-86cc-2726a4dc2cb3
+      - ac3a36a7-959a-44c9-a920-d52560021429
       X-Runtime:
-      - '0.019010'
+      - '0.026881'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Length:
       - '399'
       Connection:
@@ -51,7 +51,7 @@ http_interactions:
       string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:25 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:15 GMT
 - request:
     method: get
     uri: http://localhost:3002/api-v2/node/chron/
@@ -64,7 +64,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -87,13 +87,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - d8ddac34-3dbe-40fc-a665-ed694b2bf832
+      - b93bed06-a92c-4cc8-905b-0073e0b677a7
       X-Runtime:
-      - '0.022206'
+      - '0.027272'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Length:
       - '407'
       Connection:
@@ -103,7 +103,7 @@ http_interactions:
       string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:25 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:15 GMT
 - request:
     method: get
     uri: http://localhost:3003/api-v2/node/hathi/
@@ -116,7 +116,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -139,13 +139,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5ec565f2-7b14-4a61-98d8-378bbdff7fd8
+      - 96b5b25a-826a-4ed0-825b-651afb8f4a05
       X-Runtime:
-      - '0.019387'
+      - '0.020023'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Length:
       - '405'
       Connection:
@@ -155,7 +155,7 @@ http_interactions:
       string: '{"name":"Hathi Trust","namespace":"hathi","api_root":"http://127.0.0.1:3003","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","tdr","sdr","aptrust"],"replicate_to":["tdr","sdr","aptrust","chron"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"michigan","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:25 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:15 GMT
 - request:
     method: get
     uri: http://localhost:3004/api-v2/node/sdr/
@@ -168,7 +168,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -191,13 +191,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b244340f-ffe6-4552-a92a-f97bc4788753
+      - 69deb44d-1e31-44bc-9968-7a6b78690429
       X-Runtime:
-      - '0.019605'
+      - '0.025947'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Length:
       - '425'
       Connection:
@@ -207,7 +207,7 @@ http_interactions:
       string: '{"name":"Stanford Digital Repository","namespace":"sdr","api_root":"http://127.0.0.1:3004","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","tdr"],"replicate_to":["tdr","hathi","chron","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:25 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:15 GMT
 - request:
     method: get
     uri: http://localhost:3005/api-v2/node/tdr/
@@ -220,7 +220,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -243,13 +243,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - bd7e9447-a510-4a86-9492-e935416fac2f
+      - 0b6d3ae0-5e14-433b-b024-5b10037b3c5b
       X-Runtime:
-      - '0.025985'
+      - '0.021290'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:25 GMT
+      - Wed, 12 Oct 2016 18:13:15 GMT
       Content-Length:
       - '417'
       Connection:
@@ -259,5 +259,5 @@ http_interactions:
       string: '{"name":"Texas Digital Repository","namespace":"tdr","api_root":"http://127.0.0.1:3005","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","sdr"],"replicate_to":["hathi","chron","sdr","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"texas","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:25 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:15 GMT
 recorded_with: VCR 3.0.3

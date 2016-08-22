@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 75d459ff-9cda-4511-9c24-1f1b69c67a71
+      - 9e546ce5-b519-45e4-afa5-0dda77795329
       X-Runtime:
-      - '0.015735'
+      - '0.026676'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '67'
       Connection:
@@ -50,7 +50,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[],"total_size":0}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 - request:
     method: get
     uri: http://localhost:3001/api-v2/bag/?admin_node=aptrust&after=2000-01-01%2000:00:00%20UTC&bag_type=R&page=1&page_size=25
@@ -63,7 +63,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -86,13 +86,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8737efaf-18cd-4d09-ae99-f56ea764df43
+      - f06b901b-f2d7-4705-8668-a6d13ee50c45
       X-Runtime:
-      - '0.022192'
+      - '0.017477'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '67'
       Connection:
@@ -101,7 +101,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":0,"next":null,"previous":null,"results":[],"total_size":0}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 - request:
     method: get
     uri: http://localhost:3001/api-v2/bag/?admin_node=aptrust&after=2000-01-01%2000:00:00%20UTC&bag_type=D&page=1&page_size=25
@@ -114,7 +114,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -133,17 +133,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"4e604635a6c7ac4ac21d61aa66cdda69"
+      - W/"cdfe11c516863ee0ff52ccd18b692c34"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e5ff1326-eab4-4da5-9b08-f73e00cc4642
+      - c9e24c57-4deb-4953-bafc-270748ed79a5
       X-Runtime:
-      - '0.018631'
+      - '0.023807'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '480'
       Connection:
@@ -151,23 +151,23 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["hathi","chron"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/bag/
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["hathi","chron"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
     headers:
       User-Agent:
       - dpn-client-sdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -188,13 +188,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 7f9053bc-1623-46ca-9198-b035bdf5aa22
+      - aa1ec9e0-6551-4cb0-81df-587c27389974
       X-Runtime:
-      - '0.012664'
+      - '0.016349'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '0'
       Connection:
@@ -203,21 +203,21 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/bag/00000000-0000-4000-a000-000000000001/
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2015-09-15T17:56:03Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["hathi","chron"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
     headers:
       User-Agent:
       - dpn-client-sdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -236,17 +236,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"6b0d0e42275e37c2c44ca20f0d6af15b"
+      - W/"b8921b9a57a38bc8f96eed8b5bc70ea7"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - cdc15e30-b9d7-45c3-b05d-d767fe7bca2e
+      - 6375c90a-1674-4cd1-974c-dd76262286a1
       X-Runtime:
-      - '0.026734'
+      - '0.031814'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '409'
       Connection:
@@ -254,9 +254,9 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-09-01T19:12:27Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-10-12T18:13:16Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["hathi","chron"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 - request:
     method: get
     uri: http://localhost:3004/api-v2/bag/?admin_node=aptrust&page=1&page_size=25
@@ -269,7 +269,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -288,17 +288,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"3176e86d1c4b140488ae9a4454ebda6e"
+      - W/"4d03293abd0064fe61959e2b92ac40de"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5f37ad7e-a7f3-401d-b92a-1c267025801c
+      - 782679a5-efe2-49dc-a97c-e78b3f0566e8
       X-Runtime:
-      - '0.021573'
+      - '0.029682'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Thu, 01 Sep 2016 19:12:31 GMT
+      - Wed, 12 Oct 2016 18:13:21 GMT
       Content-Length:
       - '480'
       Connection:
@@ -306,7 +306,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-09-01T19:12:27Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-10-12T18:13:16Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["hathi","chron"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
     http_version: 
-  recorded_at: Thu, 01 Sep 2016 19:12:31 GMT
+  recorded_at: Wed, 12 Oct 2016 18:13:21 GMT
 recorded_with: VCR 3.0.3
