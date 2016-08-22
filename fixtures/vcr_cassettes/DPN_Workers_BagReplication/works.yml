@@ -1,0 +1,94 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3002/api-v1/replicate/?page=1&page_size=25
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Mon, 22 Aug 2016 18:34:51 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"1847d528b4c80ced57feedfb4491ced9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - e461a168-4a86-4919-a5cc-4eea3a6fb180
+      X-Runtime:
+      - '0.030457'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"count":4,"next":null,"previous":null,"results":[{"replication_id":"20000000-0000-4000-a000-000000000007","fixity_nonce":null,"fixity_value":null,"fixity_accept":null,"bag_valid":null,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"aptrust"},{"replication_id":"20000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":null,"fixity_accept":false,"bag_valid":true,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"sdr"},{"replication_id":"20000000-0000-4000-a000-000000000001","fixity_nonce":null,"fixity_value":null,"fixity_accept":false,"bag_valid":true,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"hathi"},{"replication_id":"20000000-0000-4000-a000-000000000019","fixity_nonce":null,"fixity_value":null,"fixity_accept":false,"bag_valid":true,"status":"requested","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","uuid":"00000000-0000-4000-a000-000000000002","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"tdr"}]}'
+    http_version: 
+  recorded_at: Mon, 22 Aug 2016 18:34:51 GMT
+- request:
+    method: put
+    uri: http://localhost:3002/api-v1/replicate/20000000-0000-4000-a000-000000000007/
+    body:
+      encoding: UTF-8
+      string: '{"replication_id":"20000000-0000-4000-a000-000000000007","fixity_nonce":null,"fixity_value":"cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b","status":"received","link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000002.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","fixity_algorithm":"sha256","protocol":"rsync","from_node":"chron","to_node":"aptrust","bag":"00000000-0000-4000-a000-000000000002","bag_valid":true}'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Mon, 22 Aug 2016 18:34:52 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - fd7bd9f4-8f26-4c45-9f7a-4732376c4bfa
+      X-Runtime:
+      - '0.086038'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "errors": ["Bag can't be blank","Bag is marked read-only but was changed.","Status cannot change from requested-\u003ereceived when requester==us and the local_node's role is from_node"]
+        }
+    http_version: 
+  recorded_at: Mon, 22 Aug 2016 18:34:52 GMT
+recorded_with: VCR 3.0.3
