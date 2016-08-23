@@ -2,25 +2,25 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:3001/api-v1/node/aptrust/
+    uri: http://localhost:3004/api-v2/node/sdr/
     body:
       encoding: UTF-8
       string: 'null'
     headers:
       User-Agent:
-      - dpn-client-aptrust (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      - dpn-client-sdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Mon, 01 Aug 2016 22:59:38 GMT
+      - Wed, 24 Aug 2016 23:00:16 GMT
       Content-Type:
       - application/json
       Authorization:
-      - Token aptrust_token
+      - Token sdr_token
   response:
     status:
       code: 200
-      message: OK
+      message: 'OK '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -31,19 +31,25 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"1f1b9c4daf93638856570dec43ec4287"
+      - W/"936e7842e2466d864bb8232c93307eaa"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 8e293238-56a8-446f-ad9f-fd2babc8bbea
+      - 564d3eb2-3298-4443-9e46-b1f56e936095
       X-Runtime:
-      - '0.027057'
-      Transfer-Encoding:
-      - chunked
+      - '0.023770'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Wed, 24 Aug 2016 23:00:16 GMT
+      Content-Length:
+      - '425'
+      Connection:
+      - Keep-Alive
     body:
       encoding: UTF-8
-      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"Virginia","type":"Magnetic
-        Disk"}}'
+      string: '{"name":"Stanford Digital Repository","namespace":"sdr","api_root":"http://127.0.0.1:3004","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","tdr"],"replicate_to":["tdr","hathi","chron","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
+        disk"}}'
     http_version: 
-  recorded_at: Mon, 01 Aug 2016 22:59:38 GMT
+  recorded_at: Wed, 24 Aug 2016 23:00:16 GMT
 recorded_with: VCR 3.0.3
