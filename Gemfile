@@ -14,8 +14,8 @@ gem 'redis', require: ['redis/connection/hiredis', 'redis']
 gem 'redis-namespace'
 
 # DPN
-gem 'dpn-client', '~> 1.3'
-gem 'dpn-bagit'
+gem 'dpn-bagit', '~>0.3'
+gem 'dpn-client', '~>2.0', git: 'https://github.com/dpn-admin/dpn-client.git'
 gem 'rpairtree'
 gem 'rsync'
 
