@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Wed, 24 Aug 2016 23:00:16 GMT
+      - Thu, 01 Sep 2016 19:12:26 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9749f275-1ed0-404d-92de-0817325912df
+      - 75031315-227a-439f-b553-87c4259c2968
       X-Runtime:
-      - '0.021800'
+      - '0.018990'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Wed, 24 Aug 2016 23:00:16 GMT
+      - Thu, 01 Sep 2016 19:12:26 GMT
       Content-Length:
       - '425'
       Connection:
@@ -51,5 +51,5 @@ http_interactions:
       string: '{"name":"Stanford Digital Repository","namespace":"sdr","api_root":"http://127.0.0.1:3004","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","tdr"],"replicate_to":["tdr","hathi","chron","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Wed, 24 Aug 2016 23:00:16 GMT
+  recorded_at: Thu, 01 Sep 2016 19:12:26 GMT
 recorded_with: VCR 3.0.3
