@@ -13,9 +13,15 @@ gem 'hiredis'
 gem 'redis', require: ['redis/connection/hiredis', 'redis']
 gem 'redis-namespace'
 
+# Console utils (also required in production)
+gem 'pry'
+gem 'pry-doc'
+gem 'pry-stack_explorer'
+gem 'rake'
+
 # DPN
-gem 'dpn-client', '~> 1.3'
-gem 'dpn-bagit'
+gem 'dpn-bagit', '~>0.3'
+gem 'dpn-client', '~>2.0', git: 'https://github.com/dpn-admin/dpn-client.git'
 gem 'rpairtree'
 gem 'rsync'
 
@@ -28,10 +34,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-doc'
-  gem 'pry-stack_explorer'
-  gem 'rake'
   gem 'rubocop'
   gem 'rubocop-rspec'
 end

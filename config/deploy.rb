@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.0'
+lock '3.6.1'
 
 set :application, 'dpn_sync'
 set :repo_url, 'https://github.com/dpn-admin/dpn-sync.git'
@@ -24,17 +24,21 @@ set :deploy_to, '/opt/app/dpn/dpn-sync'
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 set :linked_files, fetch(:linked_files, []).push(
   'config/redis.yml',
-  'config/settings/development.yml',
   'config/settings.yml',
   'config/sidekiq_schedule.yml'
 )
 
 # Default value for linked_dirs is []
-# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push(
+  'config/settings',
+  'log',
+  'public/system',
+  'tmp/cache',
+  'tmp/pids',
+  'tmp/sockets'
+)
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

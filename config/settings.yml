@@ -11,45 +11,54 @@ log_level: info
 
 # Create test cluster nodes and use those node parameters here,
 # @see https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
-local_namespace: aptrust
+#
+# The dpn-server cluster sets the local_namespace to 'hathi';
+# this dpn-sync config can use any node as the local_namespace.
+# As the dpn-sync project is used at SDR, the local_namespace is 'sdr'.
+local_namespace: sdr
+
+# Create test cluster nodes and use those node parameters here,
+# @see https://github.com/dpn-admin/dpn-server/blob/master/Cluster.md
+# As of 2016-08, the dpn-server cluster was running:
+# Starting aptrust node on http://127.0.0.1:3001
+# Starting chron   node on http://127.0.0.1:3002
+# Starting hathi   node on http://127.0.0.1:3003
+# Starting sdr     node on http://127.0.0.1:3004
+# Starting tdr     node on http://127.0.0.1:3005
+#
 nodes:
-  -
-    namespace: aptrust
-    api_root: http://localhost:3001
-    auth_credential: aptrust_token
-  -
-    namespace: chron
-    api_root: http://localhost:3002
-    auth_credential: chron_token
-  -
-    namespace: hathi
-    api_root: http://localhost:3003
-    auth_credential: hathi_token
-  -
-    namespace: sdr
-    api_root: http://localhost:3004
-    auth_credential: sdr_token
-  -
-    namespace: tdr
-    api_root: http://localhost:3005
-    auth_credential: tdr_token
+  - :namespace: aptrust
+    :api_root: http://localhost:3001
+    :auth_credential: aptrust_token
+  - :namespace: chron
+    :api_root: http://localhost:3002
+    :auth_credential: chron_token
+  - :namespace: hathi
+    :api_root: http://localhost:3003
+    :auth_credential: hathi_token
+  - :namespace: sdr
+    :api_root: http://localhost:3004
+    :auth_credential: sdr_token
+  - :namespace: tdr
+    :api_root: http://localhost:3005
+    :auth_credential: tdr_token
 
 # Settings for DPN::Workers::BagReplication
 replication:
-  staging_dir: a_staging_path
-  storage_dir: a_storage_path
+  :staging_dir: <%= Dir.mktmpdir('dpn_staging') %>
+  :storage_dir: <%= Dir.mktmpdir('dpn_storage') %>
 
 # Settings for DPN::Workers::BagRsync
 ssh:
-  user: an_ssh_login_name
-  identity_file: an_ssh_identity_file
+  :user: ''
+  :identity_file: ''
 
 sidekiq:
   # How many background jobs in the schedule queue are reasonable before
   # alarms raise attention from system or developer teams?
-  acceptable_queue_size: 250
+  :acceptable_queue_size: 250
   # An acceptable response time could be several minutes.
   # This value is in seconds.
-  acceptable_queue_latency: 300
+  :acceptable_queue_latency: 300
   # The redis namespace for test messages
-  test_message_store: dpn-test-timestamps
+  :test_message_store: dpn-sync-test
