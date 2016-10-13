@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3003/api-v2/replicate/?page=1&page_size=25
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 12 Oct 2016 21:18:59 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"ed38f47ece213aded0f02100af057467"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 43f980f0-2a70-4810-8e4a-3e813e3931fb
+      X-Runtime:
+      - '0.205294'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Wed, 12 Oct 2016 21:19:00 GMT
+      Content-Length:
+      - '2133'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"count":4,"next":null,"previous":null,"results":[{"replication_id":"30000000-0000-4000-a000-000000000001","fixity_nonce":null,"fixity_value":null,"cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","store_requested":false,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"aptrust"},{"replication_id":"30000000-0000-4000-a000-000000000007","fixity_nonce":null,"fixity_value":null,"cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","store_requested":false,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"chron"},{"replication_id":"30000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":null,"cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","store_requested":false,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"sdr"},{"replication_id":"30000000-0000-4000-a000-000000000019","fixity_nonce":null,"fixity_value":null,"cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","store_requested":false,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"tdr"}]}'
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 21:19:00 GMT
+- request:
+    method: put
+    uri: http://localhost:3003/api-v2/replicate/30000000-0000-4000-a000-000000000013/
+    body:
+      encoding: UTF-8
+      string: '{"replication_id":"30000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":"6b0c77595fa6209c6afbf5851cb76160c8b0ae0e3cb06238b1b316c31200c7a6","cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2015-09-15T19:38:31Z","store_requested":false,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"sdr"}'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 12 Oct 2016 21:19:00 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"946dfceb21112ea47be8649ad42aa38f"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0a44bdba-a921-49c9-a103-f180a9aa9d00
+      X-Runtime:
+      - '0.106385'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Wed, 12 Oct 2016 21:19:00 GMT
+      Content-Length:
+      - '579'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"replication_id":"30000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":"6b0c77595fa6209c6afbf5851cb76160c8b0ae0e3cb06238b1b316c31200c7a6","cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2016-10-12T21:19:00Z","store_requested":true,"stored":false,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"sdr"}'
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 21:19:00 GMT
+- request:
+    method: put
+    uri: http://localhost:3003/api-v2/replicate/30000000-0000-4000-a000-000000000013/
+    body:
+      encoding: UTF-8
+      string: '{"replication_id":"30000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":"6b0c77595fa6209c6afbf5851cb76160c8b0ae0e3cb06238b1b316c31200c7a6","cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2016-10-12T21:19:00Z","store_requested":true,"stored":true,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"sdr"}'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Wed, 12 Oct 2016 21:19:00 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"192ca73c04cc78d33d4b9bbced7159f3"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a3fb2ec0-4952-4a6d-bdf6-91a69087bbb7
+      X-Runtime:
+      - '0.077029'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Wed, 12 Oct 2016 21:19:00 GMT
+      Content-Length:
+      - '578'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"replication_id":"30000000-0000-4000-a000-000000000013","fixity_nonce":null,"fixity_value":"6b0c77595fa6209c6afbf5851cb76160c8b0ae0e3cb06238b1b316c31200c7a6","cancel_reason":null,"cancel_reason_detail":null,"link":"/data/src/dlss/dpn/dpn-server/test/fixtures/integration/testbags/00000000-0000-4000-a000-000000000003.tar","created_at":"2015-09-15T19:38:31Z","updated_at":"2016-10-12T21:19:00Z","store_requested":true,"stored":true,"cancelled":false,"bag":"00000000-0000-4000-a000-000000000003","fixity_algorithm":"sha256","protocol":"rsync","from_node":"hathi","to_node":"sdr"}'
+    http_version: 
+  recorded_at: Wed, 12 Oct 2016 21:19:00 GMT
+recorded_with: VCR 3.0.3
