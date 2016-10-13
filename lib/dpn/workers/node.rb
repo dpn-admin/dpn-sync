@@ -60,6 +60,8 @@ module DPN
       def alive?
         response = client.node(namespace)
         response.success?
+      rescue
+        false
       end
 
       # A connection status message that depends on whether a

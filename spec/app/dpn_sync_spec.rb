@@ -9,7 +9,7 @@ describe DpnSync, :vcr do
     end
   end
 
-  describe 'GET /is_it_working' do
+  describe 'GET /status' do
     let(:queue) do
       queue = double(Sidekiq::Queue)
       allow(queue).to receive(:size).and_return(size)
@@ -21,7 +21,7 @@ describe DpnSync, :vcr do
 
     def check_status(status)
       expect(Sidekiq::Queue).to receive(:new).and_return(queue)
-      get '/is_it_working'
+      get '/status'
       expect(last_response.status).to eq status
     end
 

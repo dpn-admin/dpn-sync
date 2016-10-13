@@ -48,11 +48,16 @@ class DpnSync < Sinatra::Base
     redirect to("test")
   end
 
-  get '/is_it_working' do
+  get '/status' do
     content_type 'text/plain'
     cache_control :none
-    monitors = Monitors.new [SidekiqMonitor.new, DPN::Monitor.new]
-    status monitors.status
-    body monitors.messages
+    begin
+      monitors = Monitors.new [SidekiqMonitor.new, DPN::Monitor.new]
+      status monitors.status
+      body monitors.messages
+    rescue StandardError => err
+      status 500
+      body err.inspect
+    end
   end
 end
