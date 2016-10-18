@@ -1,7 +1,7 @@
 module DPN
   module Workers
     ##
-    # Fetch the latest bags from a remote node
+    # Fetch the latest members from a remote node
     class SyncMembers < Sync
 
       # @return [Boolean] success of sync operations
