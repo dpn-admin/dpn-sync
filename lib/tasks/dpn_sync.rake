@@ -8,6 +8,11 @@ namespace :dpn do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncBags"
     end
 
+    desc "DPN - queue a job to fetch digest meta-data from remote nodes"
+    task :digests do
+      DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncDigests"
+    end
+
     desc "DPN - queue a job to fetch member meta-data from remote nodes"
     task :members do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncMembers"

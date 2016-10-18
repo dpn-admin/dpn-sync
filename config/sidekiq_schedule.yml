@@ -26,6 +26,12 @@ sync_bags:
   class: "DPN::Workers::SyncWorker"
   args: "DPN::Workers::SyncBags"
 
+# SyncDigests every 30 mins
+sync_digests:
+  cron: "*/30 * * * *"
+  class: "DPN::Workers::SyncWorker"
+  args: "DPN::Workers::SyncDigests"
+
 # SyncReplications every day at 5am
 sync_replications:
   cron: "00 05 * * *"
