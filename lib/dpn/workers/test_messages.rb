@@ -16,7 +16,7 @@ module DPN
         #
         # @return [Boolean] success
         def clear
-          REDIS.del(redis_key) == 0
+          REDIS.del(redis_key).zero?
         end
 
         # Save a test message
