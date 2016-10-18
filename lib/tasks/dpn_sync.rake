@@ -18,6 +18,11 @@ namespace :dpn do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncFixities"
     end
 
+    desc "DPN - queue a job to fetch ingest meta-data from remote nodes"
+    task :ingests do
+      DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncIngests"
+    end
+
     desc "DPN - queue a job to fetch member meta-data from remote nodes"
     task :members do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncMembers"

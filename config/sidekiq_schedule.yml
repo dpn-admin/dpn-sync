@@ -38,6 +38,12 @@ sync_fixities:
   class: "DPN::Workers::SyncWorker"
   args: "DPN::Workers::SyncFixities"
 
+# SyncIngests every 30 mins
+sync_ingests:
+  cron: "*/30 * * * *"
+  class: "DPN::Workers::SyncWorker"
+  args: "DPN::Workers::SyncIngests"
+
 # SyncReplications every day at 5am
 sync_replications:
   cron: "00 05 * * *"
