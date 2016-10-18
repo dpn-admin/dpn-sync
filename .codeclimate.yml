@@ -7,6 +7,15 @@ engines:
     enabled: true
   duplication:
     enabled: true
+    # SyncContent subclasses have similar code patterns, OK to ignore these
+    exclude_fingerprints:
+    - 03698989f611aac3bee9819ea4103fdc
+    - 2ff1ac4860bceda691d5d5b462eb8a08
+    - 70576e2e6fc4c71fadb0bf29edfa958b
+    - 7aefe9baf3c6fe74e3887f13890d22ca
+    - b06f68b457a8df218f1c7994853b26ec
+    - c69c778aaf694bbe1eddfde09fe907d8
+    - fb2609cfb9f8d17303e100430149b5f1
     config:
       languages:
       - ruby
