@@ -5,6 +5,8 @@ require_relative 'monitors'
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
+  VERSION = '0.4.0'.freeze
+
   set :app_file, __FILE__
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
   set :public_folder, proc { File.expand_path(File.join(root, 'app', 'public')) }, static: true
@@ -51,13 +53,16 @@ class DpnSync < Sinatra::Base
   get '/status' do
     content_type 'text/plain'
     cache_control :none
+    app_version = "DpnSync: #{VERSION}\n\n"
     begin
       monitors = Monitors.new [SidekiqMonitor.new, DPN::Monitor.new]
+      details = app_version + monitors.messages
       status monitors.status
-      body monitors.messages
+      body details
     rescue StandardError => err
+      details = app_version + err.inspect
       status 500
-      body err.inspect
+      body details
     end
   end
 end
