@@ -19,28 +19,60 @@ describe DpnSync, :vcr do
     let(:size) { settings.sidekiq.acceptable_queue_size - 1 }
     let(:latency) { settings.sidekiq.acceptable_queue_latency - 1 }
 
+    before do
+      allow(Sidekiq::Queue).to receive(:new).and_return(queue)
+      allow(DPN::Workers).to receive(:nodes).and_return([local_node])
+    end
+
     def check_status(status)
-      expect(Sidekiq::Queue).to receive(:new).and_return(queue)
       get '/status'
       expect(last_response.status).to eq status
     end
 
-    context 'when the Sidekiq queue' do
-      it 'is acceptable - it responds with 200 status' do
+    context 'success' do
+      before do
+        allow(local_node).to receive(:alive?).and_return(true)
+      end
+      it 'when everything is OK - it responds with 200 status' do
         check_status 200
         expect(last_response.body).to match(/OK:/)
       end
-      it 'is too large - it responds with 500 status' do
-        size = settings.sidekiq.acceptable_queue_size + 1
-        allow(queue).to receive(:size).and_return(size)
-        check_status 500
-        expect(last_response.body).to match(/WARNING:/)
+      it 'the response contains an application version' do
+        check_status 200
+        expect(last_response.body).to include("DpnSync: #{DpnSync::VERSION}")
       end
-      it 'is too slow - it responds with 500 status' do
-        latency = settings.sidekiq.acceptable_queue_latency + 1
-        allow(queue).to receive(:latency).and_return(latency)
-        check_status 500
-        expect(last_response.body).to match(/WARNING:/)
+    end
+
+    context 'DPN-network failures' do
+      context 'when a node is not alive' do
+        before do
+          allow(local_node).to receive(:alive?).and_return(false)
+        end
+        it 'when a node is not alive - it responds with 500 status' do
+          check_status 500
+          expect(last_response.body).to match(/WARNING:/)
+        end
+        it 'the response contains an application version' do
+          check_status 500
+          expect(last_response.body).to include("DpnSync: #{DpnSync::VERSION}")
+        end
+      end
+    end
+
+    context 'Sidekiq failures' do
+      context 'when the queue' do
+        it 'is too large - it responds with 500 status' do
+          size = settings.sidekiq.acceptable_queue_size + 1
+          allow(queue).to receive(:size).and_return(size)
+          check_status 500
+          expect(last_response.body).to match(/WARNING:/)
+        end
+        it 'is too slow - it responds with 500 status' do
+          latency = settings.sidekiq.acceptable_queue_latency + 1
+          allow(queue).to receive(:latency).and_return(latency)
+          check_status 500
+          expect(last_response.body).to match(/WARNING:/)
+        end
       end
     end
   end
