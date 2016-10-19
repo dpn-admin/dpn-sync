@@ -4,6 +4,7 @@ source 'https://rubygems.org/'
 gem 'rack'
 gem 'sinatra'
 gem 'config'
+gem 'app_version_tasks', '~> 0.2.0'
 
 # Background Processing Stack
 gem 'sidekiq'

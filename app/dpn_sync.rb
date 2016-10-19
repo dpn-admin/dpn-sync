@@ -5,6 +5,8 @@ require_relative 'monitors'
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
+  VERSION = '0.3.0'.freeze
+
   set :app_file, __FILE__
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
   set :public_folder, proc { File.expand_path(File.join(root, 'app', 'public')) }, static: true
