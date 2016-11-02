@@ -31,8 +31,10 @@ require 'fakeredis/rspec'
 # Local config
 Dir.glob('./config/initializers/**/*.rb').each { |r| require r }
 
+# Load libraries; see lib/dpn/init.rb
+require_relative '../lib/dpn/workers'
+
 # Load app
-Dir.glob('./lib/dpn/**/*.rb').each { |r| require r }
 Dir.glob('./app/**/*.rb').each { |r| require r }
 
 # Configure RSpec
@@ -76,4 +78,3 @@ def cleanup_path(dir)
   path = File.join(dir, '*')
   FileUtils.rm_rf(Dir.glob(path))
 end
-
