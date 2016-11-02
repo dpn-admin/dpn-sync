@@ -94,6 +94,15 @@ describe DPN::Workers::Nodes do
       it 'can sync bags' do
         it_can_sync 'DPN::Workers::SyncBags'
       end
+      it 'can sync digests' do
+        it_can_sync 'DPN::Workers::SyncDigests'
+      end
+      it 'can sync fixities' do
+        it_can_sync 'DPN::Workers::SyncFixities'
+      end
+      it 'can sync ingests' do
+        it_can_sync 'DPN::Workers::SyncIngests'
+      end
       it 'can sync members' do
         it_can_sync 'DPN::Workers::SyncMembers'
       end
@@ -106,19 +115,16 @@ describe DPN::Workers::Nodes do
     end
 
     context 'failure' do
-      it 'returns false for an unknown class_name' do
-        result = subject.sync('unknown')
-        expect(result).to be false
+      it 'raises NameError for an unknown class_name' do
+        expect { subject.sync('unknown') }.to raise_error(NameError)
       end
-      it 'returns false for a class that fails to implement #sync' do
-        result = subject.sync('DPN::Workers::Sync')
-        expect(result).to be false
+      it 'raises NotImplementedError for a class that does not implement #sync' do
+        expect { subject.sync('DPN::Workers::Sync') }.to raise_error(NotImplementedError)
       end
-      it 'logs errors false for unknown content' do
+      it 'logs exceptions for unknown content' do
         logger = subject.send(:logger)
         expect(logger).to receive(:error).exactly(:once)
-        result = subject.sync('unknown')
-        expect(result).to be false
+        expect { subject.sync('unknown') }.to raise_error(NameError)
       end
     end
   end

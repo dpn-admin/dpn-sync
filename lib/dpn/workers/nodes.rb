@@ -52,11 +52,12 @@ module DPN
       # Fetch registry content from remote nodes to update local node
       # @param [String] class_name object name to handle content sync
       # @return [Boolean]
+      # @raise [ScriptError|StandardError]
       def sync(class_name)
         sync_data class_name.constantize
       rescue ScriptError, StandardError => err
         logger.error err.inspect + err.backtrace.inspect
-        false
+        raise err
       end
 
       private
