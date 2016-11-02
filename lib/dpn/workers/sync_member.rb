@@ -12,7 +12,7 @@ module DPN
 
         # @return [String] member ID
         def content_id
-          member[:uuid]
+          member[:member_id]
         end
 
         # @return [Boolean]
