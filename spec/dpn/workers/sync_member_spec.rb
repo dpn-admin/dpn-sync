@@ -5,7 +5,7 @@ require 'shared_examples/sync_content'
 describe DPN::Workers::SyncMember, :vcr do
   let(:member) do
     {
-      uuid: uuid,
+      member_id: uuid,
       name: 'Example Member',
       email: 'dpn_member@example.org',
       created_at: time,
