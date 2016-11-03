@@ -52,12 +52,10 @@ module DPN
         # @return [Hash] has keys :bag, :from_node, :to_node
         def replication_query(bag_uuid)
           {
-            page_size: 50,
             bag: bag_uuid,
             from_node: remote_node.namespace,
             to_node: local_node.namespace
             # TODO: after: last_success
-            # TODO: status: 'something'
           }
         end
 
@@ -68,29 +66,26 @@ module DPN
           remote_client.replications(query) do |response|
             # the paginated response should contain only one replication
             # see https://github.com/dpn-admin/dpn-client/blob/master/lib/dpn/client/agent/connection.rb#L98
-            success << handle_replication_response(bag, response)
+            success << handle_replication_response(response)
           end
-          success.any?
+          success.all?
         end
 
-        # @param [Hash] bag data already in local node that belongs to remote node
         # @param [DPN::Client::Response] response a replication response
         # @return [Boolean] success of replication create or update operation
-        def handle_replication_response(bag, response)
+        def handle_replication_response(response)
           data = response.body
           if response.success?
-            save_replication(bag, data)
+            save_replication(data)
           else
             logger.error data
             false
           end
         end
 
-        # @param [Hash] bag data already in local node that belongs to remote node
         # @param [Hash] replication data
         # @return [Boolean] success of replication persistence
-        def save_replication(bag, replication)
-          replication[:bag] = bag[:uuid]
+        def save_replication(replication)
           local_replication = DPN::Workers::SyncReplication.new(replication, local_client, logger)
           saved = local_replication.create_or_update
           DPN::Workers::BagWorker.perform_async replication if saved
