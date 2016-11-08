@@ -18,9 +18,13 @@ module DPN
         def save_remote_node
           namespace = remote_node.namespace
           response = local_client.update_node(remote_node.to_hash)
-          raise "Failed to update #{namespace} node: #{response.body}" unless response.success?
-          logger.info "Updated #{namespace} node"
-          last_success_update
+          if response.success?
+            logger.info "Updated #{namespace} node"
+            last_success_update
+          else
+            logger.error "Failed to update #{namespace} node: #{response.body}"
+            false
+          end
         end
     end
   end

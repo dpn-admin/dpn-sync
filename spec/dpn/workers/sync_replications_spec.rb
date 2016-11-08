@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'spec_helper'
-require 'shared_examples/sync_registry_object'
+require 'shared_examples/sync_registry_object_success'
 
 describe DPN::Workers::SyncReplications, :vcr do
   before do
@@ -10,7 +10,16 @@ describe DPN::Workers::SyncReplications, :vcr do
   end
 
   let(:subject) { described_class.new local_node, remote_node }
-  it_behaves_like 'sync_registry_object'
+  it_behaves_like 'sync_registry_object_success'
+  # it DOES NOT behave like 'sync_registry_object_failure'
+
+  context 'failure' do
+    let(:failure_nodes) { described_class.new local_node, example_node }
+    it 'returns false when it is not configured to replicate from node' do
+      expect(failure_nodes).not_to receive(:sync_replications)
+      expect(failure_nodes.sync).to be false
+    end
+  end
 
   ##
   # PRIVATE

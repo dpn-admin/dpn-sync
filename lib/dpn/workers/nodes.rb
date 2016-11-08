@@ -54,7 +54,7 @@ module DPN
       # @return [Boolean]
       # @raise [ScriptError|StandardError]
       def sync(class_name)
-        sync_data class_name.constantize
+        sync_data class_name
       rescue ScriptError, StandardError => err
         logger.error err.inspect + err.backtrace.inspect
         raise err
@@ -70,8 +70,23 @@ module DPN
         # Iterates on remote_nodes to sync registry data into local_node
         # @param [Class] klass object to handle content type for sync
         # @return [Boolean]
-        def sync_data(klass)
-          remote_nodes.map { |node| klass.new(local_node, node).sync }.any?
+        def sync_data(class_name)
+          sync_class = class_name.constantize
+          sync_results = []
+          threads = remote_nodes.collect do |node|
+            # Thread the sync for each node so that one node failure does
+            # not interfere with other nodes.
+            Thread.fork do
+              sync_results << begin
+                                sync_class.new(local_node, node).sync
+                              rescue
+                                # allow sync_class to log exception details
+                                false
+                              end
+            end
+          end
+          threads.each(&:join)
+          sync_results.all?
         end
     end
   end
