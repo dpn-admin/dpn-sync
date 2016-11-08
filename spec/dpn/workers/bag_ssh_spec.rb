@@ -51,17 +51,19 @@ describe DPN::Workers::BagSSH do
     let(:ssh_cmd) { subject.retrieve_command }
     let(:ssh_file) { 'ssh_identity_file' }
     let(:ssh_user) { 'ssh_user' }
-    it "works" do
+
+    it 'works' do
       expect(ssh_cmd).not_to be_nil
     end
-    it "returns a String" do
+
+    it 'returns a String' do
       expect(ssh_cmd).to be_an String
     end
+
     context 'there is an ssh user and identity_file' do
       before do
-        allow(File).to receive(:exist?).and_return(true)
-        expect(subject).to receive(:identity_file).twice.and_return(ssh_file)
-        expect(subject).to receive(:user).twice.and_return(ssh_user)
+        allow(subject).to receive(:identity_file).and_return(ssh_file)
+        allow(subject).to receive(:user).and_return(ssh_user)
       end
       it 'starts with "ssh"' do
         expect(ssh_cmd).to start_with 'ssh'
@@ -82,22 +84,28 @@ describe DPN::Workers::BagSSH do
         expect(ssh_cmd).to include "-i #{ssh_file}"
       end
     end
+
     context 'there is no ssh user' do
       before do
-        expect(subject).to receive(:user).and_return('')
+        allow(subject).to receive(:user).and_return('')
+      end
+      it 'returns a String' do
+        expect(ssh_cmd).to be_an String
       end
       it 'returns an empty String' do
-        expect(ssh_cmd).to be_an String
         expect(ssh_cmd).to be_empty
       end
     end
+
     context 'there is an ssh user, but no ssh identity_file' do
       before do
-        expect(subject).to receive(:user).and_return('ssh_user')
-        expect(subject).to receive(:identity_file).and_return('')
+        allow(subject).to receive(:user).and_return('ssh_user')
+        allow(subject).to receive(:identity_file).and_return('')
+      end
+      it 'returns a String' do
+        expect(ssh_cmd).to be_an String
       end
       it 'returns an empty String' do
-        expect(ssh_cmd).to be_an String
         expect(ssh_cmd).to be_empty
       end
     end
