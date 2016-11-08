@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require 'spec_helper'
 
-describe DPN::Workers::Nodes do
+describe DPN::Workers::Nodes, :vcr do
   let(:settings) { SyncSettings }
   let(:node_data) { settings.nodes.map(&:to_hash) }
   let(:node_names) { settings.nodes.map(&:namespace) }
@@ -83,9 +83,8 @@ describe DPN::Workers::Nodes do
     end
 
     def it_can_sync(class_name)
-      sync_class = class_name.constantize
-      sync_instance sync_class
-      expect(subject).to receive(:sync_data).with(sync_class).and_call_original
+      sync_instance class_name.constantize
+      expect(subject).to receive(:sync_data).with(class_name).and_call_original
       result = subject.sync(class_name)
       expect(result).to be true
     end
@@ -131,17 +130,19 @@ describe DPN::Workers::Nodes do
 
   context 'private' do
     describe 'sync_data' do
-      let(:syncer) do
-        syncer = double(DPN::Workers::Sync)
-        expect(syncer).to receive(:sync).at_least(:once)
-        syncer
-      end
-
       it 'iterates on remote_nodes' do
         node_count = subject.remote_nodes.count
-        expect(subject).to receive(:remote_nodes).and_call_original
-        expect(DPN::Workers::SyncBags).to receive(:new).exactly(node_count).and_return(syncer)
-        subject.send(:sync_data, DPN::Workers::SyncBags)
+        expect(DPN::Workers::SyncNodes).to receive(:new).exactly(node_count).and_call_original
+        subject.send(:sync_data, 'DPN::Workers::SyncNodes')
+      end
+
+      it 'can skip a remote_node failure' do
+        # Add an example_node that will fail to connect
+        subject.nodes << example_node
+        node_count = subject.remote_nodes.count
+        expect(DPN::Workers::SyncNodes).to receive(:new).exactly(node_count).and_call_original
+        result = subject.send(:sync_data, 'DPN::Workers::SyncNodes')
+        expect(result).to be false
       end
     end
   end
