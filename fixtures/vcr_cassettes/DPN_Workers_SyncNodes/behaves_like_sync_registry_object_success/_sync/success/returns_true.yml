@@ -1,0 +1,108 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3001/api-v2/node/aptrust/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-aptrust (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 08 Nov 2016 22:45:05 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token aptrust_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"86f5aaaae78a3d23be0cbc937c6f41b4"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a5b9d4ed-818c-45eb-948a-21dc1f01da5c
+      X-Runtime:
+      - '0.025204'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Tue, 08 Nov 2016 22:45:05 GMT
+      Content-Length:
+      - '399'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Tue, 08 Nov 2016 22:45:05 GMT
+- request:
+    method: put
+    uri: http://localhost:3004/api-v2/node/aptrust/
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"aptrust","api_root":"http://localhost:3001","auth_credential":"aptrust_token","name":"APTrust","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
+        disk"}}'
+    headers:
+      User-Agent:
+      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Tue, 08 Nov 2016 22:45:05 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token sdr_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"9dbfd80200ddfe6eebf050eb656044c9"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 7a545981-ef4e-4c84-9e84-8c8620ae873d
+      X-Runtime:
+      - '0.037975'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Tue, 08 Nov 2016 22:45:05 GMT
+      Content-Length:
+      - '399'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://localhost:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-11-08T00:25:48Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Tue, 08 Nov 2016 22:45:05 GMT
+recorded_with: VCR 3.0.3

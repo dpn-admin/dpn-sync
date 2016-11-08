@@ -6,6 +6,7 @@ module DPN
 
       # @return [Boolean] success of sync operations
       def sync
+        return false unless replicate_remote_node?
         sync_replications
       end
 
@@ -34,7 +35,7 @@ module DPN
           remote_node_bags.each do |bag|
             success << remote_node_bag_replications(bag)
           end
-          success.any? ? last_success_update : false
+          success.all? ? last_success_update : false
         end
 
         # GET local node bag data that belongs to a remote node
@@ -48,6 +49,12 @@ module DPN
           bags.flatten
         end
 
+        # @return [Boolean] replicate from remote node
+        def replicate_remote_node?
+          local_node.update
+          local_node.replicate_from.include? remote_node.namespace
+        end
+
         # @param [String] bag_uuid
         # @return [Hash] has keys :bag, :from_node, :to_node
         def replication_query(bag_uuid)
@@ -59,13 +66,12 @@ module DPN
           }
         end
 
-        # @return [Array] remote node replication requests for a bag
+        # @return [Boolean] success of remote node replications for a bag
         def remote_node_bag_replications(bag)
           success = []
           query = replication_query(bag[:uuid])
           remote_client.replications(query) do |response|
             # the paginated response should contain only one replication
-            # see https://github.com/dpn-admin/dpn-client/blob/master/lib/dpn/client/agent/connection.rb#L98
             success << handle_replication_response(response)
           end
           success.all?
