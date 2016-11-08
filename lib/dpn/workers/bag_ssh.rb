@@ -20,24 +20,29 @@ module DPN
       # @return [String] ssh command
       def retrieve_command
         @_retrieve_command ||= begin
-          if !user.empty? && File.exist?(identity_file)
-            [
-              'ssh',
-              '-o PasswordAuthentication=no',
-              '-o UserKnownHostsFile=/dev/null',
-              '-o StrictHostKeyChecking=no',
-              "-l #{user}",
-              "-i #{identity_file}"
-            ].join(' ')
-          else
-            ''
-          end
+          return '' if ssh_user.empty? || ssh_identity_file.empty?
+          [
+            'ssh',
+            '-o PasswordAuthentication=no',
+            '-o UserKnownHostsFile=/dev/null',
+            '-o StrictHostKeyChecking=no',
+            ssh_user,
+            ssh_identity_file
+          ].join(' ')
         end
       end
 
       private
 
         attr_reader :settings
+
+        def ssh_user
+          @_ssh_user ||= user.to_s.empty? ? '' : "-l #{user}"
+        end
+
+        def ssh_identity_file
+          @_ssh_identity_file ||= identity_file.to_s.empty? ? '' : "-i #{identity_file}"
+        end
     end
   end
 end
