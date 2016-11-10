@@ -81,6 +81,12 @@ describe DPN::Workers::BagRsync do
         expect(subject).to receive(:ssh_option).and_call_original
         options
       end
+      it 'adds ssh command when ssh options are set' do
+        ssh = SyncSettings.ssh
+        ssh.user = 'ssh_user'
+        ssh.identity_file = 'ssh_identity_file'
+        expect(options).to match(/-e 'ssh.*#{ssh.user}.*#{ssh.identity_file}'/)
+      end
     end
   end
 
