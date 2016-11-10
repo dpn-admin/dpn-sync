@@ -13,11 +13,11 @@ describe DPN::Workers::SyncDigests, :vcr do
 
   # Specs for SyncDigests that are not covered by sync_registry_object
   describe '#sync_digests' do
-    it 'logs errors from requests to remote_client.digests' do
+    it 'logs errors from requests to remote_client.bag_digests' do
       response = double('response')
       allow(response).to receive(:success?).and_return(false)
       allow(response).to receive(:body).and_return('error message')
-      allow(subject.remote_client).to receive(:digests).and_yield(response)
+      allow(subject.remote_client).to receive(:bag_digests).and_yield(response)
       logger = subject.send(:logger)
       expect(logger).to receive(:error).at_least(:once).and_call_original
       expect(subject.sync).to be false

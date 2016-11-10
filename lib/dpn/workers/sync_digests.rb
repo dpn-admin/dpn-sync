@@ -14,10 +14,20 @@ module DPN
         # @return [Boolean] success of digest sync operations
         def sync_digests
           success = []
-          remote_client.digests do |response|
-            success << create_or_update_digest(response)
+          remote_node_bags.each do |bag|
+            success << remote_node_bag_digests(bag)
           end
           success.all? ? last_success_update : false
+        end
+
+        # @return [Boolean] success of remote node digests for a bag
+        def remote_node_bag_digests(bag)
+          success = []
+          remote_client.bag_digests(bag[:uuid]) do |response|
+            # the paginated response should contain only one digest
+            success << create_or_update_digest(response)
+          end
+          success.all?
         end
 
         # @param [DPN::Client::Response] remote_response
