@@ -214,32 +214,47 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe '#retrieve' do
-    it 'returns true after all retrieval tasks when !cancelled && !stored' do
-      expect(subject).to receive(:cancelled).and_return(false)
-      expect(subject).to receive(:stored).and_return(false)
-      expect(subject).to receive(:retrieve_rsync).and_return(true)
-      expect(subject).to receive(:retrieve_validate).and_return(true)
-      expect(subject).to receive(:retrieve_fixity).and_return(true)
-      expect(subject).to receive(:retrieve_success?).and_return(true)
-      subject.send(:retrieve)
-    end
-    it 'returns true without any retrieval tasks when !cancelled && stored' do
-      expect(subject).to receive(:cancelled).and_return(false)
-      expect(subject).to receive(:stored).and_return(true)
-      expect(subject).not_to receive(:retrieve_rsync)
-      expect(subject).not_to receive(:retrieve_validate)
-      expect(subject).not_to receive(:retrieve_fixity)
-      expect(subject).not_to receive(:update_replication)
+    it 'returns true after all retrieval tasks succeed' do
+      allow(subject).to receive(:retrieve_rsync).and_return(true)
+      allow(subject).to receive(:retrieve_validate).and_return(true)
+      allow(subject).to receive(:retrieve_fixity).and_return(true)
+      allow(subject).to receive(:retrieve_success?).and_return(true)
       expect(subject.send(:retrieve)).to be true
     end
-    it 'returns false without any retrieval tasks when cancelled' do
-      expect(subject).to receive(:cancelled).and_return(true)
-      expect(subject).not_to receive(:stored)
-      expect(subject).not_to receive(:retrieve_rsync)
+    it 'returns false when retrieve_rsync fails' do
+      allow(subject).to receive(:retrieve_rsync).and_return(false)
       expect(subject).not_to receive(:retrieve_validate)
       expect(subject).not_to receive(:retrieve_fixity)
-      expect(subject).not_to receive(:update_replication)
+      expect(subject).not_to receive(:retrieve_success?)
       expect(subject.send(:retrieve)).to be false
+    end
+    it 'returns false when retrieve_validate fails' do
+      allow(subject).to receive(:retrieve_rsync).and_return(true)
+      allow(subject).to receive(:retrieve_validate).and_return(false)
+      expect(subject).not_to receive(:retrieve_fixity)
+      expect(subject).not_to receive(:retrieve_success?)
+      expect(subject.send(:retrieve)).to be false
+    end
+    it 'returns false when retrieve_fixity fails' do
+      allow(subject).to receive(:retrieve_rsync).and_return(true)
+      allow(subject).to receive(:retrieve_validate).and_return(true)
+      allow(subject).to receive(:retrieve_fixity).and_return(false)
+      expect(subject).not_to receive(:retrieve_success?)
+      expect(subject.send(:retrieve)).to be false
+    end
+    it 'returns false when retrieve_success? fails' do
+      allow(subject).to receive(:retrieve_rsync).and_return(true)
+      allow(subject).to receive(:retrieve_validate).and_return(true)
+      allow(subject).to receive(:retrieve_fixity).and_return(true)
+      allow(subject).to receive(:retrieve_success?).and_return(false)
+      expect(subject.send(:retrieve)).to be false
+    end
+    it 'allows exceptions from any retrieve processes' do
+      allow(subject).to receive(:retrieve_rsync).and_raise('failed rsync')
+      expect(subject).not_to receive(:retrieve_validate)
+      expect(subject).not_to receive(:retrieve_fixity)
+      expect(subject).not_to receive(:retrieve_success?)
+      expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
     end
   end
 

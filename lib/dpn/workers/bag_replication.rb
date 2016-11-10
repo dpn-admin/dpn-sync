@@ -117,10 +117,10 @@ module DPN
 
         # @return [Boolean] success of retrieval
         def retrieve
-          return false if cancelled
-          return true if stored
-          retrieve_rsync && retrieve_validate && retrieve_fixity
-          retrieve_success?
+          retrieve_rsync &&
+            retrieve_validate &&
+            retrieve_fixity &&
+            retrieve_success?
         end
 
         # Update the replication status to 'received' and
