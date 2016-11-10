@@ -21,7 +21,10 @@ module DPN
       # @return [Boolean] success of transfer
       def rsync
         Rsync.run(source, target, options) do |result|
-          raise "Failed #{type} rsync: #{result.error}" unless result.success?
+          unless result.success?
+            msg = "Failed #{type} rsync: #{result.error}, options: #{options}"
+            raise msg
+          end
         end
         true
       end
@@ -64,7 +67,7 @@ module DPN
           @ssh_option ||= begin
             ssh = DPN::Workers::BagSSH.new
             ssh_cmd = ssh.retrieve_command
-            ssh_cmd.empty? ? '' : " -e #{ssh_cmd}"
+            ssh_cmd.empty? ? '' : " -e '#{ssh_cmd}'"
           end
         end
     end
