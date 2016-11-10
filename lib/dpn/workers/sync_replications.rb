@@ -38,17 +38,6 @@ module DPN
           success.all? ? last_success_update : false
         end
 
-        # GET local node bag data that belongs to a remote node
-        # @return [Array] bag data
-        def remote_node_bags
-          bags = []
-          bag_query = { admin_node: remote_node.namespace }
-          local_client.bags(bag_query) do |response|
-            bags << response.body if response.success?
-          end
-          bags.flatten
-        end
-
         # @return [Boolean] replicate from remote node
         def replicate_remote_node?
           local_node.update
