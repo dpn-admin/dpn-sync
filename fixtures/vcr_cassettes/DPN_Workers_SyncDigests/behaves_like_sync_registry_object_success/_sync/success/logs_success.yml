@@ -2,7 +2,59 @@
 http_interactions:
 - request:
     method: get
-    uri: http://localhost:3001/api-v2/digest/?page=1&page_size=25
+    uri: http://localhost:3004/api-v2/bag/?admin_node=aptrust&page=1&page_size=25
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      Accept:
+      - "*/*"
+      Date:
+      - Thu, 10 Nov 2016 19:37:17 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token sdr_token
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"18e1954ffc6d1356598e83dd7895dabc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5fd828a5-1a3b-4d4d-a632-689db9a09c8b
+      X-Runtime:
+      - '0.035854'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
+      Date:
+      - Thu, 10 Nov 2016 19:37:18 GMT
+      Content-Length:
+      - '480'
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-11-08T00:18:45Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
+    http_version: 
+  recorded_at: Thu, 10 Nov 2016 19:37:18 GMT
+- request:
+    method: get
+    uri: http://localhost:3001/api-v2/bag/00000000-0000-4000-a000-000000000001/digest/?page=1&page_size=25
     body:
       encoding: UTF-8
       string: 'null'
@@ -12,7 +64,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Thu, 10 Nov 2016 19:37:18 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +87,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b365750f-6a1d-4830-99b8-75d68a57af26
+      - 7d34985b-58a9-4417-b99b-72524c1245ed
       X-Runtime:
-      - '0.012700'
+      - '0.015317'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Thu, 10 Nov 2016 19:37:18 GMT
       Content-Length:
       - '247'
       Connection:
@@ -50,7 +102,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"value":"e39a201a88bc3d7803a5e375d9752439d328c2e85b4f1ba70a6d984b6c5378bd","created_at":"2015-09-15T19:38:31Z","bag":"00000000-0000-4000-a000-000000000001","node":"aptrust","algorithm":"sha256"}]}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:02 GMT
+  recorded_at: Thu, 10 Nov 2016 19:37:18 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/bag/00000000-0000-4000-a000-000000000001/digest/
@@ -63,7 +115,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Thu, 10 Nov 2016 19:37:18 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -84,13 +136,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 5311ec97-bdea-409f-9495-d1f035b705b1
+      - bc540116-7d24-4158-b927-7ddfaecd3532
       X-Runtime:
-      - '0.009229'
+      - '0.009199'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Thu, 10 Nov 2016 19:37:18 GMT
       Content-Length:
       - '0'
       Connection:
@@ -99,5 +151,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:02 GMT
+  recorded_at: Thu, 10 Nov 2016 19:37:18 GMT
 recorded_with: VCR 3.0.3
