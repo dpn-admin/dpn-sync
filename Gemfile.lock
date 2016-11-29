@@ -54,10 +54,10 @@ GEM
     capistrano-sidekiq (0.5.4)
       capistrano
       sidekiq (>= 3.4)
+    codacy-coverage (1.1.1)
+      simplecov (>= 0.10.0)
     codeclimate-engine-rb (0.4.0)
       virtus (~> 1.0)
-    codeclimate-test-reporter (0.6.0)
-      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -220,7 +220,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-passenger
   capistrano-sidekiq
-  codeclimate-test-reporter
+  codacy-coverage
   config
   dlss-capistrano
   dpn-bagit (~> 0.3)

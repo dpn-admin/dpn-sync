@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/dpn-admin/dpn-sync.svg?branch=master)](https://travis-ci.org/dpn-admin/dpn-sync) [![Code Climate](https://codeclimate.com/github/dpn-admin/dpn-sync/badges/gpa.svg)](https://codeclimate.com/github/dpn-admin/dpn-sync) [![Test Coverage](https://codeclimate.com/github/dpn-admin/dpn-sync/badges/coverage.svg)](https://codeclimate.com/github/dpn-admin/dpn-sync/coverage) [![Inline docs](http://inch-ci.org/github/dpn-admin/dpn-sync.svg?branch=master)](http://inch-ci.org/github/dpn-admin/dpn-sync)
+[![Build Status](https://travis-ci.org/dpn-admin/dpn-sync.svg?branch=master)](https://travis-ci.org/dpn-admin/dpn-sync) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cfd723a84b1f493596f0374ec6fa790e)](https://www.codacy.com/app/DPN/dpn-sync?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dpn-admin/dpn-sync&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/cfd723a84b1f493596f0374ec6fa790e)](https://www.codacy.com/app/DPN/dpn-sync?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dpn-admin/dpn-sync&amp;utm_campaign=Badge_Coverage) [![Inline docs](http://inch-ci.org/github/dpn-admin/dpn-sync.svg?branch=master)](http://inch-ci.org/github/dpn-admin/dpn-sync)
 
 # DPN Synchronization
 

@@ -5,8 +5,3 @@ rvm:
 
 services:
   - redis-server
-
-addons:
-    code_climate:
-        repo_token: 513bbc1b20a08e8626b98b93b07e49e08e9e1e1c021d40def3e8c109a13c4a47
-
