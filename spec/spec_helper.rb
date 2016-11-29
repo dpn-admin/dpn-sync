@@ -71,7 +71,7 @@ VCR.configure do |c|
   }
   c.configure_rspec_metadata!
   c.allow_http_connections_when_no_cassette = false
-  c.ignore_hosts 'codeclimate.com'
+  c.ignore_hosts 'api.codacy.com'
 end
 
 def cleanup_path(dir)
