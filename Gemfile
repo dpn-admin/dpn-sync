@@ -40,10 +40,10 @@ group :development, :test do
 end
 
 group :test do
+  gem 'codacy-coverage', require: false
   gem 'rspec'
   gem 'fakeredis', require: 'fakeredis/rspec'
   gem 'rack-test'
-  gem 'codeclimate-test-reporter', require: nil
   gem 'simplecov', require: false
   gem 'single_cov'
   gem 'vcr'
