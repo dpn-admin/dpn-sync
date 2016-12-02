@@ -68,7 +68,7 @@ module DPN
         end
 
         # Iterates on remote_nodes to sync registry data into local_node
-        # @param [Class] klass object to handle content type for sync
+        # @param [String] class_name of the class to handle content sync
         # @return [Boolean]
         def sync_data(class_name)
           sync_class = class_name.constantize
