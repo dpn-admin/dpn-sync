@@ -82,9 +82,7 @@ module DPN
         # @return [Boolean] success of replication persistence
         def save_replication(replication)
           local_replication = DPN::Workers::SyncReplication.new(replication, local_client, logger)
-          saved = local_replication.create_or_update
-          DPN::Workers::BagWorker.perform_async replication if saved
-          saved
+          local_replication.create_or_update
         end
     end
   end
