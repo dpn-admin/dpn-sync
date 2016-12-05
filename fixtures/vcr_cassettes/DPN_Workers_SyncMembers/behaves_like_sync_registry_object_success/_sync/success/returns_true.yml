@@ -8,11 +8,11 @@ http_interactions:
       string: 'null'
     headers:
       User-Agent:
-      - dpn-client-aptrust (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-aptrust (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -31,17 +31,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"1c37d05b0aa2da9483cabbb42ad7496e"
+      - W/"61d3fd69c0c6377b2cf5fe7435fae64b"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2d07adb7-e825-4ce3-926e-1091e0879ee5
+      - dfa18251-0663-4393-986f-e2fad0f52c32
       X-Runtime:
-      - '0.013611'
+      - '0.025041'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '970'
       Connection:
@@ -49,26 +49,26 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"count":5,"next":null,"previous":null,"results":[{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi
-        Test","email":"dpn_test@hathi.org","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"},{"member_id":"9a000000-0000-4000-a000-000000000004","name":"Greendale
-        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"},{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC
-        Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"},{"member_id":"9a000000-0000-4000-a000-000000000003","name":"Grand
-        Lakes University","email":"dangerfield@grandlakes.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"},{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber
-        College","email":"bluto@faber.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}]}'
+        Test","email":"dpn_test@hathi.org","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"},{"member_id":"9a000000-0000-4000-a000-000000000004","name":"Greendale
+        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"},{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC
+        Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"},{"member_id":"9a000000-0000-4000-a000-000000000003","name":"Grand
+        Lakes University","email":"dangerfield@grandlakes.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"},{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber
+        College","email":"bluto@faber.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}]}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/member/
     body:
       encoding: UTF-8
-      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -89,13 +89,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 6abbc7f1-170e-43e1-a75d-2cf5ef092f17
+      - a591b32d-dc15-45be-b459-a021651c15d5
       X-Runtime:
-      - '0.007198'
+      - '0.019067'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '0'
       Connection:
@@ -104,20 +104,20 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/member/fe908327-3635-43c2-9ca6-849485febcf3/
     body:
       encoding: UTF-8
-      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -136,40 +136,40 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"c15e15dffb3cba258521212cac652b73"
+      - W/"7b1730c51af9d18d51b492acc382001f"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f7d718b8-97aa-4513-b1ed-2b88be00fd93
+      - b0c8d237-f306-4fc4-ada9-9bb52202b761
       X-Runtime:
-      - '0.013920'
+      - '0.015195'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '173'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-11-08T00:16:53Z","updated_at":"2016-11-08T00:16:53Z"}'
+      string: '{"member_id":"fe908327-3635-43c2-9ca6-849485febcf3","name":"Hathi Test","email":"dpn_test@hathi.org","created_at":"2016-12-05T23:28:40Z","updated_at":"2016-12-05T23:28:40Z"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/member/
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000004","name":"Greendale
-        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -190,13 +190,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - c5f80215-a4f8-479c-aeaa-e00e10151016
+      - d49b560f-8859-4427-8f7d-b59542af93f3
       X-Runtime:
-      - '0.008367'
+      - '0.006684'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '0'
       Connection:
@@ -205,21 +205,21 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/member/9a000000-0000-4000-a000-000000000004/
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000004","name":"Greendale
-        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -238,17 +238,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"3b2be86fadd5bc4200534b3d9f8cefeb"
+      - W/"6835a715cbf1c6d3ae002681603a0e24"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9d007cd7-7b32-4279-a591-e339f6eebe9a
+      - 2405dc1c-bd56-40d8-a306-16cb932909e0
       X-Runtime:
-      - '0.020098'
+      - '0.022525'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '197'
       Connection:
@@ -256,22 +256,22 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000004","name":"Greendale
-        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-11-08T00:16:53Z","updated_at":"2016-11-08T00:16:53Z"}'
+        Community College","email":"lybrerien@greendalecc.edu","created_at":"2016-12-05T23:28:40Z","updated_at":"2016-12-05T23:28:40Z"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/member/
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -292,13 +292,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 589d7458-5cc3-4c39-9283-1cf1af4e5c96
+      - 906d0cb4-cb35-4c71-85c6-383735c87f4d
       X-Runtime:
-      - '0.008018'
+      - '0.007316'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '0'
       Connection:
@@ -307,20 +307,20 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/member/9a000000-0000-4000-a000-000000000001/
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -339,40 +339,40 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"8cdd000b5b482cfb58a7ae1a840849f9"
+      - W/"c004053f41c0e4256dbf2bb1f7a5e342"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c8b29f50-9a21-46d2-8a3d-73ccd6522f2b
+      - 8127190f-830f-4819-9617-c6da5654099d
       X-Runtime:
-      - '0.014719'
+      - '0.014296'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '178'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-11-08T00:16:53Z","updated_at":"2016-11-08T00:16:53Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000001","name":"UC Sunnydale","email":"buffy@ucsunnydale.edu","created_at":"2016-12-05T23:28:40Z","updated_at":"2016-12-05T23:28:40Z"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/member/
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
-        University","email":"dangerfield@grandlakes.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -393,13 +393,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - edb47d63-1d01-4eaf-8436-4d9c355d5b54
+      - 6f411af8-9a0e-4bc8-952a-f47b99a9f428
       X-Runtime:
-      - '0.008556'
+      - '0.007983'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '0'
       Connection:
@@ -408,21 +408,21 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/member/9a000000-0000-4000-a000-000000000003/
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
-        University","email":"dangerfield@grandlakes.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -441,17 +441,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"149d674d3967ebb23d92bc8c6f2ee5a2"
+      - W/"c19d531573d9dec1f66c13e45cb8a6d4"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - e2619b74-be36-4bf5-b651-a1d7538ff882
+      - 07d853d2-53eb-4e7f-b23f-379feb3c5c8a
       X-Runtime:
-      - '0.015298'
+      - '0.012751'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '193'
       Connection:
@@ -459,22 +459,22 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"member_id":"9a000000-0000-4000-a000-000000000003","name":"Grand Lakes
-        University","email":"dangerfield@grandlakes.edu","created_at":"2016-11-08T00:16:53Z","updated_at":"2016-11-08T00:16:53Z"}'
+        University","email":"dangerfield@grandlakes.edu","created_at":"2016-12-05T23:28:40Z","updated_at":"2016-12-05T23:28:40Z"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/member/
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -495,13 +495,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 4535fc4b-d85c-4be7-9845-a522948f7937
+      - e89a7b0c-f6d4-4000-b7dd-ed2284aaa093
       X-Runtime:
-      - '0.006605'
+      - '0.007031'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '0'
       Connection:
@@ -510,20 +510,20 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/member/9a000000-0000-4000-a000-000000000002/
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-11-08T00:16:46Z","updated_at":"2016-11-08T00:16:46Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-12-05T23:28:33Z","updated_at":"2016-12-05T23:28:33Z"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -542,24 +542,24 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"67c57df97234155b195e2965f44a7a86"
+      - W/"f53c691a778f7a6008bbdac8635890d4"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 1b571ed8-1c0f-45e1-9eae-a9e402df7ce1
+      - 2c764599-9d8d-45ca-958a-3430bf5c23ed
       X-Runtime:
-      - '0.016069'
+      - '0.012047'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:04 GMT
+      - Mon, 05 Dec 2016 23:30:46 GMT
       Content-Length:
       - '173'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-11-08T00:16:53Z","updated_at":"2016-11-08T00:16:53Z"}'
+      string: '{"member_id":"9a000000-0000-4000-a000-000000000002","name":"Faber College","email":"bluto@faber.edu","created_at":"2016-12-05T23:28:40Z","updated_at":"2016-12-05T23:28:40Z"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:04 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
 recorded_with: VCR 3.0.3
