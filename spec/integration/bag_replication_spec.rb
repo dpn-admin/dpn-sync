@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe DPN::Workers::BagReplication, :vcr do
-  let(:admin_node) { nodes.node('hathi') }
+  let(:admin_node) { nodes.node('chron') }
 
   # let(:settings) { SyncSettings.replication }
 
@@ -16,6 +16,11 @@ describe DPN::Workers::BagReplication, :vcr do
   it 'works' do
     # Get a replication from an admin node for this local node.
     repl = replication_transfer
+    # Ensure that this test replication transfer has logical fields that
+    # require the bag to be transferred.
+    expect(repl[:store_requested]).to be true
+    expect(repl[:stored]).to be false
+    expect(repl[:cancelled]).to be false
     if ENV['TRAVIS']
       # Replace the replication file :link with a fixture file; this is
       # required for an integration test to pass on travis.ci
