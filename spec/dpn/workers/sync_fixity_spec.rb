@@ -2,7 +2,7 @@
 require 'spec_helper'
 require 'shared_examples/sync_content'
 
-describe DPN::Workers::SyncFixity, :vcr do
+describe DPN::Workers::SyncFixity do
   let(:fixity) do
     {
       fixity_check_id: uuid,
