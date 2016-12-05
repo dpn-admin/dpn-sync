@@ -3,69 +3,69 @@ require 'spec_helper'
 
 describe DPN::Workers::BagReplication, :vcr do
   let(:settings) { SyncSettings.replication }
-  let(:subject) { described_class.new replication }
+  let(:replicator) { described_class.new replication }
 
   it 'works' do
-    expect(subject).to be_an described_class
-    expect(subject).to respond_to(:replicate)
-    expect(subject).to respond_to(:id)
-    expect(subject).to respond_to(:bag_id)
-    expect(subject).to respond_to(:to_h)
+    expect(replicator).to be_an described_class
+    expect(replicator).to respond_to(:replicate)
+    expect(replicator).to respond_to(:id)
+    expect(replicator).to respond_to(:bag_id)
+    expect(replicator).to respond_to(:to_h)
   end
 
   it 'has private accessors for replication data' do
     replication.keys do |key|
-      expect { subject.send(key) }.not_to raise_error
-      expect(subject.send(key)).to eq(replication[key])
+      expect { replicator.send(key) }.not_to raise_error
+      expect(replicator.send(key)).to eq(replication[key])
     end
   end
 
   describe '#id' do
     it 'works' do
-      expect(subject.id).not_to be_nil
+      expect(replicator.id).not_to be_nil
     end
     it 'returns a String' do
-      expect(subject.id).to be_an String
+      expect(replicator.id).to be_an String
     end
     it 'returns the replication[:replication_id] argument' do
-      expect(subject.id).to eq replication[:replication_id]
+      expect(replicator.id).to eq replication[:replication_id]
     end
   end
 
   describe '#bag_id' do
     it 'works' do
-      expect(subject.bag_id).not_to be_nil
+      expect(replicator.bag_id).not_to be_nil
     end
     it 'returns a String' do
-      expect(subject.bag_id).to be_an String
+      expect(replicator.bag_id).to be_an String
     end
     it 'returns the replication[:bag] argument' do
-      expect(subject.bag_id).to eq replication[:bag]
+      expect(replicator.bag_id).to eq replication[:bag]
     end
   end
 
   describe '#replicate' do
     it "checks if the replication was cancelled" do
-      expect(subject).to receive(:retrieve)
-      expect(subject).to receive(:cancelled).and_return(false)
-      subject.replicate
+      expect(replicator).to receive(:retrieve)
+      expect(replicator).to receive(:cancelled).and_return(false)
+      replicator.replicate
     end
 
     shared_examples 'do_nothing' do
       it "returns a boolean result" do
-        expect(subject.replicate).to be result
+        expect(replicator.replicate).to be result
       end
       it "does not initiate replication tasks" do
-        expect(subject).not_to receive(:retrieve)
-        expect(subject).not_to receive(:preserve)
-        expect(subject.replicate).to be result
+        expect(replicator).not_to receive(:retrieve)
+        expect(replicator).not_to receive(:preserve)
+        expect(replicator.replicate).to be result
       end
     end
 
     context "when the replication is cancelled" do
       let(:result) { false }
       before do
-        expect(subject).to receive(:cancelled).and_return(true)
+        expect(replicator).to receive(:cancelled).and_return(true)
       end
       it_behaves_like 'do_nothing'
     end
@@ -73,31 +73,31 @@ describe DPN::Workers::BagReplication, :vcr do
     context "when the replication is 'stored'" do
       let(:result) { true }
       before do
-        expect(subject).to receive(:stored).and_return(true)
+        expect(replicator).to receive(:stored).and_return(true)
       end
       it_behaves_like 'do_nothing'
     end
 
     context "when the replication is not 'cancelled' or 'stored'" do
       it 'performs replication tasks' do
-        expect(subject).to receive(:retrieve).once.and_return(true)
-        expect(subject).to receive(:preserve).once.and_return(true)
-        expect(subject).to receive(:cancelled).and_return(false)
-        expect(subject).to receive(:stored).and_return(false)
-        expect(subject.replicate).to be true
+        expect(replicator).to receive(:retrieve).once.and_return(true)
+        expect(replicator).to receive(:preserve).once.and_return(true)
+        expect(replicator).to receive(:cancelled).and_return(false)
+        expect(replicator).to receive(:stored).and_return(false)
+        expect(replicator.replicate).to be true
       end
     end
   end
 
   describe '#to_h' do
     it 'works' do
-      expect(subject.to_h).not_to be_nil
+      expect(replicator.to_h).not_to be_nil
     end
     it 'returns a Hash' do
-      expect(subject.to_h).to be_an Hash
+      expect(replicator.to_h).to be_an Hash
     end
     it 'returns the replication argument (when there are no updates)' do
-      expect(subject.to_h).to eq replication
+      expect(replicator.to_h).to eq replication
     end
   end
 
@@ -105,7 +105,7 @@ describe DPN::Workers::BagReplication, :vcr do
   # PRIVATE
 
   describe "#file" do
-    let(:file) { subject.send(:file) }
+    let(:file) { replicator.send(:file) }
     it "works" do
       expect(file).not_to be_nil
     end
@@ -120,37 +120,37 @@ describe DPN::Workers::BagReplication, :vcr do
 
   describe '#preserve' do
     it 'does preservation tasks when !cancelled && !stored && store_requested' do
-      expect(subject).to receive(:cancelled).and_return(false)
-      expect(subject).to receive(:stored).and_return(false)
-      expect(subject).to receive(:store_requested).and_return(true)
-      expect(subject).to receive(:preserve_rsync).and_return(true)
-      expect(subject).to receive(:preserve_validate).and_return(true)
-      expect(subject).to receive(:update_replication).and_return(true)
-      subject.send(:preserve)
+      expect(replicator).to receive(:cancelled).and_return(false)
+      expect(replicator).to receive(:stored).and_return(false)
+      expect(replicator).to receive(:store_requested).and_return(true)
+      expect(replicator).to receive(:preserve_rsync).and_return(true)
+      expect(replicator).to receive(:preserve_validate).and_return(true)
+      expect(replicator).to receive(:update_replication).and_return(true)
+      replicator.send(:preserve)
     end
 
     context "when the replication is 'stored'" do
       it 'returns true without doing any preservation tasks' do
-        expect(subject).to receive(:stored).and_return(true)
-        expect(subject).not_to receive(:preserve_rsync)
-        expect(subject).not_to receive(:preserve_validate)
-        expect(subject).not_to receive(:update_replication)
-        expect(subject.send(:preserve)).to be true
+        expect(replicator).to receive(:stored).and_return(true)
+        expect(replicator).not_to receive(:preserve_rsync)
+        expect(replicator).not_to receive(:preserve_validate)
+        expect(replicator).not_to receive(:update_replication)
+        expect(replicator.send(:preserve)).to be true
       end
     end
 
     context "when the replication is 'cancelled'" do
       before do
-        expect(subject).to receive(:cancelled).and_return(true)
+        expect(replicator).to receive(:cancelled).and_return(true)
       end
       it 'returns false' do
-        expect(subject.send(:preserve)).to be false
+        expect(replicator.send(:preserve)).to be false
       end
       it 'does not initiate preservation tasks' do
-        expect(subject).not_to receive(:preserve_rsync)
-        expect(subject).not_to receive(:preserve_validate)
-        expect(subject).not_to receive(:update_replication)
-        expect(subject.send(:preserve)).to be false
+        expect(replicator).not_to receive(:preserve_rsync)
+        expect(replicator).not_to receive(:preserve_validate)
+        expect(replicator).not_to receive(:update_replication)
+        expect(replicator.send(:preserve)).to be false
       end
     end
   end
@@ -161,7 +161,7 @@ describe DPN::Workers::BagReplication, :vcr do
     context 'rsync mock behavior' do
       before do
         allow(bagit).to receive(:location).and_return('a_bag_location')
-        allow(subject).to receive(:bagit).and_return(bagit)
+        allow(replicator).to receive(:bagit).and_return(bagit)
         expect(DPN::Workers::BagRsync).to receive(:new).and_return(bag_sync)
       end
       it 'works' do
@@ -176,24 +176,24 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#preserve_rsync" do
-    let(:rsync) { subject.send(:preserve_rsync) }
+    let(:rsync) { replicator.send(:preserve_rsync) }
     it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
-      let(:bagit) { subject.send(:bagit) }
-      let(:storage_path) { subject.send(:storage_path) }
+      let(:bagit) { replicator.send(:bagit) }
+      let(:storage_path) { replicator.send(:storage_path) }
       before do
         # perform retrieval tasks so a bag is available for preservation
-        expect(subject.send(:retrieve_rsync)).to be true
-        expect(subject.send(:retrieve_validate)).to be true
+        expect(replicator.send(:retrieve_rsync)).to be true
+        expect(replicator.send(:retrieve_validate)).to be true
         expect(File.exist?(storage_path)).to be true
         expect(File.exist?(bagit.location)).to be true
       end
       it 'works' do
-        bag_path_before = subject.send(:bagit_path)
+        bag_path_before = replicator.send(:bagit_path)
         expect(File.exist?(bag_path_before)).to be true
-        expect(subject.send(:preserve_rsync)).to be true
-        expect(subject.send(:preserve_validate)).to be true
-        bag_path_after = subject.send(:bagit_path)
+        expect(replicator.send(:preserve_rsync)).to be true
+        expect(replicator.send(:preserve_validate)).to be true
+        bag_path_after = replicator.send(:bagit_path)
         expect(File.exist?(bag_path_after)).to be true
         expect(bag_path_before).not_to eq bag_path_after
       end
@@ -201,7 +201,7 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#remote_node" do
-    let(:remote_node) { subject.send(:remote_node) }
+    let(:remote_node) { replicator.send(:remote_node) }
     it "works" do
       expect(remote_node).not_to be_nil
     end
@@ -215,63 +215,63 @@ describe DPN::Workers::BagReplication, :vcr do
 
   describe '#retrieve' do
     it 'returns true after all retrieval tasks succeed' do
-      allow(subject).to receive(:retrieve_rsync).and_return(true)
-      allow(subject).to receive(:retrieve_validate).and_return(true)
-      allow(subject).to receive(:retrieve_fixity).and_return(true)
-      allow(subject).to receive(:retrieve_success?).and_return(true)
-      expect(subject.send(:retrieve)).to be true
+      allow(replicator).to receive(:retrieve_rsync).and_return(true)
+      allow(replicator).to receive(:retrieve_validate).and_return(true)
+      allow(replicator).to receive(:retrieve_fixity).and_return(true)
+      allow(replicator).to receive(:retrieve_success?).and_return(true)
+      expect(replicator.send(:retrieve)).to be true
     end
     it 'returns false when retrieve_rsync fails' do
-      allow(subject).to receive(:retrieve_rsync).and_return(false)
-      expect(subject).not_to receive(:retrieve_validate)
-      expect(subject).not_to receive(:retrieve_fixity)
-      expect(subject).not_to receive(:retrieve_success?)
-      expect(subject.send(:retrieve)).to be false
+      allow(replicator).to receive(:retrieve_rsync).and_return(false)
+      expect(replicator).not_to receive(:retrieve_validate)
+      expect(replicator).not_to receive(:retrieve_fixity)
+      expect(replicator).not_to receive(:retrieve_success?)
+      expect(replicator.send(:retrieve)).to be false
     end
     it 'returns false when retrieve_validate fails' do
-      allow(subject).to receive(:retrieve_rsync).and_return(true)
-      allow(subject).to receive(:retrieve_validate).and_return(false)
-      expect(subject).not_to receive(:retrieve_fixity)
-      expect(subject).not_to receive(:retrieve_success?)
-      expect(subject.send(:retrieve)).to be false
+      allow(replicator).to receive(:retrieve_rsync).and_return(true)
+      allow(replicator).to receive(:retrieve_validate).and_return(false)
+      expect(replicator).not_to receive(:retrieve_fixity)
+      expect(replicator).not_to receive(:retrieve_success?)
+      expect(replicator.send(:retrieve)).to be false
     end
     it 'returns false when retrieve_fixity fails' do
-      allow(subject).to receive(:retrieve_rsync).and_return(true)
-      allow(subject).to receive(:retrieve_validate).and_return(true)
-      allow(subject).to receive(:retrieve_fixity).and_return(false)
-      expect(subject).not_to receive(:retrieve_success?)
-      expect(subject.send(:retrieve)).to be false
+      allow(replicator).to receive(:retrieve_rsync).and_return(true)
+      allow(replicator).to receive(:retrieve_validate).and_return(true)
+      allow(replicator).to receive(:retrieve_fixity).and_return(false)
+      expect(replicator).not_to receive(:retrieve_success?)
+      expect(replicator.send(:retrieve)).to be false
     end
     it 'returns false when retrieve_success? fails' do
-      allow(subject).to receive(:retrieve_rsync).and_return(true)
-      allow(subject).to receive(:retrieve_validate).and_return(true)
-      allow(subject).to receive(:retrieve_fixity).and_return(true)
-      allow(subject).to receive(:retrieve_success?).and_return(false)
-      expect(subject.send(:retrieve)).to be false
+      allow(replicator).to receive(:retrieve_rsync).and_return(true)
+      allow(replicator).to receive(:retrieve_validate).and_return(true)
+      allow(replicator).to receive(:retrieve_fixity).and_return(true)
+      allow(replicator).to receive(:retrieve_success?).and_return(false)
+      expect(replicator.send(:retrieve)).to be false
     end
     it 'allows exceptions from any retrieve processes' do
-      allow(subject).to receive(:retrieve_rsync).and_raise('failed rsync')
-      expect(subject).not_to receive(:retrieve_validate)
-      expect(subject).not_to receive(:retrieve_fixity)
-      expect(subject).not_to receive(:retrieve_success?)
-      expect { subject.send(:retrieve) }.to raise_error(RuntimeError)
+      allow(replicator).to receive(:retrieve_rsync).and_raise('failed rsync')
+      expect(replicator).not_to receive(:retrieve_validate)
+      expect(replicator).not_to receive(:retrieve_fixity)
+      expect(replicator).not_to receive(:retrieve_success?)
+      expect { replicator.send(:retrieve) }.to raise_error(RuntimeError)
     end
   end
 
   describe "#retrieve_bagit" do
-    let(:bagit) { subject.send(:bagit) }
-    let(:bagit_id) { subject.bag_id }
-    let(:bagit_path) { subject.send(:bagit_path) }
-    let(:retrieve_path) { subject.send(:retrieve_path) }
+    let(:bagit) { replicator.send(:bagit) }
+    let(:bagit_id) { replicator.bag_id }
+    let(:bagit_path) { replicator.send(:bagit_path) }
+    let(:retrieve_path) { replicator.send(:retrieve_path) }
     context 'unpack a .tar archive file' do
       before do
         # perform retrieval tasks so a .tar file is available
-        expect(subject.send(:retrieve_rsync)).to be true
+        expect(replicator.send(:retrieve_rsync)).to be true
         expect(File.exist?(retrieve_path)).to be true
         expect(retrieve_path).to end_with '.tar'
       end
       it 'works' do
-        expect(subject.send(:retrieve_bagit)).to be true
+        expect(replicator.send(:retrieve_bagit)).to be true
         expect(File.exist?(bagit_path)).to be true
         expect(bagit_path).to end_with(bagit_id + File::SEPARATOR)
       end
@@ -279,31 +279,31 @@ describe DPN::Workers::BagReplication, :vcr do
     context 'create bagit bag from a bagit directory' do
       before do
         # perform retrieval and unpack a bagit .tar
-        expect(subject.send(:retrieve_rsync)).to be true
+        expect(replicator.send(:retrieve_rsync)).to be true
         expect(File.exist?(retrieve_path)).to be true
         expect(retrieve_path).to end_with '.tar'
-        expect(subject.send(:retrieve_bagit)).to be true
+        expect(replicator.send(:retrieve_bagit)).to be true
       end
       it 'works' do
         # mock the retrieve_path so it gets the unpacked bag instead of a .tar
-        expect(subject).to receive(:retrieve_path).at_least(:once).and_return(bagit.location)
-        retrieve_path = subject.send(:retrieve_path)
+        expect(replicator).to receive(:retrieve_path).at_least(:once).and_return(bagit.location)
+        retrieve_path = replicator.send(:retrieve_path)
         expect(File.directory?(retrieve_path)).to be true
-        expect(subject.send(:retrieve_bagit)).to be true
+        expect(replicator.send(:retrieve_bagit)).to be true
         expect(File.exist?(bagit_path)).to be true
         expect(bagit_path).to end_with(bagit_id + File::SEPARATOR)
-        expect(subject.send(:validate)).to be true
+        expect(replicator.send(:validate)).to be true
       end
     end
     context 'cannot create a bagit bag from files that do not end with ".tar"' do
       before do
         # mock the retrieve_path so it returns a file name that can't work
-        allow(subject).to receive(:retrieve_path).and_return('file.tar.gz')
-        retrieve_path = subject.send(:retrieve_path)
+        allow(replicator).to receive(:retrieve_path).and_return('file.tar.gz')
+        retrieve_path = replicator.send(:retrieve_path)
         expect(File.directory?(retrieve_path)).to be false
       end
       it 'raises RuntimeError' do
-        expect { subject.send(:retrieve_bagit) }.to raise_error(RuntimeError)
+        expect { replicator.send(:retrieve_bagit) }.to raise_error(RuntimeError)
       end
     end
   end
@@ -312,20 +312,20 @@ describe DPN::Workers::BagReplication, :vcr do
     context 'calculates fixity on a bagit bag' do
       before do
         # perform retrieval tasks so a bagit bag has a fixity value
-        expect(subject.send(:retrieve_rsync)).to be true
-        expect(subject.send(:retrieve_bagit)).to be true
-        expect(File.directory?(subject.send(:bagit_path))).to be true
-        expect(subject.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
+        expect(replicator.send(:retrieve_rsync)).to be true
+        expect(replicator.send(:retrieve_bagit)).to be true
+        expect(File.directory?(replicator.send(:bagit_path))).to be true
+        expect(replicator.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
       end
       it 'works when the remote node accepts the fixity_value' do
-        expect(subject).to receive(:update_replication).and_return(true)
-        expect(subject).to receive(:store_requested).twice.and_return(true)
-        expect(subject.send(:retrieve_success?)).to be true
+        expect(replicator).to receive(:update_replication).and_return(true)
+        expect(replicator).to receive(:store_requested).twice.and_return(true)
+        expect(replicator.send(:retrieve_success?)).to be true
       end
       it 'raises RuntimeError when the remote node rejects the fixity_value' do
-        expect(subject).to receive(:update_replication).and_return(true)
-        expect(subject).to receive(:store_requested).and_return(false)
-        expect { subject.send(:retrieve_success?) }.to raise_error(RuntimeError)
+        expect(replicator).to receive(:update_replication).and_return(true)
+        expect(replicator).to receive(:store_requested).and_return(false)
+        expect { replicator.send(:retrieve_success?) }.to raise_error(RuntimeError)
       end
     end
   end
@@ -334,24 +334,24 @@ describe DPN::Workers::BagReplication, :vcr do
     context 'calculates fixity on a bagit bag' do
       before do
         # perform retrieval tasks so a bagit bag is available
-        expect(subject.send(:retrieve_rsync)).to be true
-        expect(subject.send(:retrieve_bagit)).to be true
-        expect(File.directory?(subject.send(:bagit_path))).to be true
+        expect(replicator.send(:retrieve_rsync)).to be true
+        expect(replicator.send(:retrieve_bagit)).to be true
+        expect(File.directory?(replicator.send(:bagit_path))).to be true
       end
       it 'works' do
-        expect(subject.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
+        expect(replicator.send(:retrieve_fixity)).to eq 'cd9c918c4ca76842febfc70ed27873c70a7e98f436bd2061e4b714092ffcae5b'
       end
     end
     it 'raises RuntimeError when a bagit bag is not available' do
-      expect(subject).to receive(:bagit).and_return(nil)
-      expect { subject.send(:retrieve_fixity) }.to raise_error(RuntimeError)
+      expect(replicator).to receive(:bagit).and_return(nil)
+      expect { replicator.send(:retrieve_fixity) }.to raise_error(RuntimeError)
     end
   end
 
   describe "#retrieve_path" do
-    let(:file) { subject.send(:file) }
-    let(:retrieve_path) { subject.send(:retrieve_path) }
-    let(:staging_path) { subject.send(:staging_path) }
+    let(:file) { replicator.send(:file) }
+    let(:retrieve_path) { replicator.send(:retrieve_path) }
+    let(:staging_path) { replicator.send(:staging_path) }
     before do
       # assume an rsync transfer has already completed successfully
       allow(File).to receive(:exist?).and_return(true)
@@ -371,12 +371,12 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#retrieve_rsync" do
-    let(:rsync) { subject.send(:retrieve_rsync) }
+    let(:rsync) { replicator.send(:retrieve_rsync) }
     it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
-      let(:link) { subject.send(:link) }
-      let(:staging_path) { subject.send(:staging_path) }
-      let(:retrieve_path) { subject.send(:retrieve_path) }
+      let(:link) { replicator.send(:link) }
+      let(:staging_path) { replicator.send(:staging_path) }
+      let(:retrieve_path) { replicator.send(:retrieve_path) }
       before do
         expect(File.exist?(link)).to be true
         expect(File.exist?(staging_path)).to be true
@@ -389,7 +389,7 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#staging_path" do
-    let(:staging_path) { subject.send(:staging_path) }
+    let(:staging_path) { replicator.send(:staging_path) }
     it "works" do
       expect(staging_path).not_to be_nil
     end
@@ -403,7 +403,7 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#storage_path" do
-    let(:storage_path) { subject.send(:storage_path) }
+    let(:storage_path) { replicator.send(:storage_path) }
     it "works" do
       expect(storage_path).not_to be_nil
     end
@@ -417,13 +417,13 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#update_replication" do
-    let(:update) { subject.send(:update_replication) }
-    let(:client) { subject.send(:remote_node).client }
+    let(:update) { replicator.send(:update_replication) }
+    let(:client) { replicator.send(:remote_node).client }
     let(:response) { double(DPN::Client::Response) }
     context 'success' do
       before do
         allow(response).to receive(:success?).and_return(true)
-        allow(response).to receive(:body).and_return(subject.to_h)
+        allow(response).to receive(:body).and_return(replicator.to_h)
         expect(client).to receive(:update_replication).and_return(response)
       end
       it 'works' do
@@ -437,14 +437,14 @@ describe DPN::Workers::BagReplication, :vcr do
       # simulate calculating the bagit fixity
       replication_changed = replication.dup
       replication_changed[:fixity_value] = 'abc123'
-      subject.instance_variable_set('@_replication', OpenStruct.new(replication_changed))
-      expect(subject.to_h).not_to eq(replication)
+      replicator.instance_variable_set('@_replication', OpenStruct.new(replication_changed))
+      expect(replicator.to_h).not_to eq(replication)
       # simulate and HTTP update for the replication
       expect(response).to receive(:success?).and_return(true)
       expect(response).to receive(:body).and_return(replication_changed)
       expect(client).to receive(:update_replication).with(replication_changed).and_return(response)
-      expect(subject.send(:update_replication)).to be true
-      expect(subject.to_h).to eq(replication_changed)
+      expect(replicator.send(:update_replication)).to be true
+      expect(replicator.to_h).to eq(replication_changed)
     end
     it "raises RuntimeError when the remote_node update request fails" do
       allow(response).to receive(:success?).and_return(false)
@@ -455,10 +455,10 @@ describe DPN::Workers::BagReplication, :vcr do
   end
 
   describe "#validate" do
-    let(:validate) { subject.send(:validate) }
+    let(:validate) { replicator.send(:validate) }
     let(:bagit) { double(DPN::Bagit::Bag) }
     before do
-      allow(subject).to receive(:bagit).and_return(bagit)
+      allow(replicator).to receive(:bagit).and_return(bagit)
     end
     it "works" do
       expect(bagit).to receive(:valid?).and_return(true)
