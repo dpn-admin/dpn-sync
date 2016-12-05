@@ -3,11 +3,15 @@
 require 'single_cov'
 SingleCov.setup :rspec
 
-require 'codacy-coverage'
-Codacy::Reporter.start
-
 require 'simplecov'
-SimpleCov.profiles.define 'dpn-sync' do
+require 'codacy-coverage'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [
+    SimpleCov::Formatter::HTMLFormatter,
+    Codacy::Formatter
+  ]
+)
+SimpleCov.start do
   add_filter '.gems'
   add_filter '/config/environments/'
   add_filter 'pkg'
@@ -18,7 +22,6 @@ SimpleCov.profiles.define 'dpn-sync' do
   # dataset for comparison, so it can't fail a travis build.
   maximum_coverage_drop 0.1
 end
-SimpleCov.start 'dpn-sync'
 
 ENV['RACK_ENV'] = 'test'
 require 'bundler'
