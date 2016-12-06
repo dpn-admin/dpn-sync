@@ -50,6 +50,11 @@ sync_replications:
   class: "DPN::Workers::SyncWorker"
   args: "DPN::Workers::SyncReplications"
 
+# BagTransfers, after SyncReplications, every day at 7am
+bag_replications:
+  cron: "00 07 * * *"
+  class: "DPN::Workers::BagReplications"
+
 # SyncMembers every day at 2am
 sync_members:
   cron: "00 02 * * *"

@@ -14,6 +14,7 @@ require_relative 'workers/nodes'
 require_relative 'workers/bag_paths'
 require_relative 'workers/bag_rsync'
 require_relative 'workers/bag_replication'
+require_relative 'workers/bag_replications'
 
 # Sidekiq worker libraries
 require_relative 'workers/job_data'
@@ -44,7 +45,6 @@ require_relative 'workers/sync_replications'
 require_relative 'workers/test_messages'
 
 # Sidekiq workers
-require_relative 'workers/bag_worker'
 require_relative 'workers/sync_worker'
 require_relative 'workers/test_worker'
 

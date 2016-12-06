@@ -1,16 +1,16 @@
 ---
-DuplicateMethodCall:
-  exclude:
-  - DPN::Workers::BagReplication#update_replication
-TooManyInstanceVariables:
+InstanceVariableAssumption:
   exclude:
   - DPN::Workers::BagReplication
-  - DPN::Workers::BagRsync
 TooManyMethods:
   exclude:
   - DPN::Workers::BagReplication
+TooManyStatements:
+  exclude:
+  - initialize
+  - DPN::Workers::Nodes#sync_data
+  - DPN::Workers::SyncNodes#save_remote_node
 UtilityFunction:
   exclude:
-  - DPN::Workers::BagWorker#perform
   - DPN::Workers::SyncWorker#perform
   - cleanup_path

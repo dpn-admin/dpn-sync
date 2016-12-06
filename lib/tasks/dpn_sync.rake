@@ -8,6 +8,11 @@ namespace :dpn do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncBags"
     end
 
+    desc "DPN - queue a job that will queue bag replication transfers"
+    task :bag_replications do
+      DPN::Workers::BagReplications.perform_async
+    end
+
     desc "DPN - queue a job to fetch digest meta-data from remote nodes"
     task :digests do
       DPN::Workers::SyncWorker.perform_async "DPN::Workers::SyncDigests"
