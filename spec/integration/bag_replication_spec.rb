@@ -24,7 +24,8 @@ describe DPN::Workers::BagReplication, :vcr do
     if ENV['TRAVIS']
       # Replace the replication file :link with a fixture file; this is
       # required for an integration test to pass on travis.ci
-      local_tarfile = File.join(Dir.pwd, 'fixtures', 'testbags', '00000000-0000-4000-a000-000000000003.tar')
+      tar_filename = File.basename repl[:link]
+      local_tarfile = File.join(Dir.pwd, 'fixtures', 'testbags', tar_filename)
       expect(File.exist?(local_tarfile)).to be true
       repl[:link] = local_tarfile
     end
