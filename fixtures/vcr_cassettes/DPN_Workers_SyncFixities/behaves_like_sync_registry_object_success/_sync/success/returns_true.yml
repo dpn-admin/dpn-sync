@@ -8,11 +8,11 @@ http_interactions:
       string: 'null'
     headers:
       User-Agent:
-      - dpn-client-aptrust (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-aptrust (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 2c412edb-42c0-4e0f-958d-0430e81a2684
+      - 488320b7-e114-4d1f-8b13-357aa6bec640
       X-Runtime:
-      - '0.020623'
+      - '0.031809'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
       - '1076'
       Connection:
@@ -50,7 +50,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":5,"next":null,"previous":null,"results":[{"fixity_check_id":"1729db55-13d3-467b-8b6d-7cc21d88a48a","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"sdr"},{"fixity_check_id":"d30b787b-5fd1-441e-960d-024db9367615","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"tdr"},{"fixity_check_id":"99be34a2-ea07-4b49-b5fc-0da10255ac76","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"aptrust"},{"fixity_check_id":"a2047393-2bed-482f-86bc-1153c89746f1","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"chron"},{"fixity_check_id":"71effd33-a23a-40ee-8e14-84a7d5ae9931","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"hathi"}]}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:02 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/fixity_check/
@@ -59,19 +59,19 @@ http_interactions:
       string: '{"fixity_check_id":"1729db55-13d3-467b-8b6d-7cc21d88a48a","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"sdr"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:02 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
       - Token sdr_token
   response:
     status:
-      code: 409
-      message: 'Conflict '
+      code: 201
+      message: 'Created '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -80,26 +80,28 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Content-Type:
-      - text/plain; charset=utf-8
+      - application/json; charset=utf-8
+      Etag:
+      - W/"11743c57170d03e61c90d327784b031b"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - dfa908fc-1a09-4122-8ac2-5e6515ce2f17
+      - 23f31fd2-2723-4b94-bca3-3be595f6078b
       X-Runtime:
-      - '0.009675'
+      - '0.039259'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
-      - '0'
+      - '202'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '{"fixity_check_id":"1729db55-13d3-467b-8b6d-7cc21d88a48a","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"sdr"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/fixity_check/
@@ -108,19 +110,19 @@ http_interactions:
       string: '{"fixity_check_id":"d30b787b-5fd1-441e-960d-024db9367615","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"tdr"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
       - Token sdr_token
   response:
     status:
-      code: 409
-      message: 'Conflict '
+      code: 201
+      message: 'Created '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -129,26 +131,28 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Content-Type:
-      - text/plain; charset=utf-8
+      - application/json; charset=utf-8
+      Etag:
+      - W/"d18aed3b985bd1fabc53ee26c6e8902b"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 462fb72f-3c7d-4538-a2ce-a5e3685de870
+      - 1a3cb1fa-85e2-4000-9fab-bf1bcf148a65
       X-Runtime:
-      - '0.007310'
+      - '0.016798'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
-      - '0'
+      - '203'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '{"fixity_check_id":"d30b787b-5fd1-441e-960d-024db9367615","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"tdr"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/fixity_check/
@@ -157,19 +161,19 @@ http_interactions:
       string: '{"fixity_check_id":"99be34a2-ea07-4b49-b5fc-0da10255ac76","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"aptrust"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
       - Token sdr_token
   response:
     status:
-      code: 409
-      message: 'Conflict '
+      code: 201
+      message: 'Created '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -178,26 +182,28 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Content-Type:
-      - text/plain; charset=utf-8
+      - application/json; charset=utf-8
+      Etag:
+      - W/"6d96f4a24b8c70ff60d50ae729920bbe"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3f2a925c-8500-4ec3-90ef-89ae45aa2bc2
+      - fec89f8b-8abb-4937-b510-5d0049ab522e
       X-Runtime:
-      - '0.009830'
+      - '0.019250'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
-      - '0'
+      - '206'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '{"fixity_check_id":"99be34a2-ea07-4b49-b5fc-0da10255ac76","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"aptrust"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/fixity_check/
@@ -206,19 +212,19 @@ http_interactions:
       string: '{"fixity_check_id":"a2047393-2bed-482f-86bc-1153c89746f1","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"chron"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
       - Token sdr_token
   response:
     status:
-      code: 409
-      message: 'Conflict '
+      code: 201
+      message: 'Created '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -227,26 +233,28 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Content-Type:
-      - text/plain; charset=utf-8
+      - application/json; charset=utf-8
+      Etag:
+      - W/"0c05e53e3caf7840fc1bb2bd8dd3b2bd"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 85c34e30-b464-4da5-879e-296af33dc2f2
+      - 79a40b21-7dfe-4cb1-b1a4-f5843061405b
       X-Runtime:
-      - '0.020658'
+      - '0.018206'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
-      - '0'
+      - '204'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '{"fixity_check_id":"a2047393-2bed-482f-86bc-1153c89746f1","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":true,"bag":"00000000-0000-4000-a000-000000000001","node":"chron"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/fixity_check/
@@ -255,19 +263,19 @@ http_interactions:
       string: '{"fixity_check_id":"71effd33-a23a-40ee-8e14-84a7d5ae9931","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"hathi"}'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.3.1 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Type:
       - application/json
       Authorization:
       - Token sdr_token
   response:
     status:
-      code: 409
-      message: 'Conflict '
+      code: 201
+      message: 'Created '
     headers:
       X-Frame-Options:
       - SAMEORIGIN
@@ -276,24 +284,26 @@ http_interactions:
       X-Content-Type-Options:
       - nosniff
       Content-Type:
-      - text/plain; charset=utf-8
+      - application/json; charset=utf-8
+      Etag:
+      - W/"42dafdf824a491640fed51812c87be7a"
       Cache-Control:
-      - no-cache
+      - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 6788468b-1603-45a6-b3eb-db57ccb900ad
+      - 7641d26a-5f8f-4437-b68a-c0d32979b60e
       X-Runtime:
-      - '0.007384'
+      - '0.020944'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Tue, 08 Nov 2016 22:45:03 GMT
+      - Mon, 05 Dec 2016 23:30:45 GMT
       Content-Length:
-      - '0'
+      - '205'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: ''
+      string: '{"fixity_check_id":"71effd33-a23a-40ee-8e14-84a7d5ae9931","created_at":"2015-09-15T17:56:03Z","fixity_at":"2015-09-15T17:56:03Z","success":false,"bag":"00000000-0000-4000-a000-000000000001","node":"hathi"}'
     http_version: 
-  recorded_at: Tue, 08 Nov 2016 22:45:03 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
 recorded_with: VCR 3.0.3

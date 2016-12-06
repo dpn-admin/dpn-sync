@@ -22,7 +22,7 @@ gem 'rake'
 
 # DPN
 gem 'dpn-bagit', '~>0.3'
-gem 'dpn-client', '~>2.0', git: 'https://github.com/dpn-admin/dpn-client.git'
+gem 'dpn-client', '~>2.0'
 gem 'rpairtree'
 gem 'rsync'
 

@@ -8,11 +8,11 @@ http_interactions:
       string: 'null'
     headers:
       User-Agent:
-      - dpn-client-sdr (2.6.0.1, ruby 2.2.5 (2016-04-26))
+      - dpn-client-sdr (2.8.2.4, ruby 2.3.1 (2016-04-26))
       Accept:
       - "*/*"
       Date:
-      - Wed, 12 Oct 2016 18:13:16 GMT
+      - Mon, 05 Dec 2016 23:30:43 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 68585053-c382-4584-9d89-46841278b280
+      - e3c28d34-eae5-4b21-b45f-3d28062e3c24
       X-Runtime:
-      - '0.031428'
+      - '0.031332'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Wed, 12 Oct 2016 18:13:16 GMT
+      - Mon, 05 Dec 2016 23:30:43 GMT
       Content-Length:
       - '425'
       Connection:
@@ -51,5 +51,5 @@ http_interactions:
       string: '{"name":"Stanford Digital Repository","namespace":"sdr","api_root":"http://127.0.0.1:3004","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","tdr"],"replicate_to":["tdr","hathi","chron","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Wed, 12 Oct 2016 18:13:16 GMT
+  recorded_at: Mon, 05 Dec 2016 23:30:43 GMT
 recorded_with: VCR 3.0.3
