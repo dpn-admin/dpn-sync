@@ -81,3 +81,43 @@ def cleanup_path(dir)
   path = File.join(dir, '*')
   FileUtils.rm_rf(Dir.glob(path))
 end
+
+# Nodes are defined in SyncSettings.nodes
+# @see config/settings.yml, config/settings/test.yml
+def nodes
+  @nodes ||= DPN::Workers.nodes
+end
+
+def local_node
+  nodes.local_node
+end
+
+def remote_node
+  @remote_node ||= nodes.remote_nodes.first
+end
+
+# This example_node is used for specs where a node should fail to respond
+def example_node
+  @example_node ||= DPN::Workers::Node.new(
+    namespace: 'example',
+    api_root: 'http://node.example.org',
+    auth_credential: 'example_token'
+  )
+end
+
+# DPN replication requests
+# @see https://github.com/dpn-admin/DPN-REST-Wiki/blob/master/Replication-Transfer-Resource.md
+# @see https://github.com/dpn-admin/dpn-server/blob/master/app/models/replication_transfer.rb
+# @see https://wiki.duraspace.org/display/DPNC/BagIt+Specification
+def replications
+  @replications ||= begin
+    repls = []
+    query = { to_node: local_node.namespace }
+    remote_node.client.replications(query) { |response| repls << response.body }
+    repls
+  end
+end
+
+def replication
+  @replication ||= replications.sample
+end
