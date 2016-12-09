@@ -1,5 +1,4 @@
 require 'rsync'
-require_relative 'bag_paths'
 require_relative 'bag_ssh'
 
 module DPN
@@ -10,9 +9,8 @@ module DPN
 
       # @param [String] source location for transfer resource
       # @param [String] target location for transfer resource
-      # @param [String] type of transfer ('retrieve' || 'preserve')
+      # @param [String] type of transfer ('stage' || 'store')
       def initialize(source, target, type)
-        @paths = DPN::Workers::BagPaths.new
         @source = source
         @target = target
         @type = type
@@ -31,17 +29,16 @@ module DPN
 
       private
 
-        attr_reader :paths,
-                    :source,
+        attr_reader :source,
                     :target,
                     :type
 
         def options
           case type
-          when 'preserve'
-            PRESERVE_OPTIONS
-          when 'retrieve'
-            retrieve_options
+          when 'stage'
+            stage_options
+          when 'store'
+            STORE_OPTIONS
           else
             raise "Unknown rsync type: #{type}"
           end
@@ -55,10 +52,10 @@ module DPN
           '--recursive'
         ].join(' ')
 
-        PRESERVE_OPTIONS = COMMON_OPTIONS + ' --recursive'
+        STORE_OPTIONS = COMMON_OPTIONS + ' --recursive'
 
         # @return [String] rsync options for retrieval
-        def retrieve_options
+        def stage_options
           COMMON_OPTIONS + ' --archive' + ssh_option
         end
 
@@ -66,7 +63,7 @@ module DPN
         def ssh_option
           @ssh_option ||= begin
             ssh = DPN::Workers::BagSSH.new
-            ssh_cmd = ssh.retrieve_command
+            ssh_cmd = ssh.stage_command
             ssh_cmd.empty? ? '' : " -e '#{ssh_cmd}'"
           end
         end
