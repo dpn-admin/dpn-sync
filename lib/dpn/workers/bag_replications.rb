@@ -6,26 +6,22 @@ module DPN
       include Sidekiq::Worker
       sidekiq_options backtrace: 10
 
-      # @return [Boolean] success of bag transfer operations
+      # @return [Boolean] success
       def perform
         bag_transfers
       end
 
-      private
+      protected
 
-        # @return [Boolean] success of bag replications
+        # @return [Boolean] success
         def bag_transfers
-          replications.all? do |repl|
-            DPN::Workers::BagReplication.new(repl).replicate
-          end
+          raise NotImplementedError, "This #{self.class} cannot respond to: bag_transfer"
         end
 
         # GET local node bag replication data
         # @return [Array] bag replication data
         def replications
           @replications ||= begin
-            # There are options for the replications query, but this
-            # script pulls everything that is available to filter it here.
             replications = []
             local_client.replications(replications_query) do |response|
               replications << response.body if response.success?
@@ -36,7 +32,7 @@ module DPN
 
         # A replications query to find all the outstanding bag replications
         # for the local node.  The replication requests must include attributes
-        # for store_requested (true), stored (false), cancelled (false).
+        # for store_requested, stored & cancelled.
         # @return [Hash]
         def replications_query
           # To see the options available, use pry and run
@@ -45,13 +41,12 @@ module DPN
           # [Boolean] store_requested - Filter by the value of store_requested.
           # [Boolean] stored - Filter by the value of stored.
           # [Boolean] cancelled - Filter by the value of cancelled.
-          {
-            store_requested: true,
-            stored: false,
-            cancelled: false,
-            to_node: local_node.namespace
-          }
+          raise NotImplementedError, "This #{self.class} cannot respond to: replications_query"
         end
+
+        #
+        # Utils
+        #
 
         # @return [Logger]
         def logger
