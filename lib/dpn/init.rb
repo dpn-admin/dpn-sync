@@ -16,6 +16,7 @@ require_relative 'workers/bag_rsync'
 require_relative 'workers/bag_replication'
 require_relative 'workers/bag_replications'
 require_relative 'workers/bag_retrieve'
+require_relative 'workers/bag_retrievals'
 require_relative 'workers/bag_store'
 require_relative 'workers/replication'
 
