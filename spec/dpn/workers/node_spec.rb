@@ -2,44 +2,48 @@
 require 'spec_helper'
 
 describe DPN::Workers::Node, :vcr do
-  let(:subject) { local_node }
-  let(:client) { subject.client }
+  subject(:node) { local_node }
+  let(:client) { node.client }
 
   describe '#new' do
     it 'works' do
-      expect(subject).to be_an described_class
+      expect(node).to be_an described_class
     end
   end
 
   describe '#alive?' do
     it 'works' do
-      expect(subject.alive?).to be true
+      expect(node.alive?).to be true
     end
     it 'is true when node is alive' do
       response = double(DPN::Client::Response)
       expect(response).to receive(:success?).and_return(true)
       expect(client).to receive(:node).and_return(response)
-      expect(subject.alive?).to be true
+      expect(node.alive?).to be true
     end
     it 'is false when node is not alive' do
       response = double(DPN::Client::Response)
       expect(response).to receive(:success?).and_return(false)
       expect(client).to receive(:node).and_return(response)
-      expect(subject.alive?).to be false
+      expect(node.alive?).to be false
+    end
+    it 'is false when node check raises an exception' do
+      expect(client).to receive(:node).and_raise(RuntimeError)
+      expect(node.alive?).to be false
     end
   end
 
   describe '#status' do
     it 'works' do
-      expect(subject.status).not_to be_nil
+      expect(node.status).not_to be_nil
     end
     it 'contains OK when node is alive' do
-      expect(subject).to receive(:alive?).and_return(true)
-      expect(subject.status).to include 'OK'
+      expect(node).to receive(:alive?).and_return(true)
+      expect(node.status).to include 'OK'
     end
     it 'contains WARNING when node is not alive' do
-      expect(subject).to receive(:alive?).and_return(false)
-      expect(subject.status).to include 'WARNING'
+      expect(node).to receive(:alive?).and_return(false)
+      expect(node.status).to include 'WARNING'
     end
   end
 
@@ -54,23 +58,23 @@ describe DPN::Workers::Node, :vcr do
 
   describe '#to_hash' do
     it 'works' do
-      expect(subject.to_hash).not_to be_nil
+      expect(node.to_hash).not_to be_nil
     end
     it 'is a Hash' do
-      expect(subject.to_hash).to be_an Hash
+      expect(node.to_hash).to be_an Hash
     end
     it 'includes :namespace' do
-      expect(subject.to_hash).to include(:namespace)
+      expect(node.to_hash).to include(:namespace)
     end
     it 'includes :api_root' do
-      expect(subject.to_hash).to include(:api_root)
+      expect(node.to_hash).to include(:api_root)
     end
     it 'includes :auth_credential' do
-      expect(subject.to_hash).to include(:auth_credential)
+      expect(node.to_hash).to include(:auth_credential)
     end
     it 'includes additional node attributes after update' do
-      expect(subject.update).to be true
-      hash = subject.to_hash
+      expect(node.update).to be true
+      hash = node.to_hash
       expect(hash).to include(:name)
       expect(hash).to include(:ssh_pubkey)
       expect(hash).to include(:created_at)
@@ -87,10 +91,10 @@ describe DPN::Workers::Node, :vcr do
 
   describe '#update' do
     it 'works' do
-      expect(subject.update).not_to be_nil
+      expect(node.update).not_to be_nil
     end
     it 'is true for a successful update' do
-      expect(subject.update).to be true
+      expect(node.update).to be true
     end
     context 'failure' do
       it 'raises exception' do
