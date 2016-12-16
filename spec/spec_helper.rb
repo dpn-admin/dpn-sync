@@ -119,5 +119,25 @@ def replications
 end
 
 def replication
-  @replication ||= replications.sample
+  @replication ||= begin
+    repl = replications.sample
+    return replication4travis(repl) if ENV['TRAVIS']
+    repl
+  end
+end
+
+def replication4travis(repl)
+  # Replace the replication file :link with a fixture file.
+  repl[:link] = replication_local_tarfile(repl)
+  repl
+end
+
+# Construct a replication file :link with a fixture file.
+# @param [Hash] repl a replication transfer request
+# @return [String] local_tarfile
+def replication_local_tarfile(repl)
+  tar_filename = File.basename repl[:link]
+  local_tarfile = File.join(Dir.pwd, 'fixtures', 'testbags', tar_filename)
+  expect(File.exist?(local_tarfile)).to be true
+  local_tarfile
 end
