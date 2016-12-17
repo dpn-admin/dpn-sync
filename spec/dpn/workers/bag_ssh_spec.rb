@@ -47,8 +47,8 @@ describe DPN::Workers::BagSSH do
     end
   end
 
-  describe "#retrieve_command" do
-    let(:ssh_cmd) { subject.retrieve_command }
+  describe "#stage_command" do
+    let(:ssh_cmd) { subject.stage_command }
     let(:ssh_file) { 'ssh_identity_file' }
     let(:ssh_user) { 'ssh_user' }
 

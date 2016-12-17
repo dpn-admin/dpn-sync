@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:47 GMT
+      - Thu, 15 Dec 2016 23:50:18 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 252d6d75-395a-4db6-9935-3428549eb29f
+      - 1a463b1f-ff24-4953-b85b-6d9d02e92e28
       X-Runtime:
-      - '0.024140'
+      - '0.025579'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:47 GMT
+      - Thu, 15 Dec 2016 23:50:18 GMT
       Content-Length:
       - '399'
       Connection:
@@ -51,7 +51,7 @@ http_interactions:
       string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://127.0.0.1:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:47 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:18 GMT
 - request:
     method: put
     uri: http://localhost:3004/api-v2/node/aptrust/
@@ -65,7 +65,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:47 GMT
+      - Thu, 15 Dec 2016 23:50:18 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -84,25 +84,25 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"ef6482501a0b447e7326ac97bea70a6c"
+      - W/"6a180e9bd31b4492b8e39e9329dbc0e8"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5583afc8-1a5b-47a5-a6bf-7869a1a106bd
+      - c7030a57-cd67-4ee8-8110-b336bfa8c3fc
       X-Runtime:
-      - '0.038340'
+      - '0.037455'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:47 GMT
+      - Thu, 15 Dec 2016 23:50:18 GMT
       Content-Length:
       - '399'
       Connection:
       - Keep-Alive
     body:
       encoding: UTF-8
-      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://localhost:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-12-05T23:30:43Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
+      string: '{"name":"APTrust","namespace":"aptrust","api_root":"http://localhost:3001","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2016-12-15T23:50:12Z","replicate_from":["chron","hathi","sdr","tdr"],"replicate_to":["tdr","sdr","chron","hathi"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"virginia","type":"magnetic
         disk"}}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:47 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:18 GMT
 recorded_with: VCR 3.0.3

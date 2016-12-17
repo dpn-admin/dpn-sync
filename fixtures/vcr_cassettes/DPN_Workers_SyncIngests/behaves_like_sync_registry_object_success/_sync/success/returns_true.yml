@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b15fd720-f27c-4fcb-b8f7-d66b032e4b1f
+      - a6581b7b-43d8-4644-b9a6-84ced0412e6d
       X-Runtime:
-      - '0.048531'
+      - '0.050046'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Length:
       - '224'
       Connection:
@@ -50,7 +50,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"ingest_id":"7a1067d9-a384-4472-ab0e-03ecab66d07a","created_at":"2015-09-15T17:56:03Z","bag":"00000000-0000-4000-a000-000000000001","ingested":true,"replicating_nodes":[]}]}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:16 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/ingest/
@@ -63,7 +63,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -86,13 +86,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c04ebfca-3fd2-40cd-a7cf-f3f84b784c2a
+      - ece245e4-6415-4232-adbe-c53fa0c73ffc
       X-Runtime:
-      - '0.045321'
+      - '0.047451'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Length:
       - '172'
       Connection:
@@ -101,5 +101,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"ingest_id":"7a1067d9-a384-4472-ab0e-03ecab66d07a","created_at":"2015-09-15T17:56:03Z","bag":"00000000-0000-4000-a000-000000000001","ingested":true,"replicating_nodes":[]}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:16 GMT
 recorded_with: VCR 3.0.3

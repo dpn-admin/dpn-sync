@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:45 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -31,17 +31,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Etag:
-      - W/"9aec524ce3537440c9a055f6ee6f1f5b"
+      - W/"0acc12f6d1956587fc55124e9be148b3"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 419b5326-a329-438c-9d3a-18098017e19c
+      - 015cc62d-f027-4a68-9c3d-8309076f4308
       X-Runtime:
-      - '0.026949'
+      - '0.024364'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:45 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Length:
       - '480'
       Connection:
@@ -49,7 +49,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"uuid":"00000000-0000-4000-a000-000000000001","local_id":"APTrust
-        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-12-05T23:30:44Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
+        Bag 1","size":71680,"version":1,"created_at":"2015-09-15T17:56:03Z","updated_at":"2016-12-15T23:50:10Z","ingest_node":"aptrust","admin_node":"aptrust","member":"9a000000-0000-4000-a000-000000000001","interpretive":[],"rights":[],"replicating_nodes":["chron","hathi"],"bag_type":"D","first_version_uuid":"00000000-0000-4000-a000-000000000001"}],"total_size":71680}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:45 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:16 GMT
 recorded_with: VCR 3.0.3

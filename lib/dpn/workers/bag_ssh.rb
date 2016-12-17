@@ -18,8 +18,8 @@ module DPN
       # Construct an ssh command for rsync, if an ssh identity file is
       # provided in the SyncSettings.replication configuration.
       # @return [String] ssh command
-      def retrieve_command
-        @_retrieve_command ||= begin
+      def stage_command
+        @stage_command ||= begin
           return '' if ssh_user.empty? || ssh_identity_file.empty?
           [
             'ssh',
@@ -37,11 +37,11 @@ module DPN
         attr_reader :settings
 
         def ssh_user
-          @_ssh_user ||= user.to_s.empty? ? '' : "-l #{user}"
+          @ssh_user ||= user.to_s.empty? ? '' : "-l #{user}"
         end
 
         def ssh_identity_file
-          @_ssh_identity_file ||= identity_file.to_s.empty? ? '' : "-i #{identity_file}"
+          @ssh_identity_file ||= identity_file.to_s.empty? ? '' : "-i #{identity_file}"
         end
     end
   end

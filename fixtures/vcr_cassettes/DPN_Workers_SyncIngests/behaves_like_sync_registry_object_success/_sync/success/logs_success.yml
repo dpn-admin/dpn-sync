@@ -12,7 +12,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -35,13 +35,13 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - de474979-e4c3-45ab-9518-23bd077f3101
+      - 064ea2cd-df4c-473b-8f80-7230d5c426c2
       X-Runtime:
-      - '0.017370'
+      - '0.030542'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Length:
       - '224'
       Connection:
@@ -50,7 +50,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"count":1,"next":null,"previous":null,"results":[{"ingest_id":"7a1067d9-a384-4472-ab0e-03ecab66d07a","created_at":"2015-09-15T17:56:03Z","bag":"00000000-0000-4000-a000-000000000001","ingested":true,"replicating_nodes":[]}]}'
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:16 GMT
 - request:
     method: post
     uri: http://localhost:3004/api-v2/ingest/
@@ -63,7 +63,7 @@ http_interactions:
       Accept:
       - "*/*"
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Type:
       - application/json
       Authorization:
@@ -84,13 +84,13 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - af3e91d6-6949-4b5c-9810-67f2a77ab308
+      - 931c372c-3dbf-4c77-8b75-c67aaf8d35b3
       X-Runtime:
-      - '0.009181'
+      - '0.010006'
       Server:
       - WEBrick/1.3.1 (Ruby/2.3.1/2016-04-26)
       Date:
-      - Mon, 05 Dec 2016 23:30:46 GMT
+      - Thu, 15 Dec 2016 23:50:16 GMT
       Content-Length:
       - '0'
       Connection:
@@ -99,5 +99,5 @@ http_interactions:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 05 Dec 2016 23:30:46 GMT
+  recorded_at: Thu, 15 Dec 2016 23:50:16 GMT
 recorded_with: VCR 3.0.3
