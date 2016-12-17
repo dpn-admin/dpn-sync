@@ -8,9 +8,7 @@ module DPN
 
       # The current retry count is yielded. The return value of the block must
       # be an integer. It is used as the delay, in seconds.
-      sidekiq_retry_in do |count|
-        10 * 60 * (count + 1) # 10 minute intervals
-      end
+      sidekiq_retry_in { |count| 10 * 60 * (count + 1) } # 10 minutes
 
       # @param [String] class_name for a class to perform a sync process
       # @return [Boolean]
