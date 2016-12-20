@@ -50,10 +50,15 @@ sync_replications:
   class: "DPN::Workers::SyncWorker"
   args: "DPN::Workers::SyncReplications"
 
-# BagTransfers, after SyncReplications, every day at 7am
-bag_replications:
-  cron: "00 07 * * *"
-  class: "DPN::Workers::BagReplications"
+# BagRetrievals, after SyncReplications, every day at 6am
+bag_retrievals:
+  cron: "00 06 * * *"
+  class: "DPN::Workers::BagRetrievals"
+
+# BagStores, after BagRetrievals, every day at 8am
+bag_stores:
+  cron: "00 08 * * *"
+  class: "DPN::Workers::BagStores"
 
 # SyncMembers every day at 2am
 sync_members:
@@ -72,4 +77,4 @@ sync_nodes:
 #   class: "HardWorker"
 #   queue: hard_worker_long
 #   args:
-#     hard: "stuff"
+#     cool: "stuff"
