@@ -24,7 +24,7 @@ gem 'rake'
 gem 'dpn-bagit', '~>0.3'
 gem 'dpn-client', '~>2.0'
 gem 'rpairtree'
-gem 'rsync'
+gem 'systemu', '~> 2.6'
 
 group :development do
   gem 'thin' # app server
