@@ -5,7 +5,7 @@ require_relative 'monitors'
 ##
 # DPN Registry Sync
 class DpnSync < Sinatra::Base
-  VERSION = '0.4.4'.freeze
+  VERSION = '0.4.5'.freeze
 
   set :app_file, __FILE__
   set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
