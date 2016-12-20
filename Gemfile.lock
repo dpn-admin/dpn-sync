@@ -10,7 +10,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
-    app_version_tasks (0.2.2)
+    app_version_tasks (0.2.3)
       git (~> 1.3)
     ast (2.3.0)
     axiom-types (0.1.1)
@@ -149,7 +149,6 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rsync (1.0.9)
     rubocop (0.46.0)
       parser (>= 2.3.1.1, < 3.0)
       powerpack (~> 0.1)
@@ -185,6 +184,7 @@ GEM
     sshkit (1.11.4)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    systemu (2.6.5)
     thin (1.7.0)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -238,7 +238,6 @@ DEPENDENCIES
   reek
   rpairtree
   rspec
-  rsync
   rubocop
   rubocop-rspec
   sidekiq
@@ -246,6 +245,7 @@ DEPENDENCIES
   simplecov
   sinatra
   single_cov
+  systemu (~> 2.6)
   thin
   vcr
   webmock

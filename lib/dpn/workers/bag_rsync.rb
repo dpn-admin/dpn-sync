@@ -1,4 +1,4 @@
-require 'rsync'
+require 'systemu'
 require_relative 'bag_ssh'
 
 module DPN
@@ -17,13 +17,9 @@ module DPN
       end
 
       # @return [Boolean] success of transfer
+      # @raise [RuntimeError]
       def rsync
-        Rsync.run(source, target, options) do |result|
-          unless result.success?
-            msg = "Failed #{type} rsync: #{result.error}, options: #{options}"
-            raise msg
-          end
-        end
+        os_execute(rsync_command)
         true
       end
 
@@ -33,6 +29,12 @@ module DPN
                     :target,
                     :type
 
+        # @return [String] rsync_command
+        def rsync_command
+          @rsync_command ||= "rsync #{options} #{source} #{target}"
+        end
+
+        # @return [String] options for rsync
         def options
           case type
           when 'stage'
@@ -56,7 +58,7 @@ module DPN
 
         # @return [String] rsync options for retrieval
         def stage_options
-          COMMON_OPTIONS + ' --archive' + ssh_option
+          ssh_option + COMMON_OPTIONS + ' --archive'
         end
 
         # @return [String] ssh option for retrieval
@@ -66,6 +68,23 @@ module DPN
             ssh_cmd = ssh.stage_command
             ssh_cmd.empty? ? '' : " -e '#{ssh_cmd}'"
           end
+        end
+
+        # Executes a system command in a subprocess.
+        # The method returns stdout from the command if execution succeeds.
+        # The method will raise an exception if execution fails; the exception
+        # message will explain the failure.
+        # @param [String] command the command to be executed
+        # @return [String] stdout from the command if execution was successful
+        # @raise [RuntimeError]
+        def os_execute(command)
+          status, stdout, stderr = systemu(command)
+          status.exitstatus.zero? ? stdout : raise(stderr)
+        rescue
+          msg = ["Command failed to execute: #{command}"]
+          msg << "  STDERR: #{stderr.split($/).join('; ')}" if !stderr.empty?
+          msg << "  STDOUT: #{stdout.split($/).join('; ')}" if !stdout.empty?
+          raise msg.join("\n")
         end
     end
   end
