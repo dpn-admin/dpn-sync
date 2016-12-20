@@ -66,7 +66,7 @@ module DPN
           @ssh_option ||= begin
             ssh = DPN::Workers::BagSSH.new
             ssh_cmd = ssh.stage_command
-            ssh_cmd.empty? ? '' : " -e '#{ssh_cmd}'"
+            ssh_cmd.empty? ? '' : " -e '#{ssh_cmd}' "
           end
         end
 
