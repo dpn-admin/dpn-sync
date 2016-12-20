@@ -38,20 +38,21 @@ describe DPN::Workers::BagRsync, :vcr do
   end
 
   context 'rsync mock behavior' do
-    let(:rsync_result) { double }
+    let(:status) { instance_double("Process::Status") }
+    let(:sys) { instance_double("SystemUniversal") }
     before do
-      options = bag_rsync.send(:options)
-      expect(Rsync).to receive(:run).with(source, target, options).and_yield(rsync_result)
+      cmd = bag_rsync.send(:rsync_command)
+      allow(SystemUniversal).to receive(:new).with(cmd).and_return(sys)
+      allow(sys).to receive(:systemu).and_return([status, 'stdout', 'stderr'])
     end
     it 'works' do
-      expect(rsync_result).to receive(:success?).and_return(true)
+      allow(status).to receive(:exitstatus).and_return(0) # success
       expect(bag_rsync).to be_an described_class
       expect(bag_rsync).to respond_to(:rsync)
       expect(bag_rsync.rsync).to be true
     end
     it 'raises RuntimeError when rsync fails' do
-      expect(rsync_result).to receive(:success?).and_return(false)
-      expect(rsync_result).to receive(:error).and_return('rsync error')
+      allow(status).to receive(:exitstatus).and_return(1) # failure
       expect { bag_rsync.rsync }.to raise_error(RuntimeError)
     end
   end
