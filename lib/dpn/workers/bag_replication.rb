@@ -12,9 +12,7 @@ require_relative 'bag_rsync'
 module DPN
   module Workers
     ##
-    # A Bag Replication-Transfer-Resource
-    # @see https://github.com/dpn-admin/DPN-REST-Wiki/blob/master/Replication-Transfer-Resource.md
-    # @see https://wiki.duraspace.org/display/DPNC/BagIt+Specification
+    # A Bag Replication Transfer
     class BagReplication
 
       # @param [Hash] replication transfer resource
