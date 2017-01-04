@@ -195,43 +195,52 @@ describe DPN::Workers::BagRetrieve, :vcr do
     let(:bagit) { bag_retrieve.send(:bagit) }
     let(:bagit_path) { bagit.location }
     let(:retrieve_path) { bag_retrieve.send(:retrieve_path) }
-    context 'success' do
-      before do
-        # perform retrieval tasks so a .tar file is available
-        expect(bag_retrieve.send(:retrieve_rsync)).to be true
-        expect(File.exist?(retrieve_path)).to be true
-        expect(retrieve_path).to end_with '.tar'
-      end
-      it 'can unpack a .tar archive file' do
-        expect(bagit_path).to end_with(bagit.uuid)
-        expect(File.exist?(bagit_path)).to be true
-      end
-      it 'can create a bagit bag from a bagit directory' do
-        # Ensure a bagit is created, to unpack the .tar file
-        expect(File.exist?(bagit_path)).to be true
-        # mock the retrieve_path so it gets the unpacked bag instead of a .tar
-        allow(bag_retrieve).to receive(:retrieve_path).and_return(bagit_path)
-        # reset the memoized @bagit so that new calls will have to recreate it
-        bag_retrieve.instance_variable_set('@bagit', nil)
-        retrieve_path = bag_retrieve.send(:retrieve_path)
-        expect(retrieve_path).not_to end_with '.tar'
-        expect(File.directory?(retrieve_path)).to be true
-        # now recreate the bagit from the directory
-        expect(File.exist?(bagit_path)).to be true
-        expect(bagit_path).to end_with(bagit.uuid)
-        expect(bag_retrieve.send(:retrieve_validate)).to be true
-      end
+    before do
+      # perform retrieval tasks so a .tar file is available
+      expect(bag_retrieve.send(:retrieve_rsync)).to be true
+      expect(File.exist?(retrieve_path)).to be true
+      expect(retrieve_path).to end_with '.tar'
     end
-    context 'cannot create a bagit bag from files that do not end with ".tar"' do
-      before do
-        # mock the retrieve_path so it returns a file name that can't work
-        allow(bag_retrieve).to receive(:retrieve_path).and_return('file.tar.gz')
-        retrieve_path = bag_retrieve.send(:retrieve_path)
-        expect(File.directory?(retrieve_path)).to be false
-      end
-      it 'raises RuntimeError' do
-        expect { bag_retrieve.send(:bagit) }.to raise_error(RuntimeError)
-      end
+    it 'can unpack a .tar archive file' do
+      expect(bagit).to be_an DPN::Bagit::Bag
+      expect(bagit_path).to end_with(bagit.uuid)
+      expect(File.exist?(bagit_path)).to be true
+    end
+    it 'can unpack a .tar.gz archive file' do
+      # move the retrieve_path file so it becomes a file that can't work
+      tar_path = retrieve_path
+      expect(File.exist?(tar_path)).to be true
+      zip_path = retrieve_path + '.gz'
+      system("gzip #{tar_path}")
+      expect(File.exist?(tar_path)).to be false
+      expect(File.exist?(zip_path)).to be true
+      allow(bag_retrieve).to receive(:retrieve_path).and_return(zip_path)
+      expect(bagit).to be_an DPN::Bagit::Bag
+    end
+    it 'can create a bagit bag from a bagit directory' do
+      # Ensure a bagit is created, to unpack the .tar file
+      expect(File.exist?(bagit_path)).to be true
+      # mock the retrieve_path so it gets the unpacked bag instead of a .tar
+      allow(bag_retrieve).to receive(:retrieve_path).and_return(bagit_path)
+      # reset the memoized @bagit so that new calls will have to recreate it
+      bag_retrieve.instance_variable_set('@bagit', nil)
+      retrieve_path = bag_retrieve.send(:retrieve_path)
+      expect(retrieve_path).not_to end_with '.tar'
+      expect(File.directory?(retrieve_path)).to be true
+      # now recreate the bagit from the directory
+      expect(File.exist?(bagit_path)).to be true
+      expect(bagit_path).to end_with(bagit.uuid)
+      expect(bag_retrieve.send(:retrieve_validate)).to be true
+    end
+    it 'cannot create a bagit bag from files that do not end with ".tar"' do
+      # zip the retrieve_path file so it becomes a file that can't work
+      tar_path = retrieve_path
+      expect(File.exist?(tar_path)).to be true
+      zip_path = retrieve_path + '.zip'
+      system("zip -q #{zip_path} #{tar_path}")
+      expect(File.exist?(zip_path)).to be true
+      allow(bag_retrieve).to receive(:retrieve_path).and_return(zip_path)
+      expect { bag_retrieve.send(:bagit) }.to raise_error
     end
   end
 end
