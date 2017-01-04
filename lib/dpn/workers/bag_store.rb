@@ -23,10 +23,7 @@ module DPN
       private
 
         def bagit
-          @bagit ||= begin
-            bag_path = File.join(storage_path, replication.bag)
-            DPN::Bagit::Bag.new(bag_path)
-          end
+          @bagit ||= DPN::Bagit::Bag.new(storage_path)
         end
 
         # @return [Boolean] success of preservation
@@ -40,8 +37,8 @@ module DPN
 
         # @return [Boolean] success of rsync transfer
         def preserve_rsync
-          bag_path = File.join(staging_path, replication.bag)
-          DPN::Workers::BagRsync.new(bag_path, storage_path, 'store').rsync
+          src_path = File.join(staging_path, replication.bag, File::SEPARATOR)
+          DPN::Workers::BagRsync.new(src_path, storage_path, 'store').rsync
         end
 
         # @return [Boolean] validity of preserved bag
