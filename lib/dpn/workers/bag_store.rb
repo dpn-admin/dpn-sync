@@ -28,11 +28,12 @@ module DPN
 
         # @return [Boolean] success of preservation
         def store
-          # TODO: consider whether or not to mark a replication as
+          # TODO: consider whether to mark a replication as
           #       cancelled when this fails.  Or try again?
           preserve_rsync &&
             preserve_validate &&
-            update_replication
+            update_replication &&
+            staging_cleanup
         end
 
         # @return [Boolean] success of rsync transfer
@@ -44,6 +45,14 @@ module DPN
         # @return [Boolean] validity of preserved bag
         def preserve_validate
           bagit.valid? || raise("Bag invalid: #{bagit.errors}")
+        end
+
+        def staging_cleanup
+          if bagit.valid?
+            FileUtils.rm_r(staging_path, secure: true) && true
+          else
+            false
+          end
         end
 
         # Update the replication transfer resource on the remote node
