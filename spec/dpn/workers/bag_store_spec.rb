@@ -4,14 +4,6 @@ require 'spec_helper'
 describe DPN::Workers::BagStore, :vcr do
   subject(:bag_store) { described_class.new replication_reset }
 
-  let(:replication_reset) do
-    r = replication
-    r[:stored] = false
-    r[:store_requested] = false
-    r[:cancelled] = false
-    r
-  end
-
   let(:repl) { bag_store.send(:replication) }
 
   let(:bagit_staged) do
@@ -19,6 +11,7 @@ describe DPN::Workers::BagStore, :vcr do
     retrieve = DPN::Workers::BagRetrieve.new(replication_reset)
     retrieve.send(:bagit) if retrieve.transfer
   end
+  let(:bagit_stored) { bag_store.send(:bagit) }
 
   it 'works' do
     expect(bag_store).to be_an described_class
@@ -116,6 +109,7 @@ describe DPN::Workers::BagStore, :vcr do
       expect(bag_store).to receive(:preserve_rsync).and_return(true)
       expect(bag_store).to receive(:preserve_validate).and_return(true)
       expect(bag_store).to receive(:update_replication).and_return(true)
+      expect(bag_store).to receive(:staging_cleanup).and_return(true)
       expect(bag_store.send(:store)).to be true
     end
   end
@@ -142,7 +136,6 @@ describe DPN::Workers::BagStore, :vcr do
     let(:validate) { bag_store.send(:preserve_validate) }
     it_behaves_like 'bag_rsync_mocks'
     context 'rsync fixture behavior' do
-      let(:bagit_stored) { bag_store.send(:bagit) }
       before do
         bag_is_staged = File.exist?(bagit_staged.location)
         expect(bag_is_staged).to be true
@@ -169,6 +162,27 @@ describe DPN::Workers::BagStore, :vcr do
       allow(bagit).to receive(:valid?).and_return(false)
       allow(bagit).to receive(:errors).and_return('error')
       expect { validate }.to raise_error(RuntimeError)
+    end
+  end
+
+  describe '#staging_cleanup' do
+    let(:cleanup) { bag_store.send(:staging_cleanup) }
+    let(:bagit) {  bag_store.send(:bagit) }
+    it 'checks bagit.valid?' do
+      expect(bagit).to receive(:valid?)
+      cleanup
+    end
+    it 'returns false when bagit.valid? is false' do
+      allow(bagit).to receive(:valid?).and_return(false)
+      expect(cleanup).to be false
+    end
+    it 'will cleanup staging path when bagit.valid? is true' do
+      expect(File.exist?(bagit_staged.location)).to be true
+      expect(bag_store.send(:preserve_rsync)).to be true
+      expect(bag_store.send(:preserve_validate)).to be true
+      expect(FileUtils).to receive(:rm_r).and_call_original
+      expect(cleanup).to be true
+      expect(File.exist?(bagit_staged.location)).to be false
     end
   end
 

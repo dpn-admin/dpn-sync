@@ -70,19 +70,17 @@ module DPN
 
         # @return [DPN::Bagit::Bag] a bagit from a replication transfer
         # @raise [RuntimeError]
+        # @see DPN::Bagit::SerializedBag#unserialize!
         def bagit
           @bagit ||= begin
             if File.directory?(retrieve_path)
-              DPN::Bagit::Bag.new(retrieve_path)
+              bag = DPN::Bagit::Bag.new(retrieve_path)
             else
-              case File.extname retrieve_path
-              when ".tar"
-                serialized_bag = DPN::Bagit::SerializedBag.new(retrieve_path)
-                serialized_bag.unserialize!
-              else
-                raise "Could not unpack file type: #{retrieve_path}"
-              end
+              serialized_bag = DPN::Bagit::SerializedBag.new(retrieve_path)
+              bag = serialized_bag.unserialize!
+              File.delete(retrieve_path) if bag.valid?
             end
+            bag
           end
         end
     end

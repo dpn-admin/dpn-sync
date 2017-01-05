@@ -134,6 +134,14 @@ def replication
   end
 end
 
+def replication_reset
+  repl = replication
+  repl[:stored] = false
+  repl[:store_requested] = false
+  repl[:cancelled] = false
+  repl
+end
+
 def replication4travis(repl)
   # Replace the replication file :link with a fixture file.
   repl[:link] = replication_local_tarfile(repl)
