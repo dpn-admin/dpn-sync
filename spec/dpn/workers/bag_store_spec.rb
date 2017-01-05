@@ -4,14 +4,6 @@ require 'spec_helper'
 describe DPN::Workers::BagStore, :vcr do
   subject(:bag_store) { described_class.new replication_reset }
 
-  let(:replication_reset) do
-    r = replication
-    r[:stored] = false
-    r[:store_requested] = false
-    r[:cancelled] = false
-    r
-  end
-
   let(:repl) { bag_store.send(:replication) }
 
   let(:bagit_staged) do
