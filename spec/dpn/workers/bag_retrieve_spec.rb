@@ -6,6 +6,10 @@ describe DPN::Workers::BagRetrieve, :vcr do
 
   let(:repl) { bag_retrieve.send(:replication) }
 
+  after do
+    cleanup_path SyncSettings.replication.staging_dir
+  end
+
   it 'works' do
     expect(bag_retrieve).to be_an described_class
     expect(bag_retrieve).to respond_to(:transfer)
@@ -88,7 +92,7 @@ describe DPN::Workers::BagRetrieve, :vcr do
   end
 
   shared_examples 'bag_rsync_mocks' do
-    let(:bag_sync) { double(DPN::Workers::BagRsync) }
+    let(:bag_sync) { instance_double(DPN::Workers::BagRsync) }
     context 'rsync mock behavior' do
       before do
         allow(DPN::Workers::BagRsync).to receive(:new).and_return(bag_sync)
@@ -118,7 +122,7 @@ describe DPN::Workers::BagRetrieve, :vcr do
 
   describe '#retrieve_validate' do
     let(:validate) { bag_retrieve.send(:retrieve_validate) }
-    let(:bagit) { double(DPN::Bagit::Bag) }
+    let(:bagit) { instance_double(DPN::Bagit::Bag) }
     before do
       allow(bag_retrieve).to receive(:bagit).and_return(bagit)
     end
@@ -232,7 +236,7 @@ describe DPN::Workers::BagRetrieve, :vcr do
       system("zip -q #{zip_path} #{tar_path}")
       expect(File.exist?(zip_path)).to be true
       allow(bag_retrieve).to receive(:retrieve_path).and_return(zip_path)
-      expect { bag_retrieve.send(:bagit) }.to raise_error
+      expect { bag_retrieve.send(:bagit) }.to raise_error RuntimeError
     end
   end
 end
