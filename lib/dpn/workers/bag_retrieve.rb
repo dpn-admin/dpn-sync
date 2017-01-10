@@ -32,7 +32,8 @@ module DPN
         # @return [Boolean] success of rsync transfer
         def retrieve_rsync
           src = replication.link
-          DPN::Workers::BagRsync.new(src, staging_path, 'stage').rsync
+          target = File.join(staging_path, File::SEPARATOR)
+          DPN::Workers::BagRsync.new(src, target, 'stage').rsync
         end
 
         # Validate the DPN bag retrieved
