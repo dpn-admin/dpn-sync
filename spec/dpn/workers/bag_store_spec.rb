@@ -13,6 +13,11 @@ describe DPN::Workers::BagStore, :vcr do
   end
   let(:bagit_stored) { bag_store.send(:bagit) }
 
+  after do
+    cleanup_path SyncSettings.replication.staging_dir
+    cleanup_path SyncSettings.replication.storage_dir
+  end
+
   it 'works' do
     expect(bag_store).to be_an described_class
     expect(bag_store).to respond_to(:transfer)
@@ -180,7 +185,7 @@ describe DPN::Workers::BagStore, :vcr do
       expect(File.exist?(bagit_staged.location)).to be true
       expect(bag_store.send(:preserve_rsync)).to be true
       expect(bag_store.send(:preserve_validate)).to be true
-      expect(FileUtils).to receive(:rm_r).and_call_original
+      expect(FileUtils).to receive(:rm_r).at_least(:once).and_call_original
       expect(cleanup).to be true
       expect(File.exist?(bagit_staged.location)).to be false
     end

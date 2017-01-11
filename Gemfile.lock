@@ -79,7 +79,7 @@ GEM
       capistrano-shared_configs
     docile (1.1.5)
     docopt (0.5.0)
-    dpn-bagit (0.3.1)
+    dpn-bagit (0.3.2)
       bagit (~> 0.3.2)
       configliere
     dpn-client (2.0.1)
@@ -252,4 +252,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.12.5
+   1.13.7
