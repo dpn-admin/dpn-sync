@@ -52,9 +52,9 @@ end
 
 group :deployment do
   gem 'capistrano', '~> 3.0'
+  gem 'capistrano-bundle_audit', '~> 0.1'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger'
   gem 'capistrano-sidekiq'
-  gem 'capistrano-bundle_audit', '~> 0.1'
   gem 'dlss-capistrano'
 end
