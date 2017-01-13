@@ -37,13 +37,13 @@ describe DPN::Workers::Node, :vcr do
     it 'works' do
       expect(node.status).not_to be_nil
     end
-    it 'contains OK when node is alive' do
+    it 'contains PASSED when node is alive' do
       expect(node).to receive(:alive?).and_return(true)
-      expect(node.status).to include 'OK'
+      expect(node.status).to include 'PASSED'
     end
-    it 'contains WARNING when node is not alive' do
+    it 'contains FAILED when node is not alive' do
       expect(node).to receive(:alive?).and_return(false)
-      expect(node.status).to include 'WARNING'
+      expect(node.status).to include 'FAILED'
     end
   end
 

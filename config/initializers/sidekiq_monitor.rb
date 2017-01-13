@@ -13,8 +13,8 @@ class SidekiqMonitor
 
   # @return [String] queue status with size and latency
   def message
-    msg = ok? ? 'OK:' : 'WARNING:'
-    msg += " Sidekiq Queue: SIZE: #{size}, LATENCY: #{latency}\n"
+    msg = ok? ? 'PASSED:' : 'FAILED:'
+    msg += " Sidekiq Queue: SIZE: #{size}, LATENCY: #{latency}"
     msg
   end
 

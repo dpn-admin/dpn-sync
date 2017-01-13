@@ -26,5 +26,10 @@ if $DEBUG
   # rubocop:enable Lint/Debugger
 end
 
-# Run app
-run Rack::URLMap.new('/' => DpnSync, '/sidekiq' => Sidekiq::Web)
+map '/' do
+  run DPN::DpnSync.new
+end
+
+map '/sidekiq' do
+  run Sidekiq::Web.new
+end

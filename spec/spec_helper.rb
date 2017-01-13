@@ -44,7 +44,7 @@ Dir.glob('./app/**/*.rb').each { |r| require r }
 module RSpecMixin
   include Rack::Test::Methods
   def app
-    DpnSync
+    DPN::DpnSync
   end
 end
 

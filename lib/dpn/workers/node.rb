@@ -69,9 +69,9 @@ module DPN
       # @return [String] connection status
       def status
         if alive?
-          "OK: DPN node '#{namespace}' is alive"
+          "PASSED: DPN node '#{namespace}' is alive"
         else
-          "WARNING: DPN node '#{namespace}' is not responding"
+          "FAILED: DPN node '#{namespace}' is not responding"
         end
       end
 

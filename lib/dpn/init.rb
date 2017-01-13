@@ -54,4 +54,4 @@ require_relative 'workers/sync_worker'
 require_relative 'workers/test_worker'
 
 # /status monitor
-require_relative 'monitor'
+require_relative 'workers/node_monitor'
