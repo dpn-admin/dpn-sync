@@ -20,6 +20,8 @@ AllCops:
     - 'spec/test_app_templates/**/*'
     - 'vendor/**/*'
 
+inherit_from: .rubocop_todo.yml
+
 # DPN configuration changes for these cops enabled by default in Rubocop
 
 Metrics/AbcSize:
@@ -130,3 +132,5 @@ RSpec/DescribeClass:
 RSpec/FilePath:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
