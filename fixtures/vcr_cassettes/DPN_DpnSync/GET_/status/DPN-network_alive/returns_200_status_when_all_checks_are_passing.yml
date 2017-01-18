@@ -1,0 +1,279 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:3005/api-v2/node/tdr/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-tdr (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token tdr_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"8d69d0c32b7acd70d43ca59c5ee662cc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 137373fe-59e9-4d85-a24f-2f5964094bb0
+      X-Runtime:
+      - '0.026180'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Texas Digital Repository","namespace":"tdr","api_root":"http://127.0.0.1:3005","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","sdr"],"replicate_to":["hathi","chron","sdr","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"texas","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+- request:
+    method: get
+    uri: http://localhost:3003/api-v2/node/hathi/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"990ff8ddcfd962c8e3a9a31f8898f8ff"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 27237ba9-87fb-4971-96cf-01f12ff5fa4d
+      X-Runtime:
+      - '0.043674'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Hathi Trust","namespace":"hathi","api_root":"http://127.0.0.1:3003","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","tdr","sdr","aptrust"],"replicate_to":["tdr","sdr","aptrust","chron"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"michigan","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+- request:
+    method: get
+    uri: http://localhost:3002/api-v2/node/chron/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"31f0af1548be84312ece563c15ecdab5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 68e46b07-9f46-49ab-8589-ac30c6f6969e
+      X-Runtime:
+      - '0.054279'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+- request:
+    method: get
+    uri: http://localhost:3005/api-v2/node/tdr/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-tdr (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token tdr_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"8d69d0c32b7acd70d43ca59c5ee662cc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 14971d7c-8421-4eec-9d8d-02adce3f4fc7
+      X-Runtime:
+      - '0.032632'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Texas Digital Repository","namespace":"tdr","api_root":"http://127.0.0.1:3005","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["aptrust","hathi","chron","sdr"],"replicate_to":["hathi","chron","sdr","aptrust"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"texas","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+- request:
+    method: get
+    uri: http://localhost:3003/api-v2/node/hathi/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-hathi (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token hathi_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"990ff8ddcfd962c8e3a9a31f8898f8ff"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - c4f96fe6-6e65-4714-9dd6-73e2ff015e93
+      X-Runtime:
+      - '0.032827'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Hathi Trust","namespace":"hathi","api_root":"http://127.0.0.1:3003","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["chron","tdr","sdr","aptrust"],"replicate_to":["tdr","sdr","aptrust","chron"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"michigan","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+- request:
+    method: get
+    uri: http://localhost:3002/api-v2/node/chron/
+    body:
+      encoding: UTF-8
+      string: 'null'
+    headers:
+      User-Agent:
+      - dpn-client-chron (2.8.3, ruby 2.3.3 (2016-11-21))
+      Accept:
+      - "*/*"
+      Date:
+      - Fri, 13 Jan 2017 23:40:34 GMT
+      Content-Type:
+      - application/json
+      Authorization:
+      - Token chron_token
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Etag:
+      - W/"31f0af1548be84312ece563c15ecdab5"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d508ffb6-8119-4919-ae33-df4c6d05aafd
+      X-Runtime:
+      - '0.026002'
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: '{"name":"Chronopolis","namespace":"chron","api_root":"http://127.0.0.1:3002","ssh_pubkey":null,"created_at":"2015-09-15T17:39:46Z","updated_at":"2015-09-15T17:39:46Z","replicate_from":["tdr","aptrust","sdr","hathi"],"replicate_to":["hathi","aptrust","tdr","sdr"],"restore_from":[],"restore_to":[],"protocols":["rsync"],"fixity_algorithms":["sha256"],"storage":{"region":"california","type":"magnetic
+        disk"}}'
+    http_version: 
+  recorded_at: Fri, 13 Jan 2017 23:40:34 GMT
+recorded_with: VCR 3.0.3

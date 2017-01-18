@@ -1,3 +1,4 @@
+require 'English'
 require 'systemu'
 require_relative 'bag_ssh'
 
@@ -82,8 +83,8 @@ module DPN
           status.exitstatus.zero? ? stdout : raise(stderr)
         rescue
           msg = ["Command failed to execute: #{command}"]
-          msg << "  STDERR: #{stderr.split($/).join('; ')}" if !stderr.empty?
-          msg << "  STDOUT: #{stdout.split($/).join('; ')}" if !stdout.empty?
+          msg << "  STDERR: #{stderr.split($INPUT_RECORD_SEPARATOR).join('; ')}" if !stderr.empty?
+          msg << "  STDOUT: #{stdout.split($INPUT_RECORD_SEPARATOR).join('; ')}" if !stdout.empty?
           raise msg.join("\n")
         end
     end

@@ -4,7 +4,10 @@ source 'https://rubygems.org/'
 gem 'rack'
 gem 'sinatra'
 gem 'config'
+
+# Monitoring utils
 gem 'app_version_tasks', '~> 0.2.0'
+gem 'okcomputer'
 
 # Background Processing Stack
 gem 'sidekiq'

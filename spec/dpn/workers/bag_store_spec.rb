@@ -172,7 +172,7 @@ describe DPN::Workers::BagStore, :vcr do
 
   describe '#staging_cleanup' do
     let(:cleanup) { bag_store.send(:staging_cleanup) }
-    let(:bagit) {  bag_store.send(:bagit) }
+    let(:bagit) { bag_store.send(:bagit) }
     it 'checks bagit.valid?' do
       expect(bagit).to receive(:valid?)
       cleanup
